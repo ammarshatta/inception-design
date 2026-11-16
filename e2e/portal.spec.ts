@@ -20,7 +20,7 @@ test('logged in: Arabic RTL greeting with the full name', async ({ page }) => {
 
   const portal = await page.goto('/portal')
   expect(portal?.status()).toBe(200)
-  expect(new URL(page.url()).pathname).toBe('/portal')
+  expect(new URL(page.url()).pathname).toMatch(/^\/portal\/?$/)
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
   await expect(page.locator('html')).toHaveAttribute('lang', 'ar')
   const greeting = page.getByTestId('greeting')

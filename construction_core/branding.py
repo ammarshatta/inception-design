@@ -22,7 +22,8 @@ FEATURE_FLAGS = (
 def get_branding() -> dict:
 	"""Branding values safe to show on any page (public or private)."""
 	s = frappe.get_cached_doc(SETTINGS)
-	office_name = s.office_name or frappe.db.get_single_value("Website Settings", "app_name") or ""
+	# Fallback: the ERPNext default company (never the framework's own app name)
+	office_name = s.office_name or frappe.db.get_single_value("Global Defaults", "default_company") or ""
 	return {
 		"office_name": office_name,
 		"logo": s.logo or "",
