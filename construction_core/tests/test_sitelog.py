@@ -164,7 +164,7 @@ class TestClockAndTimesheets(IntegrationTestCase):
 		with self.set_user(self.w.users.client1):
 			rows = sitelog.client_daily_logs(self.w.p1)
 			self.assertRaises(frappe.PermissionError, frappe.client.get, "Daily Log", first)
-		text = frappe.as_json(rows)
+		text = frappe.as_json(rows, ensure_ascii=False)
 		self.assertIn("بطانة", text)
 		self.assertNotIn("سر", text)
 		self.assertNotIn("manpower", text)
