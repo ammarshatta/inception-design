@@ -38,11 +38,17 @@ test('chat: message within 5 s, approval answered and locked', async ({ browser 
   await expect(e.page.getByTestId('chat-list')).toBeVisible()
   await expect(c.page.getByTestId('chat-list')).toBeVisible()
 
+  const problems: string[] = []
+  for (const pg of [e.page, c.page]) {
+    pg.on('pageerror', (err) => problems.push(String(err)))
+    pg.on('response', (r) => r.status() >= 400 && problems.push(`${r.status()} ${r.url()}`))
+  }
   const text = `سؤال ${Date.now()}`
   await c.page.getByTestId('chat-input').fill(text)
   const sentAt = Date.now()
   await c.page.getByTestId('chat-send').click()
-  await expect(e.page.getByTestId('chat-message').filter({ hasText: text })).toBeVisible({ timeout: 5000 })
+  await expect(c.page.getByTestId('chat-message').filter({ hasText: text }), problems.join(' | ')).toBeVisible({ timeout: 5000 })
+  await expect(e.page.getByTestId('chat-message').filter({ hasText: text }), problems.join(' | ')).toBeVisible({ timeout: 5000 })
   console.log(`message seen by the engineer after ${Date.now() - sentAt} ms`)
 
   // Engineer asks for an approval; the client answers; the answer is final

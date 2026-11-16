@@ -139,6 +139,9 @@ jobs:
           bench --site test_site execute construction_core.tests.e2e_setup.add_chat_client \
             --kwargs "{'project': '$E2E_ENG_PROJECT', 'email': 'e2e-chat-client@example.com', 'password': '$E2E_CHAT_CLIENT_PASSWORD'}"
           export E2E_CHAT_CLIENT=e2e-chat-client@example.com E2E_CHAT_CLIENT_PASSWORD
+          bench --site test_site set-config host_name http://localhost:8000
+          (bench serve --port 8000 > /tmp/serve.log 2>&1 &)
+          for i in $(seq 1 45); do curl -sf http://localhost:8000/api/method/ping && break; sleep 2; done
           mkdir -p /tmp/e2e-shots
           bench --site test_site execute construction_core.setup.demo.install
           export E2E_ADMIN_PASSWORD=admin
@@ -146,8 +149,6 @@ jobs:
             --kwargs "{'project': '$E2E_ENG_PROJECT', 'path': '/tmp/e2e-shots/invoice.pdf'}"
           pdftoppm -png -r 110 -f 1 -l 1 /tmp/e2e-shots/invoice.pdf /tmp/e2e-shots/20-invoice-pdf
           export E2E_SHOTS_DIR=/tmp/e2e-shots
-          (bench serve --port 8000 > /tmp/serve.log 2>&1 &)
-          for i in $(seq 1 45); do curl -sf http://localhost:8000/api/method/ping && break; sleep 2; done
           cd apps/construction_core/e2e
           yarn install --non-interactive
           npx playwright install --with-deps chromium

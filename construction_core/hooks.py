@@ -317,12 +317,22 @@ doc_events = {
 	"Project Stage": {"on_update": "construction_core.notifications.project_stage_on_update"},
 	"Project Message": {"after_insert": "construction_core.notifications.project_message_after_insert"},
 	"Payment Milestone": {"on_update": "construction_core.notifications.payment_milestone_on_update"},
+	"Sales Invoice": {
+		"on_submit": "construction_core.money.sales_invoice_on_submit",
+		"on_cancel": "construction_core.money.sales_invoice_on_cancel",
+	},
+	"Payment Entry": {
+		"on_submit": "construction_core.money.payment_entry_on_submit",
+		"on_cancel": "construction_core.money.payment_entry_on_cancel",
+	},
+	"Company": {"after_insert": "construction_core.money.company_after_insert"},
 	"User": {"before_insert": "construction_core.auth.user_before_insert"},
 }
 
 doctype_js = {
 	"Project": "public/js/project.js",
 	"Phase Template": "public/js/phase_template.js",
+	"Payment Milestone": "public/js/payment_milestone.js",
 }
 
 # Temporary passwords: nothing but the change-password page until it is changed

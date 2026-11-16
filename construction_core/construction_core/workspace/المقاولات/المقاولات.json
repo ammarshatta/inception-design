@@ -1,7 +1,7 @@
 {
  "app": "construction_core",
  "charts": [],
- "content": "[{\"id\": \"hdr0000001\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>المقاولات</b></span>\", \"col\": 12}}, {\"id\": \"sc00000000\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"المشاريع\", \"col\": 3}}, {\"id\": \"sc00000001\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"مراحل المشاريع\", \"col\": 3}}, {\"id\": \"sc00000002\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"قوالب المراحل\", \"col\": 3}}, {\"id\": \"sc00000003\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"تصميمات الكتالوج\", \"col\": 3}}, {\"id\": \"sc00000004\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"العملاء المحتملين\", \"col\": 3}}, {\"id\": \"sc00000005\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"الدفعات\", \"col\": 3}}, {\"id\": \"sc00000006\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"فواتير الشراء\", \"col\": 3}}, {\"id\": \"sc00000007\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"رسائل المشاريع\", \"col\": 3}}, {\"id\": \"sc00000008\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"الإعدادات\", \"col\": 3}}]",
+ "content": "[{\"id\": \"hdr0000001\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>المقاولات</b></span>\", \"col\": 12}}, {\"id\": \"sc00000000\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"المشاريع\", \"col\": 3}}, {\"id\": \"sc00000001\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"مراحل المشاريع\", \"col\": 3}}, {\"id\": \"sc00000002\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"قوالب المراحل\", \"col\": 3}}, {\"id\": \"sc00000003\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"تصميمات الكتالوج\", \"col\": 3}}, {\"id\": \"sc00000004\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"العملاء المحتملين\", \"col\": 3}}, {\"id\": \"sc00000005\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"الدفعات\", \"col\": 3}}, {\"id\": \"sc00000006\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"فواتير الشراء\", \"col\": 3}}, {\"id\": \"sc00000007\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"رسائل المشاريع\", \"col\": 3}}, {\"id\": \"sc00000008\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"الإعدادات\", \"col\": 3}}, {\"id\": \"sc00000099\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"ملخص مالي للمشروع\", \"col\": 3}}]",
  "creation": "2026-11-16 22:10:00.000000",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "المقاولات",
  "links": [],
- "modified": "2026-11-16 22:10:00.000000",
+ "modified": "2026-11-16 23:40:00.000000",
  "modified_by": "Administrator",
  "module": "Construction Core",
  "name": "المقاولات",
@@ -95,6 +95,13 @@
    "label": "الإعدادات",
    "link_to": "Inceptiondesign Settings",
    "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "label": "ملخص مالي للمشروع",
+   "link_to": "Project Financial Summary",
+   "type": "Report"
   }
  ],
  "standard": 1,

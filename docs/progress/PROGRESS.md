@@ -24,7 +24,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 3 | Engineer portal, photo uploads | 🔵 | Cloud + CI | [phase-3.md](phase-3.md) | Code written, waiting for CI |
 | 4 | Client portal, chat, approvals | 🔵 | Cloud + CI | [phase-4.md](phase-4.md) | Code written, waiting for CI |
 | 5 | Design catalog, public pages, lead form | 🔵 | Cloud + CI | [phase-5.md](phase-5.md) | Code written, waiting for CI |
-| 6 | Money: milestones, invoices, expenses | ⬜ | | | |
+| 6 | Money: milestones, invoices, expenses | 🔵 | Cloud + CI | [phase-6.md](phase-6.md) | Code written, waiting for CI |
 | 7 | Sales and estimating | ⬜ | | | |
 | 8 | Proposals and e-signature | ⬜ | | | |
 | 9 | Finish selections | ⬜ | | | |
@@ -55,6 +55,7 @@ The owner asked for all phases to be built in a row and reviewed once at the end
 | Install the portal on an Android phone from Chrome (Add to home screen) | 3 |
 | Lawyer review of the privacy and data-deletion text | 5 / 19 |
 | Run `bench execute construction_core.setup.demo.remove` before launch | 5 / 19 |
+| Accountant enters the VAT rate in the "ضريبة القيمة المضافة" template (14% today) | 6 |
 
 ## Next actions (owner)
 

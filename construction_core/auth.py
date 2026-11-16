@@ -37,10 +37,15 @@ ALLOWED_METHODS = frozenset(
 UNREGISTERED_MESSAGE = "الحساب ده مش مسجّل، كلّم المكتب"
 
 
+STATIC_EXTENSIONS = (".js", ".css", ".map", ".png", ".jpg", ".jpeg", ".svg", ".ico", ".woff", ".woff2", ".ttf")
+
+
 def is_allowed_while_changing_password(path: str) -> bool:
 	path = path or "/"
 	if path.startswith(ALLOWED_PREFIXES):
 		return True
+	if not path.startswith("/api/") and path.lower().endswith(STATIC_EXTENSIONS):
+		return True  # static files the change-password page loads (never data)
 	if path.startswith("/api/method/"):
 		method = path[len("/api/method/") :].split("/")[0]
 		return method in ALLOWED_METHODS

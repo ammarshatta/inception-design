@@ -35,6 +35,9 @@ def after_migrate():
 	ensure_permissions()
 	apply_login_settings()
 	apply_site_config()
+	from construction_core.money import ensure_finance_setup
+
+	ensure_finance_setup()
 
 
 def apply_site_config():
