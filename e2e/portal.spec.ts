@@ -43,9 +43,11 @@ test('temporary password: only the change-password page until changed', async ({
   expect(api.status()).toBe(403)
 
   const newPassword = 'Nw-' + tempPassword + '-9x'
-  await page.fill('#old_password', tempPassword)
-  await page.fill('#new_password', newPassword)
-  await page.fill('#confirm_password', newPassword)
+  // Frappe's page enables "Confirm" from keyup handlers, so type like a user would
+  await page.locator('#old_password').pressSequentially(tempPassword)
+  await page.locator('#new_password').pressSequentially(newPassword)
+  await page.locator('#confirm_password').pressSequentially(newPassword)
+  await expect(page.locator('#update')).toBeEnabled({ timeout: 10000 })
   await page.locator('#update').click()
   await page.waitForURL(/\/portal/, { timeout: 15000 })
   await expect(page.getByTestId('greeting')).toContainText('أهلاً', { timeout: 15000 })

@@ -28,11 +28,21 @@ ERPNEXT_DOCPERMS = {
 def after_install():
 	ensure_permissions()
 	apply_login_settings()
+	apply_site_config()
 
 
 def after_migrate():
 	ensure_permissions()
 	apply_login_settings()
+	apply_site_config()
+
+
+def apply_site_config():
+	"""Phase 3: videos up to 50 MB (Frappe's default upload limit is 25 MB)."""
+	from frappe.installer import update_site_config
+
+	if frappe.conf.get("max_file_size") != 52428800:
+		update_site_config("max_file_size", 52428800)
 
 
 def apply_login_settings():

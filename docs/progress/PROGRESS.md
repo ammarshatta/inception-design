@@ -21,7 +21,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 0 | Foundation: app, portal skeleton, CI | ✅ (CI) | Cloud + CI | [phase-0.md](phase-0.md) | CI green: install, 33 tests, portal build, 2 Playwright tests. One local install is still to do. |
 | 1 | Data model and permissions | ✅ (CI) | Cloud + CI | [phase-1.md](phase-1.md) | Every required test passes in CI. Review the 4 decisions. |
 | 2 | Admin screens, client onboarding | 🔵 | Cloud + CI | [phase-2.md](phase-2.md) | Code written, waiting for CI |
-| 3 | Engineer portal, photo uploads | ⬜ | | | Screens: `docs/design/SCREENS.md` |
+| 3 | Engineer portal, photo uploads | 🔵 | Cloud + CI | [phase-3.md](phase-3.md) | Code written, waiting for CI |
 | 4 | Client portal, chat, approvals | ⬜ | | | Screens drafted |
 | 5 | Design catalog, public pages, lead form | ⬜ | | | Screens drafted |
 | 6 | Money: milestones, invoices, expenses | ⬜ | | | |
@@ -52,6 +52,7 @@ The owner asked for all phases to be built in a row and reviewed once at the end
 | Check | Phase |
 |---|---|
 | Timed admin run (under 3 minutes): project from a template + 2 clients + share link | 2 |
+| Install the portal on an Android phone from Chrome (Add to home screen) | 3 |
 
 ## Next actions (owner)
 

@@ -38,3 +38,29 @@ def create_temp_password_client(username: str = "e2e.temp") -> dict:
 	res = add_client(project, "عميل مؤقت", "01098765432", username=username)
 	frappe.db.commit()
 	return {"username": res["username"], "password": res["temp_password"]}
+
+
+def create_engineer_project(email: str, password: str) -> dict:
+	"""An engineer with a password and a project from the test template, for Playwright."""
+	if not frappe.conf.get("allow_tests"):
+		frappe.throw("Only on test sites (allow_tests is off)")
+	from construction_core.api.admin import add_engineer
+	from construction_core.tests.factories import make_project
+
+	if not frappe.db.exists("User", email):
+		user = frappe.get_doc(
+			{
+				"doctype": "User",
+				"email": email,
+				"first_name": "مهندس",
+				"last_name": "التجربة",
+				"send_welcome_email": 0,
+			}
+		)
+		user.insert(ignore_permissions=True)
+		user.add_roles("Construction Engineer")
+	update_password(email, password)
+	project = make_project("مشروع تجربة المهندس", [])
+	add_engineer(project, email)
+	frappe.db.commit()
+	return {"project": project}

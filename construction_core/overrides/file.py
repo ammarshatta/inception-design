@@ -17,6 +17,8 @@ PUBLIC_EXCEPTIONS = frozenset({("Inceptiondesign Settings", "logo")})
 
 
 def before_insert(doc, method=None):
+	if doc.flags.public_copy:  # media.make_public_copy: an intentional public copy
+		return
 	key = (doc.attached_to_doctype, doc.attached_to_field)
 	if key in PUBLIC_EXCEPTIONS:
 		return

@@ -15,3 +15,10 @@ app.use(resourcesPlugin)
 
 app.component('Button', Button)
 app.mount('#app')
+
+// PWA: the service worker caches static assets only (never /api).
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  navigator.serviceWorker
+    .register('/api/method/construction_core.api.public.service_worker', { scope: '/portal/' })
+    .catch(() => {})
+}

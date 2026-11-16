@@ -127,6 +127,15 @@ jobs:
           E2E_TEMP_USER="$(python3 -c "import json,ast;d=ast.literal_eval(open('/tmp/temp_client.json').read().strip().splitlines()[-1]);print(d['username'])")"
           E2E_TEMP_PASSWORD="$(python3 -c "import json,ast;d=ast.literal_eval(open('/tmp/temp_client.json').read().strip().splitlines()[-1]);print(d['password'])")"
           export E2E_TEMP_USER E2E_TEMP_PASSWORD
+          E2E_ENG_PASSWORD="$(openssl rand -hex 16)"
+          bench --site test_site execute construction_core.tests.e2e_setup.create_engineer_project \
+            --kwargs "{'email': 'e2e-eng@example.com', 'password': '$E2E_ENG_PASSWORD'}" > /tmp/eng.json
+          E2E_ENG_PROJECT="$(python3 -c "import ast;print(ast.literal_eval(open('/tmp/eng.json').read().strip().splitlines()[-1])['project'])")"
+          E2E_ENG_USER=e2e-eng@example.com
+          ./env/bin/python apps/construction_core/e2e/make_photos.py /tmp/e2e-photos
+          export E2E_ENG_USER E2E_ENG_PASSWORD E2E_ENG_PROJECT
+          export E2E_PHOTOS_DIR=/tmp/e2e-photos
+          export E2E_SHOTS_DIR=/tmp/e2e-shots
           (bench serve --port 8000 > /tmp/serve.log 2>&1 &)
           for i in $(seq 1 45); do curl -sf http://localhost:8000/api/method/ping && break; sleep 2; done
           cd apps/construction_core/e2e
@@ -140,3 +149,11 @@ jobs:
         run: |
           tail -n 80 /tmp/serve.log || true
           find /home/runner/frappe-bench/apps/construction_core/e2e/test-results -name "*.md" -exec cat {} \; || true
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: /tmp/e2e-shots
+          if-no-files-found: ignore
