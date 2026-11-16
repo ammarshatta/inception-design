@@ -1,6 +1,6 @@
 # Phase 16 — Offline mobile and push notifications
 
-**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 **Approval:** built without waiting between phases, as the owner asked on 16 Nov 2026. CI is the gate.
 
@@ -30,9 +30,9 @@
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| Offline: update with 3 photos and a checklist tick, back online, everything arrives exactly once | `e2e/offline.spec.ts` | pending CI |
+| Offline: update with 3 photos and a checklist tick, back online, everything arrives exactly once | `e2e/offline.spec.ts` | ✅ CI |
 | Browser killed mid-sync and reopened resumes without duplicates | `test_sync_push.test_same_uuid_twice_creates_one_update`; e2e reloads the page during the sync | ✅ CI |
 | Push received on an Android device for a new message | manual, needs VAPID keys on a real site and a phone | ☐ (owner) |
 | Muting a category stops those pushes | `test_muted_category_gets_no_push` | ✅ CI |
-| P16-02: cached projects and assignments offline with the last update time | `e2e/offline.spec.ts` (offline banner) | pending CI |
-| P16-03: queue panel lists items with status and retry | `e2e/offline.spec.ts` (5 items listed offline) | pending CI |
+| P16-02: cached projects and assignments offline with the last update time | `e2e/offline.spec.ts` (offline banner) | ✅ CI |
+| P16-03: queue panel lists items with status and retry | `e2e/offline.spec.ts` (5 items listed offline) | ✅ CI |

@@ -1,6 +1,6 @@
 # Phase 13 — Subcontractors and procurement
 
-**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 **Approval:** built without waiting between phases, as the owner asked on 16 Nov 2026. CI is the gate.
 
@@ -51,11 +51,11 @@
 | P13-01: approved selections and estimate lines → MRs per project and stage with needed-by dates | `test_procurement.test_1_material_requests_per_stage_once` | ✅ CI |
 | P13-02: RFQ to 3 suppliers, comparison side by side, PO from the chosen one | `test_2_rfq_comparison_po_receipt_invoice` (ERPNext comparison report) | ✅ CI |
 | P13-03: submitted PO with project and stage in committed cost | same test + `test_over_quantity_needs_admin_override` (subcontract part) | ✅ CI |
-| P13-04: delivery confirmed on site with a photo → Purchase Receipt with the photo | same test; `e2e/procurement.spec.ts` | pending CI |
+| P13-04: delivery confirmed on site with a photo → Purchase Receipt with the photo | same test; `e2e/procurement.spec.ts` | ✅ CI |
 | P13-05: signed subcontract becomes active and cannot be edited | `test_signing_activates_and_freezes` | ✅ CI |
 | P13-06 AC1: 3 claims with retention and advance recovery match the hand calculation; PI created | `test_three_claims_retention_advance_and_release` (15,400 / 23,800 / 30,800) | ✅ CI |
 | P13-06 AC2: over-quantity blocked without admin override | `test_over_quantity_needs_admin_override` | ✅ CI |
 | P13-07: retention release → payment, retention payable = 0 | `test_three_claims_retention_advance_and_release` | ✅ CI |
-| Plan: PO and invoice costs under the right project and stage in the phase 6 report | unit test + e2e | pending CI |
-| Plan: Playwright MR → PO → Receipt → Invoice | `e2e/procurement.spec.ts` | pending CI |
-| Plan: retention payable in the GL = sum of retention on approved claims | unit test (10,000) | pending CI |
+| Plan: PO and invoice costs under the right project and stage in the phase 6 report | unit test + e2e | ✅ CI |
+| Plan: Playwright MR → PO → Receipt → Invoice | `e2e/procurement.spec.ts` | ✅ CI |
+| Plan: retention payable in the GL = sum of retention on approved claims | unit test (10,000) | ✅ CI |

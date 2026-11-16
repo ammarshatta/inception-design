@@ -20,23 +20,23 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 |---|---|---|---|---|---|
 | 0 | Foundation: app, portal skeleton, CI | ✅ (CI) | Cloud + CI | [phase-0.md](phase-0.md) | CI green: install, 33 tests, portal build, 2 Playwright tests. One local install is still to do. |
 | 1 | Data model and permissions | ✅ (CI) | Cloud + CI | [phase-1.md](phase-1.md) | Every required test passes in CI. Review the 4 decisions. |
-| 2 | Admin screens, client onboarding | 🟢 | Cloud + CI | [phase-2.md](phase-2.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 3 | Engineer portal, photo uploads | 🟢 | Cloud + CI | [phase-3.md](phase-3.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 4 | Client portal, chat, approvals | 🟢 | Cloud + CI | [phase-4.md](phase-4.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 5 | Design catalog, public pages, lead form | 🟢 | Cloud + CI | [phase-5.md](phase-5.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 6 | Money: milestones, invoices, expenses | 🟢 | Cloud + CI | [phase-6.md](phase-6.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 7 | Sales and estimating | 🟢 | Cloud + CI | [phase-7.md](phase-7.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 8 | Proposals and e-signature | 🟢 | Cloud + CI | [phase-8.md](phase-8.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 9 | Finish selections | 🟢 | Cloud + CI | [phase-9.md](phase-9.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 10 | Change orders | 🟢 | Cloud + CI | [phase-10.md](phase-10.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 11 | Scheduling and crews | 🟢 | Cloud + CI | [phase-11.md](phase-11.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 12 | Daily logs, timesheets, GPS clock-in | 🟢 | Cloud + CI | [phase-12.md](phase-12.md) | Unit tests green; e2e pending |
-| 13 | Subcontractors and procurement | 🟢 | Cloud + CI | [phase-13.md](phase-13.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 14 | Documents, markup, takeoff | 🟢 | Cloud + CI | [phase-14.md](phase-14.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 15 | Online payments and reminders | 🟢 | Cloud + CI | [phase-15.md](phase-15.md) | Unit tests green in CI (run 43975747126); e2e being fixed; sandbox run needs the owner |
-| 16 | Offline PWA and push | 🟢 | Cloud + CI | [phase-16.md](phase-16.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 17 | Reports and dashboards | 🔵 | Cloud + CI | [phase-17.md](phase-17.md) | Code written, waiting for CI |
-| 18 | AI assistant | 🔵 | Cloud + CI | [phase-18.md](phase-18.md) | Code written, off by default (needs the owner's key and cap) |
+| 2 | Admin screens, client onboarding | 🟢 | Cloud + CI | [phase-2.md](phase-2.md) | Unit green; the temporary-password browser test is the last one being fixed |
+| 3 | Engineer portal, photo uploads | ✅ (CI) | Cloud + CI | [phase-3.md](phase-3.md) | Unit + Playwright green (run 43977742055) |
+| 4 | Client portal, chat, approvals | ✅ (CI) | Cloud + CI | [phase-4.md](phase-4.md) | Unit + Playwright green (run 43977742055) |
+| 5 | Design catalog, public pages, lead form | ✅ (CI) | Cloud + CI | [phase-5.md](phase-5.md) | Unit + Playwright green (run 43977742055) |
+| 6 | Money: milestones, invoices, expenses | ✅ (CI) | Cloud + CI | [phase-6.md](phase-6.md) | Unit + Playwright green (run 43977742055) |
+| 7 | Sales and estimating | ✅ (CI) | Cloud + CI | [phase-7.md](phase-7.md) | Unit + Playwright green (run 43977742055) |
+| 8 | Proposals and e-signature | ✅ (CI) | Cloud + CI | [phase-8.md](phase-8.md) | Unit + Playwright green (run 43977742055) |
+| 9 | Finish selections | ✅ (CI) | Cloud + CI | [phase-9.md](phase-9.md) | Unit + Playwright green (run 43977742055) |
+| 10 | Change orders | ✅ (CI) | Cloud + CI | [phase-10.md](phase-10.md) | Unit + Playwright green (run 43977742055) |
+| 11 | Scheduling and crews | ✅ (CI) | Cloud + CI | [phase-11.md](phase-11.md) | Unit + Playwright green (run 43977742055) |
+| 12 | Daily logs, timesheets, GPS clock-in | ✅ (CI) | Cloud + CI | [phase-12.md](phase-12.md) | Unit + Playwright green (run 43977742055) |
+| 13 | Subcontractors and procurement | ✅ (CI) | Cloud + CI | [phase-13.md](phase-13.md) | Unit + Playwright green (run 43977742055) |
+| 14 | Documents, markup, takeoff | ✅ (CI) | Cloud + CI | [phase-14.md](phase-14.md) | Unit + Playwright green (run 43977742055) |
+| 15 | Online payments and reminders | ✅ (CI) | Cloud + CI | [phase-15.md](phase-15.md) | Unit + Playwright green (run 43977742055); sandbox run needs the owner's Paymob test account |
+| 16 | Offline PWA and push | ✅ (CI) | Cloud + CI | [phase-16.md](phase-16.md) | Unit + Playwright green (run 43977742055) |
+| 17 | Reports and dashboards | ✅ (CI) | Cloud + CI | [phase-17.md](phase-17.md) | Unit + Playwright green (run 43977742055) |
+| 18 | AI assistant | ✅ (CI) | Cloud + CI | [phase-18.md](phase-18.md) | Unit + Playwright green (run 43977742055); off by default until the owner adds a key and cap |
 | 19 | Launch: hosting and compliance | ⏸ | Waiting for the owner | [phase-19.md](phase-19.md) | Deploy files, docs and security review ready; needs hosting, domain, accounts and the lawyer |
 
 ## Working mode (decided 16 Nov 2026)
@@ -96,3 +96,4 @@ The owner asked for all phases to be built in a row and reviewed once at the end
 |---|---|---|
 | 16 Nov 2026 | Cloud | Phases 0 and 1 code written. Plan, backlog and design docs added. |
 | 16 Nov 2026 | CI | 8 CI runs. Fixed welcome emails, the permission test method, the portal build path and the office-name fallback. All green. |
+| 17 Nov 2026 | Cloud + CI | Phases 2–18 built. CI run 43977742055: 166 unit tests pass, 16 of 17 Playwright tests pass. Phase 19 prepared (deploy files, docs, security review); hosting waits for the owner. |

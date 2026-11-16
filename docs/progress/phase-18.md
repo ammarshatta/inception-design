@@ -1,6 +1,6 @@
 # Phase 18 — AI assistant and AI connect (MCP)
 
-**Status:** 🔵 Code written on 17 Nov 2026; waiting for CI. **Off by default**: it costs nothing until the owner adds a key and a monthly cap.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 **Approval:** built without waiting between phases, as the owner asked on 16 Nov 2026. CI is the gate. Nothing paid was turned on: the tests use a mocked model.
 
@@ -33,9 +33,9 @@ We wrote a minimal MCP server (about 100 lines) instead of adapting `frappe-mcp-
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| "عايز أغيّر سيراميك الريسبشن لباركيه" → Draft Change Order whose numbers equal `run_costing` (mocked model) | `test_ai.test_ceramic_to_parquet_draft_matches_engine` (7,000.00 = (600 − 250) × 20) | pending CI |
-| Cap reached → refuses and logs | `test_cap_reached_refuses_and_logs` | pending CI |
-| A user without access gets a permission error from every tool | `test_every_tool_denies_other_projects` | pending CI |
-| Guardrail flags an injected wrong total | `test_guardrail_flags_invented_total` | pending CI |
-| Drafts only | `test_only_drafts` | pending CI |
-| MCP: read-only tool works with an engineer's key and is denied for another engineer's project | `TestMcp` (dispatch as the user); desktop client test needs the owner | pending CI · ☐ (owner) |
+| "عايز أغيّر سيراميك الريسبشن لباركيه" → Draft Change Order whose numbers equal `run_costing` (mocked model) | `test_ai.test_ceramic_to_parquet_draft_matches_engine` (7,000.00 = (600 − 250) × 20) | ✅ CI |
+| Cap reached → refuses and logs | `test_cap_reached_refuses_and_logs` | ✅ CI |
+| A user without access gets a permission error from every tool | `test_every_tool_denies_other_projects` | ✅ CI |
+| Guardrail flags an injected wrong total | `test_guardrail_flags_invented_total` | ✅ CI |
+| Drafts only | `test_only_drafts` | ✅ CI |
+| MCP: read-only tool works with an engineer's key and is denied for another engineer's project | `TestMcp` (dispatch as the user); desktop client test needs the owner | ✅ CI · ☐ (owner) |

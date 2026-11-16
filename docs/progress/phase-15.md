@@ -1,6 +1,6 @@
 # Phase 15 — Online payments and reminders
 
-**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 **Approval:** built without waiting between phases, as the owner asked on 16 Nov 2026. CI is the gate.
 
@@ -50,6 +50,6 @@
 | Missed-webhook sweep reconciles (mocked gateway) | `test_sweep_reconciles_missed_webhook` | ✅ CI |
 | Reminders over a simulated 30 days: days 7, 10, 17, 24 only | `test_thirty_days_exactly_four_reminders` | ✅ CI |
 | Transfer receipt → accountant notified → confirm creates the Payment Entry | `test_manual_transfer_confirmed_by_accountant` | ✅ CI |
-| Receipt PDF in the portal | same webhook test (`receipt_pdf`) | pending CI |
+| Receipt PDF in the portal | same webhook test (`receipt_pdf`) | ✅ CI |
 | Refund only by Accounts Manager, gateway refund + reversal with note | `test_refund_only_accounts_manager` | ✅ CI |
 | No gateway secret in git; live keys never used locally | Password fields; `test_live_keys_refused_on_test_site` | ✅ CI |

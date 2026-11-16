@@ -1,6 +1,6 @@
 # Phase 11 — Scheduling and crews
 
-**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 ## What was done
 

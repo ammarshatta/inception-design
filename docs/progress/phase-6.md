@@ -1,6 +1,6 @@
 # Phase 6 — Money
 
-**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 ## What was done
 
@@ -28,7 +28,7 @@
 | Criterion | Evidence | Result |
 |---|---|---|
 | Full cycle: Due → draft → submit → Payment Entry → Paid → the portal shows Paid | `test_money.test_full_cycle_and_cancel` | ✅ CI |
-| Cancelling the Payment Entry returns the milestone to Invoiced | same test | pending CI |
+| Cancelling the Payment Entry returns the milestone to Invoiced | same test | ✅ CI |
 | Report totals equal the GL and Accounts Receivable to the piastre (amounts with piastres: 85000.55, 40000.25, 10000.10, 1500.5, 3200.25) | `test_report_matches_general_ledger` | ✅ CI |
 | No raw `float(` in money code | grep above | ✅ |
 | A submitted invoice cannot be edited | `test_submitted_invoice_cannot_be_edited` | ✅ CI |

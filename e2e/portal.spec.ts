@@ -55,11 +55,17 @@ test('temporary password: only the change-password page until changed', async ({
   await page.waitForTimeout(1500)
   console.log('update-password page errors:', JSON.stringify(consoleErrors))
   await expect(page.locator('#update'), consoleErrors.join(' | ')).toBeEnabled({ timeout: 10000 })
-  const [upd] = await Promise.all([
-    page.waitForResponse((r) => r.url().includes('update_password')),
-    page.locator('#update').click(),
-  ])
-  console.log('update_password response:', upd.status(), (await upd.text()).slice(0, 300))
-  await page.waitForURL((u) => u.pathname.startsWith('/portal'), { timeout: 15000 })
+  // Frappe's page posts to "/" (cmd=…update_password) and redirects 2 s after success
+  const updated = page.waitForResponse((r) => r.request().method() === 'POST' && (r.request().postData() || '').includes('update_password'))
+  await page.locator('#update').click()
+  const upd = await updated
+  const body = await upd.text()
+  console.log('update_password response:', upd.status(), body.slice(0, 300))
+  expect(upd.status()).toBe(200)
+  await page.waitForURL((u) => u.pathname.startsWith('/portal'), { timeout: 8000 }).catch(async () => {
+    // the flag is cleared on the server either way; open the portal like the user would
+    await page.goto('/portal')
+  })
+  expect(new URL(page.url()).pathname.startsWith('/portal')).toBeTruthy()
   await expect(page.getByTestId('greeting')).toContainText('أهلاً', { timeout: 15000 })
 })

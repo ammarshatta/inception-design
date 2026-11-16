@@ -1,6 +1,6 @@
 # Phase 7 — Sales pipeline and estimating
 
-**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 ## What was done
 
@@ -32,7 +32,7 @@
 | Engine: known totals with waste, overhead, profit and VAT, to the piastre (2235.26; 5840.51) | `test_estimating.TestEngine`, `test_estimate_total_with_vat` | ✅ CI |
 | A new Item Price after approval does not change the estimate | `test_approved_estimate_keeps_captured_price` | ✅ CI |
 | `compare_revisions` with an added, a removed and a changed line | `test_revise_and_compare` | ✅ CI |
-| Lead → Opportunity → Estimate → Quotation end to end in Playwright | `e2e/sales.spec.ts`. It drives the server API and then opens the Kanban and the Quotation in the desk. | pending CI |
+| Lead → Opportunity → Estimate → Quotation end to end in Playwright | `e2e/sales.spec.ts`. It drives the server API and then opens the Kanban and the Quotation in the desk. | ✅ CI |
 | No `float(` in `costing/` | grep above | ✅ |
 | P07-02: the January price is used for a February estimate; prices cannot be deleted | `test_price_in_force_on_date`, `test_prices_cannot_be_deleted` | ✅ CI |
 | P07-03: assembly for 50 m² | `test_assembly_for_50_m2` | ✅ CI |

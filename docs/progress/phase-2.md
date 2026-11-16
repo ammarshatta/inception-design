@@ -1,6 +1,6 @@
 # Phase 2 — Admin screens and client onboarding
 
-**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026) except the temporary-password browser test, fixed in the next commit.
 
 **Approval:** on 16 Nov 2026 the owner asked for every phase to be built without waiting for approval between phases, with one review at the end. CI is the gate between phases.
 

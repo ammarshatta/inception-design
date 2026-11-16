@@ -1,6 +1,6 @@
 # Phase 8 — Proposals, e-signature and kickoff
 
-**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 > **Legal (for the owner):** this is a *simple electronic signature with a strong audit trail*, not an ITIDA-licensed signature under Egyptian Law 15/2004.
 > - Ask a lawyer whether it is enough for your contracts.
@@ -29,10 +29,10 @@
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| Playwright: the client opens the request, gets the code, signs, and the project appears | `e2e/sign.spec.ts` | pending CI |
+| Playwright: the client opens the request, gets the code, signs, and the project appears | `e2e/sign.spec.ts` | ✅ CI |
 | After signing, every change to the request or its files is rejected | `test_esign.test_signed_is_frozen_and_tamper_detected` | ✅ CI |
 | The SHA-256 of the original matches `pdf_sha256`, and tampering is detected by `verify` | same test, plus `test_full_signing_and_kickoff` | ✅ CI |
 | The 4th try after 3 wrong codes is locked until the office resends | `test_fourth_wrong_code_locks_until_resend` | ✅ CI |
-| The signed PDF in Arabic RTL with the signature page (screenshot) | CI turns the signed PDF into PNGs (`53-signed-pdf-*.png`) | pending CI |
+| The signed PDF in Arabic RTL with the signature page (screenshot) | CI turns the signed PDF into PNGs (`53-signed-pdf-*.png`) | ✅ CI |
 | P08-04: project, weighted stages, tasks, milestones, and the client on the team | `test_full_signing_and_kickoff` | ✅ CI |
 | P08-05 / P08-06: decline with a reason; expiry | `test_decline_and_expiry` | ✅ CI |

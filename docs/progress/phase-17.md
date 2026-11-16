@@ -1,6 +1,6 @@
 # Phase 17 — Reports and dashboards
 
-**Status:** 🔵 Code written on 17 Nov 2026; waiting for CI.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 **Approval:** built without waiting between phases, as the owner asked on 16 Nov 2026. CI is the gate.
 
@@ -36,8 +36,8 @@ Excel export and printing come with Frappe's report view.
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| WIP math on a seeded project with known numbers | `test_analytics.TestWip` (pure + seeded: contract 100,000, 40%, billed 30,000 → earned 40,000, under-billed 10,000, EAC 30,000) | pending CI |
-| Report totals tie to ERPNext's own reports | job costing actual = GL expense for the project; collections = ERPNext Accounts Receivable for the invoice | pending CI |
-| 200 seeded projects, every report under 3 s (timings printed in the test log) | `test_two_hundred_projects_under_three_seconds` | pending CI |
-| An engineer sees only their projects in every report | `test_engineer_sees_only_own_projects_in_every_report` | pending CI |
+| WIP math on a seeded project with known numbers | `test_analytics.TestWip` (pure + seeded: contract 100,000, 40%, billed 30,000 → earned 40,000, under-billed 10,000, EAC 30,000) | ✅ CI |
+| Report totals tie to ERPNext's own reports | job costing actual = GL expense for the project; collections = ERPNext Accounts Receivable for the invoice | ✅ CI |
+| 200 seeded projects, every report under 3 s | `test_two_hundred_projects_under_three_seconds` — CI timings with 202 projects: WIP 0.010 s, job costing 0.006, variance 0.008, labor 0.002, collections 0.002, selections 0.002, schedule 0.003, pipeline 0.001, dashboard 0.015 | ✅ CI |
+| An engineer sees only their projects in every report | `test_engineer_sees_only_own_projects_in_every_report` | ✅ CI |
 | Saturday 9 AM summary PDF | needs an email account on a real site | ☐ (owner) |

@@ -1,6 +1,6 @@
 # Phase 10 — Change orders
 
-**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 ## What was done
 
@@ -23,7 +23,7 @@
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| Full cycle: request → price → admin sends → client signs → milestone created, budget updated | `test_positive_cycle_creates_milestone_and_budget` (unit). The Playwright version is in `e2e/changes.spec.ts`. | pending CI |
+| Full cycle: request → price → admin sends → client signs → milestone created, budget updated | `test_positive_cycle_creates_milestone_and_budget` (unit). The Playwright version is in `e2e/changes.spec.ts`. | ✅ CI |
 | A negative change order makes a credit that Accounts Receivable shows correctly (10,000 − 2,000 = 8,000) | `test_negative_credit_note_in_receivables` | ✅ CI |
 | An approved change order cannot be edited | `test_approved_cannot_be_edited` | ✅ CI |
 | Schedule impact moves the stage and the later ones by the right number of days (Done stages stay) | `TestScheduleShift` | ✅ CI |

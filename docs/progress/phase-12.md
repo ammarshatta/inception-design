@@ -1,6 +1,6 @@
 # Phase 12 — Daily logs, timesheets, GPS clock-in
 
-**Status:** 🟢 Unit tests green in CI (run 43971272948, 126 tests). The e2e daily-log test runs with the phase 13 commit.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026).
 
 **Approval:** built without waiting between phases, as the owner asked on 16 Nov 2026. CI is the gate.
 
