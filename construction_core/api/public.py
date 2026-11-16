@@ -381,3 +381,34 @@ def sitemap():
 	body += "".join(f"  <url><loc>{escape_html(u)}</loc></url>\n" for u in urls)
 	body += "</urlset>\n"
 	return Response(body, content_type="application/xml")
+
+
+# --- Payment gateway webhook (phase 15) -----------------------------------------------
+
+
+@frappe.whitelist(allow_guest=True, methods=["POST"])
+def paymob_webhook():
+	"""Paymob "transaction processed" callback. The HMAC is checked before anything is read or
+	written; a bad signature is rejected (401) and logged without the payload's card data."""
+	from construction_core.payments.gateway import get_gateway
+	from construction_core.payments.online import reconcile
+	from construction_core.utils import as_system
+
+	request = frappe.request
+	signature = cstr(request.args.get("hmac"))
+	try:
+		payload = json.loads(request.get_data(as_text=True) or "{}")
+	except ValueError:
+		payload = {}
+	gw = get_gateway()
+	if not gw.verify_webhook(payload, signature):
+		frappe.log_error(
+			title="Paymob webhook rejected: bad signature",
+			message=f"ip={frappe.local.request_ip} has_hmac={bool(signature)}",
+		)
+		frappe.local.response["http_status_code"] = 401
+		return {"ok": False}
+	tx = gw.parse_webhook(payload)
+	with as_system():
+		reconcile(tx)
+	return {"ok": True}

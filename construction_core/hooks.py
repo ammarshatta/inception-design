@@ -326,6 +326,7 @@ _SCOPED = (
 	"Subcontract Claim",
 	"Project Document",
 	"Markup",
+	"Online Payment",
 )
 
 has_permission = {
@@ -344,7 +345,11 @@ scheduler_events = {
 		"construction_core.esign.expire_requests",
 		"construction_core.selections.send_reminders",
 		"construction_core.sitelog.build_timesheets",
+		"construction_core.payments.reminders.send_due_reminders",
 	],
+	"cron": {
+		"*/15 * * * *": ["construction_core.payments.online.sweep_pending"],
+	},
 }
 
 doc_events = {

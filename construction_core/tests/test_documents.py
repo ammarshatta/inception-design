@@ -40,6 +40,17 @@ def private_file(user: str, name: str, content: bytes, attached_to: tuple | None
 		frappe.set_user(with_user)
 
 
+def pdf(width: int) -> bytes:
+	"""A real one-page PDF; the width makes each version's content different."""
+	from pypdf import PdfWriter
+
+	w = PdfWriter()
+	w.add_blank_page(width=width, height=400)
+	out = io.BytesIO()
+	w.write(out)
+	return out.getvalue()
+
+
 def png(color=(200, 0, 0)) -> bytes:
 	out = io.BytesIO()
 	Image.new("RGB", (40, 30), color).save(out, format="PNG")
@@ -82,16 +93,14 @@ class TestDocuments(IntegrationTestCase):
 
 	def test_versions_and_client_visibility(self):
 		(res1, v1) = self.upload(
-			b"%PDF-1.4 plan v1", "plan-v1.pdf", title="مسقط أفقي", folder="رسومات", client_visible=1
+			pdf(601), "plan-v1.pdf", title="مسقط أفقي", folder="رسومات", client_visible=1
 		)
-		(res2, v2) = self.upload(
-			b"%PDF-1.4 plan v2", "plan-v2.pdf", document=res1["document"], note="تعديل المطبخ"
-		)
+		(res2, v2) = self.upload(pdf(602), "plan-v2.pdf", document=res1["document"], note="تعديل المطبخ")
 		self.assertEqual((res1["version"], res2["version"]), (1, 2))
 		doc = frappe.get_doc("Project Document", res1["document"])
 		self.assertEqual((doc.current_version, doc.current_file), (2, v2))
 		(hidden, h1) = self.upload(
-			b"%PDF-1.4 internal", "boq.pdf", title="مقايسة داخلية", folder="مواصفات", client_visible=0
+			pdf(603), "boq.pdf", title="مقايسة داخلية", folder="مواصفات", client_visible=0
 		)
 
 		# staff: both versions stay downloadable

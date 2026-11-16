@@ -39,6 +39,7 @@ PROJECT_LINKED_DOCTYPES = (
 	"Subcontract Claim",
 	"Project Document",
 	"Markup",
+	"Online Payment",
 )
 SCOPED_DOCTYPES = ("Project", *PROJECT_LINKED_DOCTYPES)
 

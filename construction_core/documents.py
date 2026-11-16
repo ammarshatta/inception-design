@@ -210,6 +210,11 @@ def add_signed_contract(req, project: str | None):
 	if existing:
 		return existing
 	content = _file_doc(req.signed_pdf).get_content()
+	f = frappe.get_doc(
+		{"doctype": "File", "file_name": f"{req.name}-signed.pdf", "content": content, "is_private": 1}
+	)
+	f.flags.ignore_permissions = True
+	f.insert()
 	doc = frappe.get_doc(
 		{
 			"doctype": "Project Document",
@@ -221,22 +226,10 @@ def add_signed_contract(req, project: str | None):
 			"signature_request": req.name,
 		}
 	)
+	add_version(doc, f.file_url, _("نسخة موقّعة"), user="Administrator")
 	doc.flags.ignore_permissions = True
 	doc.insert()
-	f = frappe.get_doc(
-		{
-			"doctype": "File",
-			"file_name": f"{req.name}-signed.pdf",
-			"content": content,
-			"is_private": 1,
-			"attached_to_doctype": "Project Document",
-			"attached_to_name": doc.name,
-		}
-	)
-	f.flags.ignore_permissions = True
-	f.insert()
-	add_version(doc, f.file_url, _("نسخة موقّعة"), user="Administrator")
-	doc.save(ignore_permissions=True)
+	f.db_set({"attached_to_doctype": "Project Document", "attached_to_name": doc.name})
 	return doc.name
 
 

@@ -1,0 +1,268 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:PAY-{#####}",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "project",
+  "payment_milestone",
+  "sales_invoice",
+  "amount",
+  "method",
+  "cb1",
+  "status",
+  "paid_by",
+  "payment_entry",
+  "receipt_sent",
+  "gateway_section",
+  "gateway",
+  "reference",
+  "gateway_order_id",
+  "transaction_id",
+  "checkout_url",
+  "last_checked",
+  "manual_section",
+  "proof_file",
+  "client_note",
+  "confirmed_by",
+  "reject_reason",
+  "refund_section",
+  "refund_note",
+  "refunded_by",
+  "refund_reference"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "العنوان",
+   "read_only": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "payment_milestone",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "الدفعة",
+   "options": "Payment Milestone",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "الفاتورة",
+   "options": "Sales Invoice",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "المبلغ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "method",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "طريقة الدفع",
+   "options": "Card\nWallet\nBank Transfer\nInstaPay",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الحالة",
+   "options": "Pending\nAwaiting Confirmation\nPaid\nFailed\nExpired\nRejected\nRefunded",
+   "read_only": 1
+  },
+  {
+   "fieldname": "paid_by",
+   "fieldtype": "Link",
+   "label": "العميل",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_entry",
+   "fieldtype": "Link",
+   "label": "سند القبض",
+   "no_copy": 1,
+   "options": "Payment Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "receipt_sent",
+   "fieldtype": "Check",
+   "label": "اتبعت الإيصال",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:['Card','Wallet'].includes(doc.method)",
+   "fieldname": "gateway_section",
+   "fieldtype": "Section Break",
+   "label": "بوابة الدفع"
+  },
+  {
+   "fieldname": "gateway",
+   "fieldtype": "Data",
+   "label": "البوابة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "label": "مرجعنا",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "gateway_order_id",
+   "fieldtype": "Data",
+   "label": "رقم الطلب عند البوابة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "transaction_id",
+   "fieldtype": "Data",
+   "label": "رقم العملية",
+   "no_copy": 1,
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "checkout_url",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "رابط الدفع",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_checked",
+   "fieldtype": "Datetime",
+   "label": "آخر مراجعة",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:['Bank Transfer','InstaPay'].includes(doc.method)",
+   "fieldname": "manual_section",
+   "fieldtype": "Section Break",
+   "label": "تحويل يدوي"
+  },
+  {
+   "fieldname": "proof_file",
+   "fieldtype": "Attach Image",
+   "label": "صورة الإيصال",
+   "read_only": 1
+  },
+  {
+   "fieldname": "client_note",
+   "fieldtype": "Small Text",
+   "label": "ملاحظة العميل",
+   "read_only": 1
+  },
+  {
+   "fieldname": "confirmed_by",
+   "fieldtype": "Link",
+   "label": "أكّده",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reject_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب الرفض",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "refund_section",
+   "fieldtype": "Section Break",
+   "label": "الاسترداد"
+  },
+  {
+   "fieldname": "refund_note",
+   "fieldtype": "Small Text",
+   "label": "سبب الاسترداد",
+   "read_only": 1
+  },
+  {
+   "fieldname": "refunded_by",
+   "fieldtype": "Link",
+   "label": "استرده",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "refund_reference",
+   "fieldtype": "Data",
+   "label": "رقم الاسترداد عند البوابة",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Online Payment",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "export": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "export": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Construction Client"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

@@ -25,7 +25,27 @@
   "clock_section",
   "clock_consent_version",
   "clock_consent_text",
-  "labor_hours_per_day"
+  "labor_hours_per_day",
+  "payments_section",
+  "payment_gateway",
+  "gateway_mode",
+  "paymob_base_url",
+  "paymob_public_key",
+  "paymob_secret_key",
+  "paymob_hmac_secret",
+  "paymob_api_key",
+  "pay_cb1",
+  "paymob_card_integration_id",
+  "paymob_wallet_integration_id",
+  "gateway_clearing_account",
+  "manual_payment_account",
+  "bank_transfer_details",
+  "instapay_details",
+  "reminders_section",
+  "enable_payment_reminders",
+  "reminder_before_text",
+  "reminder_due_text",
+  "reminder_overdue_text"
  ],
  "fields": [
   {
@@ -142,12 +162,125 @@
    "fieldname": "labor_hours_per_day",
    "fieldtype": "Float",
    "label": "ساعات اليومية"
+  },
+  {
+   "depends_on": "enable_online_payments",
+   "fieldname": "payments_section",
+   "fieldtype": "Section Break",
+   "label": "الدفع أونلاين"
+  },
+  {
+   "default": "Paymob",
+   "fieldname": "payment_gateway",
+   "fieldtype": "Select",
+   "label": "البوابة",
+   "options": "Paymob"
+  },
+  {
+   "default": "Test",
+   "description": "Live مقفول على أي موقع تجارب أو جهاز تطوير.",
+   "fieldname": "gateway_mode",
+   "fieldtype": "Select",
+   "label": "الوضع",
+   "options": "Test\nLive"
+  },
+  {
+   "default": "https://accept.paymob.com",
+   "fieldname": "paymob_base_url",
+   "fieldtype": "Data",
+   "label": "عنوان Paymob"
+  },
+  {
+   "fieldname": "paymob_public_key",
+   "fieldtype": "Data",
+   "label": "Public Key"
+  },
+  {
+   "fieldname": "paymob_secret_key",
+   "fieldtype": "Password",
+   "label": "Secret Key"
+  },
+  {
+   "fieldname": "paymob_hmac_secret",
+   "fieldtype": "Password",
+   "label": "HMAC Secret"
+  },
+  {
+   "fieldname": "paymob_api_key",
+   "fieldtype": "Password",
+   "label": "API Key (للاستعلام والاسترداد)"
+  },
+  {
+   "fieldname": "pay_cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "paymob_card_integration_id",
+   "fieldtype": "Int",
+   "label": "Integration ID للكروت"
+  },
+  {
+   "fieldname": "paymob_wallet_integration_id",
+   "fieldtype": "Int",
+   "label": "Integration ID للمحافظ"
+  },
+  {
+   "description": "الحساب اللي بتتسجل عليه فلوس البوابة لحد التسوية مع البنك.",
+   "fieldname": "gateway_clearing_account",
+   "fieldtype": "Link",
+   "label": "حساب تحصيل البوابة",
+   "options": "Account"
+  },
+  {
+   "fieldname": "manual_payment_account",
+   "fieldtype": "Link",
+   "label": "حساب التحويلات البنكية وإنستاباي",
+   "options": "Account"
+  },
+  {
+   "fieldname": "bank_transfer_details",
+   "fieldtype": "Small Text",
+   "label": "بيانات التحويل البنكي (بتظهر للعميل)"
+  },
+  {
+   "fieldname": "instapay_details",
+   "fieldtype": "Small Text",
+   "label": "بيانات إنستاباي (بتظهر للعميل)"
+  },
+  {
+   "fieldname": "reminders_section",
+   "fieldtype": "Section Break",
+   "label": "تذكير الدفعات"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_payment_reminders",
+   "fieldtype": "Check",
+   "label": "تشغيل التذكير"
+  },
+  {
+   "default": "أهلاً {client}، فاكرينك إن دفعة «{label}» بقيمة {amount} ج.م مستحقة يوم {due_date}. شكراً ليك.",
+   "fieldname": "reminder_before_text",
+   "fieldtype": "Small Text",
+   "label": "قبل الاستحقاق بـ 3 أيام"
+  },
+  {
+   "default": "أهلاً {client}، النهارده ميعاد دفعة «{label}» بقيمة {amount} ج.م. تقدر تدفع من البوابة: {link}",
+   "fieldname": "reminder_due_text",
+   "fieldtype": "Small Text",
+   "label": "يوم الاستحقاق"
+  },
+  {
+   "default": "أهلاً {client}، دفعة «{label}» بقيمة {amount} ج.م فات ميعادها من {days} يوم. لو دفعت تجاهل الرسالة دي، ولو محتاج حاجة كلمنا.",
+   "fieldname": "reminder_overdue_text",
+   "fieldtype": "Small Text",
+   "label": "بعد الاستحقاق (7 و14 يوم)"
   }
  ],
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-11-17 02:30:00.000000",
+ "modified": "2026-11-17 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Construction Core",
  "name": "Inceptiondesign Settings",

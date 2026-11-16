@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "hash",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "payment_milestone",
+  "project",
+  "offset_days",
+  "sent_on",
+  "recipient",
+  "channels",
+  "whatsapp_url"
+ ],
+ "fields": [
+  {
+   "fieldname": "payment_milestone",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "الدفعة",
+   "options": "Payment Milestone",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project"
+  },
+  {
+   "fieldname": "offset_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "الأيام من الاستحقاق"
+  },
+  {
+   "fieldname": "sent_on",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "اتبعت يوم"
+  },
+  {
+   "fieldname": "recipient",
+   "fieldtype": "Link",
+   "label": "المستلم",
+   "options": "User"
+  },
+  {
+   "fieldname": "channels",
+   "fieldtype": "Data",
+   "label": "القنوات"
+  },
+  {
+   "fieldname": "whatsapp_url",
+   "fieldtype": "Small Text",
+   "label": "رابط واتساب"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Payment Reminder Log",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "read": 1,
+   "report": 1,
+   "role": "System Manager"
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin"
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

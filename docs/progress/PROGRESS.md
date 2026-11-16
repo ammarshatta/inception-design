@@ -33,7 +33,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 12 | Daily logs, timesheets, GPS clock-in | 🟢 | Cloud + CI | [phase-12.md](phase-12.md) | Unit tests green; e2e pending. Weekly PDF (Could) not done |
 | 13 | Subcontractors and procurement | 🔵 | Cloud + CI | [phase-13.md](phase-13.md) | Code written, waiting for CI |
 | 14 | Documents, markup, takeoff | 🔵 | Cloud + CI | [phase-14.md](phase-14.md) | Code written, waiting for CI |
-| 15 | Online payments and reminders | ⬜ | | | |
+| 15 | Online payments and reminders | 🔵 | Cloud + CI | [phase-15.md](phase-15.md) | Code written (gateway mocked); sandbox run needs the owner's Paymob test account |
 | 16 | Offline PWA and push | ⬜ | | | |
 | 17 | Reports and dashboards | ⬜ | | | |
 | 18 | AI assistant | ⬜ | | | |
@@ -63,6 +63,8 @@ The owner asked for all phases to be built in a row and reviewed once at the end
 | Accountant checks the two new accounts (محتجزات / سلف مقاولين الباطن) sit where they want in the chart of accounts | 13 |
 | Create a portal user for each subcontractor (role Construction Subcontractor) with a mobile number for the signing code | 13 |
 | Set up an outgoing email account (Tools → Email Account): signing codes are sent by email; without it the portal says it cannot send the code | 8 |
+| Open a free Paymob **test** account, put the test keys in Settings → الدفع أونلاين, and pay one milestone end to end | 15 |
+| Decide on Paymob live (fee per transaction) and set the clearing and manual-payment accounts in Settings | 15 / 19 |
 | Accountant enters the VAT rate in the "ضريبة القيمة المضافة" template (14% today) | 6 |
 
 ## Next actions (owner)
