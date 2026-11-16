@@ -130,3 +130,9 @@ jobs:
           npx playwright install --with-deps chromium
           E2E_BASE_URL=http://localhost:8000 E2E_USER=e2e-client@example.com E2E_PASSWORD="$E2E_PASSWORD" \
             E2E_FULL_NAME="عميل التجربة" yarn test
+
+      - name: Server log and Playwright report (on failure)
+        if: failure()
+        run: |
+          tail -n 80 /tmp/serve.log || true
+          find /home/runner/frappe-bench/apps/construction_core/e2e/test-results -name "*.md" -exec cat {} \; || true

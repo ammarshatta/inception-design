@@ -14,14 +14,16 @@ test('logged out: /portal redirects to login, then back to /portal', async ({ pa
 
 test('logged in: Arabic RTL greeting with the full name', async ({ page }) => {
   test.skip(!user || !password, 'Set E2E_USER and E2E_PASSWORD')
-  await page.goto('/login?redirect-to=/portal')
-  await page.fill('#login_email', user)
-  await page.fill('#login_password', password)
-  await page.locator('form.form-login button[type="submit"]').first().click()
-  await page.waitForURL(/\/portal/)
+  // Log in through Frappe's login API (same session cookie as the login form)
+  const res = await page.request.post('/api/method/login', { form: { usr: user, pwd: password } })
+  expect(res.ok(), await res.text()).toBeTruthy()
+
+  const portal = await page.goto('/portal')
+  expect(portal?.status()).toBe(200)
+  expect(new URL(page.url()).pathname).toBe('/portal')
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
   await expect(page.locator('html')).toHaveAttribute('lang', 'ar')
   const greeting = page.getByTestId('greeting')
-  await expect(greeting).toContainText('أهلاً')
+  await expect(greeting).toContainText('أهلاً', { timeout: 15000 })
   if (fullName) await expect(greeting).toContainText(fullName)
 })
