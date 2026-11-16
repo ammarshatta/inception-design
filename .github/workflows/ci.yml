@@ -75,10 +75,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install MariaDB Client, wkhtmltopdf and PDF tools
+      - name: Install MariaDB Client and PDF tools
         run: |
           sudo apt update
-          sudo apt-get install -y mariadb-client wkhtmltopdf poppler-utils fonts-dejavu-core
+          sudo apt-get install -y mariadb-client poppler-utils fonts-dejavu-core
 
       - name: Setup
         run: |

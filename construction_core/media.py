@@ -57,7 +57,7 @@ def sanitize_photo(file_name: str) -> bool:
 	return True
 
 
-def make_public_copy(private_url: str, update: str) -> str:
+def make_public_copy(private_url: str, docname: str, doctype: str = "Stage Update") -> str:
 	"""A separate public file for a photo marked suitable for publishing (story P03-05)."""
 	source = frappe.get_doc("File", {"file_url": private_url})
 	copy = frappe.get_doc(
@@ -66,8 +66,8 @@ def make_public_copy(private_url: str, update: str) -> str:
 			"file_name": "public-" + source.file_name,
 			"content": source.get_content(),
 			"is_private": 0,
-			"attached_to_doctype": "Stage Update",
-			"attached_to_name": update,
+			"attached_to_doctype": doctype,
+			"attached_to_name": docname,
 		}
 	)
 	copy.flags.public_copy = True

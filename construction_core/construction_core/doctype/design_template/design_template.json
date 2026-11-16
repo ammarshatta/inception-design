@@ -10,6 +10,7 @@
   "slug",
   "published",
   "cover",
+  "cover_public",
   "cb1",
   "style",
   "area_m2",
@@ -53,6 +54,14 @@
    "fieldname": "cover",
    "fieldtype": "Attach Image",
    "label": "صورة الغلاف"
+  },
+  {
+   "fieldname": "cover_public",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "نسخة الغلاف العامة",
+   "no_copy": 1,
+   "read_only": 1
   },
   {
    "fieldname": "cb1",
@@ -133,7 +142,7 @@
  ],
  "index_web_pages_for_search": 0,
  "links": [],
- "modified": "2026-11-16 20:30:00.000000",
+ "modified": "2026-11-16 23:00:00.000000",
  "modified_by": "Administrator",
  "module": "Construction Core",
  "name": "Design Template",

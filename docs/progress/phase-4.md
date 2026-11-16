@@ -27,5 +27,5 @@
 | Two browsers: a message appears for the other user within 5 seconds | `e2e/chat.spec.ts` | pending CI |
 | Every portal method rejects another client's project (one subtest per method) | `test_every_method_rejects_other_project`, `test_answer_approval_other_project_rejected` | pending CI |
 | An internal update never appears on home, in the gallery or in notifications | `test_home_shows_last_three_non_internal`, `test_internal_never_in_gallery`, `test_update_notifies_client_internal_does_not` | pending CI |
-| The invoice PDF renders in Arabic RTL (screenshot) | CI renders the PDF with wkhtmltopdf and turns it into a PNG: `docs/progress/screens/` | pending CI |
+| The invoice PDF renders in Arabic RTL (screenshot) | CI renders the PDF with PlutoPrint (Frappe v16's built-in engine; the CI image has no wkhtmltopdf) and turns it into a PNG: `docs/progress/screens/` | pending CI |
 | P04-02: a 4-day delay is shown | `test_timeline_delay` | pending CI |
