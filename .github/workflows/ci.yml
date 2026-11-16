@@ -115,3 +115,18 @@ jobs:
         run: |
           bench build --app construction_core
           test -f apps/construction_core/construction_core/www/portal.html
+
+      - name: Portal end-to-end (Playwright)
+        working-directory: /home/runner/frappe-bench
+        run: |
+          E2E_PASSWORD="$(openssl rand -hex 16)"
+          bench use test_site
+          bench --site test_site execute construction_core.tests.e2e_setup.create_e2e_user \
+            --kwargs "{'email': 'e2e-client@example.com', 'password': '$E2E_PASSWORD'}"
+          (bench serve --port 8000 > /tmp/serve.log 2>&1 &)
+          for i in $(seq 1 45); do curl -sf http://localhost:8000/api/method/ping && break; sleep 2; done
+          cd apps/construction_core/e2e
+          yarn install --non-interactive
+          npx playwright install --with-deps chromium
+          E2E_BASE_URL=http://localhost:8000 E2E_USER=e2e-client@example.com E2E_PASSWORD="$E2E_PASSWORD" \
+            E2E_FULL_NAME="عميل التجربة" yarn test
