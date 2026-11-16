@@ -59,7 +59,7 @@ test('temporary password: only the change-password page until changed', async ({
   const updated = page.waitForResponse((r) => r.request().method() === 'POST' && (r.request().postData() || '').includes('update_password'))
   await page.locator('#update').click()
   const upd = await updated
-  const body = await upd.text()
+  const body = await upd.text().catch(() => '(redirect)')
   console.log('update_password response:', upd.status(), body.slice(0, 300))
   expect(upd.status()).toBe(200)
   await page.waitForURL((u) => u.pathname.startsWith('/portal'), { timeout: 8000 }).catch(async () => {

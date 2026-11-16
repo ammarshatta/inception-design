@@ -30,6 +30,10 @@
 
 **ERPNext welcome email:** when there is no outgoing email account, new team rows are marked as welcomed, so adding users does not fail (`overrides/project.before_validate`).
 
+## Bug found by the browser test (17 Nov 2026)
+
+Frappe's change-password page sends its call as a POST to `/` with `cmd=frappe.core.doctype.user.user.update_password`. The forced-password guard only allowed `/api/method/...`, so it redirected that POST back to the page and a client with a temporary password could never change it. The guard now also allows a POST to `/` whose `cmd` is one of the allowed methods (`auth.force_password_change`).
+
 ## Decisions to review
 
 1. **Clients without email:** Frappe requires an email on every User, so the user is stored as `<username>@no-email.invalid`. `.invalid` is a reserved domain, so nothing is ever delivered there. The client logs in with the username.

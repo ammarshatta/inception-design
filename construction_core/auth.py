@@ -83,6 +83,11 @@ def force_password_change():
 		return
 	if is_allowed_while_changing_password(request.path):
 		return
+	# Frappe's website pages post RPC calls to "/" with a `cmd` form field
+	if request.method == "POST" and (request.path or "/") == "/":
+		cmd = (frappe.form_dict.get("cmd") or request.form.get("cmd") or "").strip()
+		if cmd in ALLOWED_METHODS:
+			return
 	if request.path.startswith("/api/"):
 		frappe.throw(_("Change your temporary password first"), frappe.PermissionError)
 	raise HTTPException(response=redirect(UPDATE_PASSWORD_PATH + "?redirect-to=" + quote(request.path)))
