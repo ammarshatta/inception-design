@@ -101,8 +101,8 @@ export function uploadFile(
     const form = new FormData()
     form.append('file', file, fileName)
     form.append('is_private', '1')
-    form.append('doctype', doctype)
-    form.append('docname', docname)
+    if (doctype) form.append('doctype', doctype)
+    if (docname) form.append('docname', docname)
     xhr.send(form)
   })
 }

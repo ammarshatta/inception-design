@@ -37,6 +37,11 @@ test('temporary password: only the change-password page until changed', async ({
   const res = await page.request.post('/api/method/login', { form: { usr: tempUser, pwd: tempPassword } })
   expect(res.ok(), await res.text()).toBeTruthy()
 
+  const consoleErrors: string[] = []
+  page.on('console', (m) => m.type() === 'error' && consoleErrors.push(m.text()))
+  page.on('pageerror', (e) => consoleErrors.push(String(e)))
+  page.on('response', (r) => r.status() >= 400 && consoleErrors.push(`${r.status()} ${r.url()}`))
+
   await page.goto('/portal')
   await expect(page).toHaveURL(/\/update-password/)
   const api = await page.request.get('/api/method/construction_core.api.portal.get_me')
@@ -47,7 +52,9 @@ test('temporary password: only the change-password page until changed', async ({
   await page.locator('#old_password').pressSequentially(tempPassword)
   await page.locator('#new_password').pressSequentially(newPassword)
   await page.locator('#confirm_password').pressSequentially(newPassword)
-  await expect(page.locator('#update')).toBeEnabled({ timeout: 10000 })
+  await page.waitForTimeout(1500)
+  console.log('update-password page errors:', JSON.stringify(consoleErrors))
+  await expect(page.locator('#update'), consoleErrors.join(' | ')).toBeEnabled({ timeout: 10000 })
   await page.locator('#update').click()
   await page.waitForURL(/\/portal/, { timeout: 15000 })
   await expect(page.getByTestId('greeting')).toContainText('أهلاً', { timeout: 15000 })

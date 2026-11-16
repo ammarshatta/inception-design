@@ -1,5 +1,6 @@
 import { test, expect, type Page } from '@playwright/test'
 import fs from 'fs'
+import os from 'os'
 import path from 'path'
 
 // Phase 3: engineer posts an update with 10 photos on Slow 4G (stories P03-01, P03-02).
@@ -92,12 +93,10 @@ test('video over the limits shows an Arabic message', async ({ page }) => {
   await login(page)
   await page.goto(`/portal/projects/${encodeURIComponent(project)}/update`)
   await expect(page.getByTestId('stage-select')).toBeVisible()
-  // 51 MB of zeros with a video MIME type: rejected by size before any upload
-  await page.getByTestId('file-input').setInputFiles({
-    name: 'long.mp4',
-    mimeType: 'video/mp4',
-    buffer: Buffer.alloc(51 * 1024 * 1024),
-  })
+  // 51 MB file with a video MIME type: rejected by size before any upload
+  const big = path.join(os.tmpdir(), 'too-big.mp4')
+  fs.writeFileSync(big, Buffer.alloc(51 * 1024 * 1024))
+  await page.getByTestId('file-input').setInputFiles(big)
   await expect(page.getByRole('alert')).toContainText('50 ميجا')
   await expect(page.getByTestId('upload-item')).toHaveCount(0)
 })

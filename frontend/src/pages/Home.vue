@@ -13,7 +13,7 @@
         <RouterLink
           v-for="p in projects"
           :key="p.name"
-          :to="`/projects/${encodeURIComponent(p.name)}`"
+          :to="projectLink(p.name)"
           data-testid="project-card"
           class="flex flex-col gap-2 rounded-[14px] bg-white p-3.5 text-[#17201D]"
         >
@@ -35,12 +35,22 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { me } from '@/data/me'
 import { call } from '@/lib/api'
 import { pct, relDate } from '@/lib/format'
 import ProgressBar from '@/components/ProgressBar.vue'
 
+const router = useRouter()
 const projects = ref<any[]>([])
+
+function isClientOnly() {
+  const r = me.data?.roles
+  return !!r?.client && !r?.engineer && !r?.admin
+}
+function projectLink(name: string) {
+  return isClientOnly() ? `/c/${encodeURIComponent(name)}` : `/projects/${encodeURIComponent(name)}`
+}
 const loadingProjects = ref(true)
 const error = ref('')
 
@@ -48,6 +58,9 @@ me.fetch()
 onMounted(async () => {
   try {
     projects.value = await call('construction_core.api.portal.my_projects')
+    await me.promise?.catch(() => {})
+    if (!me.data) await me.fetch()
+    if (isClientOnly() && projects.value.length === 1) router.replace(projectLink(projects.value[0].name))
   } catch (e: any) {
     error.value = e.message
   } finally {

@@ -5,6 +5,11 @@ const routes = [
   { path: '/projects/:name', name: 'Project', component: () => import('@/pages/ProjectPage.vue'), props: true },
   { path: '/projects/:name/update', name: 'NewUpdate', component: () => import('@/pages/NewUpdate.vue'), props: true },
   { path: '/stages/:name', name: 'Stage', component: () => import('@/pages/StagePage.vue'), props: true },
+  { path: '/c/:project', name: 'ClientHome', component: () => import('@/pages/ClientHome.vue'), props: true },
+  { path: '/c/:project/timeline', name: 'ClientTimeline', component: () => import('@/pages/ClientTimeline.vue'), props: true },
+  { path: '/c/:project/gallery', name: 'ClientGallery', component: () => import('@/pages/ClientGallery.vue'), props: true },
+  { path: '/c/:project/payments', name: 'ClientPayments', component: () => import('@/pages/ClientPayments.vue'), props: true },
+  { path: '/c/:project/chat', name: 'Chat', component: () => import('@/pages/ChatPage.vue'), props: true },
 ]
 
 const router = createRouter({

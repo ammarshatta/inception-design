@@ -6,6 +6,9 @@
       <div class="rounded-[14px] bg-white p-3.5">
         <ProgressBar :value="data.weighted_progress" />
       </div>
+      <RouterLink :to="`/c/${encodeURIComponent(data.name)}/chat`" class="flex min-h-[44px] items-center justify-center rounded-xl border border-[#E2E5E0] bg-white text-sm font-semibold text-[#1D6B57]" data-testid="open-chat">
+        {{ __('شات المشروع') }}
+      </RouterLink>
       <RouterLink
         v-for="s in data.stages"
         :key="s.name"

@@ -313,6 +313,10 @@ doc_events = {
 		"after_insert": "construction_core.overrides.project.after_insert",
 	},
 	"File": {"before_insert": "construction_core.overrides.file.before_insert"},
+	"Stage Update": {"after_insert": "construction_core.notifications.stage_update_after_insert"},
+	"Project Stage": {"on_update": "construction_core.notifications.project_stage_on_update"},
+	"Project Message": {"after_insert": "construction_core.notifications.project_message_after_insert"},
+	"Payment Milestone": {"on_update": "construction_core.notifications.payment_milestone_on_update"},
 	"User": {"before_insert": "construction_core.auth.user_before_insert"},
 }
 

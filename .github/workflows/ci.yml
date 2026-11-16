@@ -75,10 +75,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install MariaDB Client
+      - name: Install MariaDB Client, wkhtmltopdf and PDF tools
         run: |
           sudo apt update
-          sudo apt-get install mariadb-client
+          sudo apt-get install -y mariadb-client wkhtmltopdf poppler-utils fonts-dejavu-core
 
       - name: Setup
         run: |
@@ -135,6 +135,14 @@ jobs:
           ./env/bin/python apps/construction_core/e2e/make_photos.py /tmp/e2e-photos
           export E2E_ENG_USER E2E_ENG_PASSWORD E2E_ENG_PROJECT
           export E2E_PHOTOS_DIR=/tmp/e2e-photos
+          E2E_CHAT_CLIENT_PASSWORD="$(openssl rand -hex 16)"
+          bench --site test_site execute construction_core.tests.e2e_setup.add_chat_client \
+            --kwargs "{'project': '$E2E_ENG_PROJECT', 'email': 'e2e-chat-client@example.com', 'password': '$E2E_CHAT_CLIENT_PASSWORD'}"
+          export E2E_CHAT_CLIENT=e2e-chat-client@example.com E2E_CHAT_CLIENT_PASSWORD
+          mkdir -p /tmp/e2e-shots
+          bench --site test_site execute construction_core.tests.e2e_setup.make_invoice_pdf \
+            --kwargs "{'project': '$E2E_ENG_PROJECT', 'path': '/tmp/e2e-shots/invoice.pdf'}"
+          pdftoppm -png -r 110 -f 1 -l 1 /tmp/e2e-shots/invoice.pdf /tmp/e2e-shots/20-invoice-pdf
           export E2E_SHOTS_DIR=/tmp/e2e-shots
           (bench serve --port 8000 > /tmp/serve.log 2>&1 &)
           for i in $(seq 1 45); do curl -sf http://localhost:8000/api/method/ping && break; sleep 2; done
