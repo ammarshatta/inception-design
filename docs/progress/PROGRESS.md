@@ -96,4 +96,4 @@ The owner asked for all phases to be built in a row and reviewed once at the end
 |---|---|---|
 | 16 Nov 2026 | Cloud | Phases 0 and 1 code written. Plan, backlog and design docs added. |
 | 16 Nov 2026 | CI | 8 CI runs. Fixed welcome emails, the permission test method, the portal build path and the office-name fallback. All green. |
-| 17 Nov 2026 | Cloud + CI | Phases 2–18 built. CI run 43980628912: 166 unit tests and all 17 Playwright tests pass. Phase 19 prepared (deploy files, docs, security review); hosting waits for the owner. |
+| 17 Nov 2026 | Cloud + CI | Phases 2–18 built. CI run 43981949494 (fully green, every step): 166 unit tests and all 17 Playwright tests pass. Phase 19 prepared (deploy files, docs, security review); hosting waits for the owner. |
