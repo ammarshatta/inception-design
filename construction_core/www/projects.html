@@ -1,0 +1,6 @@
+{% extends "templates/cc_site.html" %}
+{% block content %}
+<h1>مشاريعنا</h1>
+{% if projects %}<div class="grid">{% for p in projects %}{% include "templates/cc_project_card.html" %}{% endfor %}</div>
+{% else %}<p class="muted">مفيش مشاريع منشورة لسه.</p>{% endif %}
+{% endblock %}

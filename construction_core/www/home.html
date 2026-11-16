@@ -1,0 +1,20 @@
+{% extends "templates/cc_site.html" %}
+{% block content %}
+<section style="padding:32px 0 8px">
+  <h1>تصميمات شقق جاهزة للتنفيذ</h1>
+  <p class="muted" style="font-size:17px;max-width:620px">اختار التصميم، وشوف المراحل والتكلفة التقريبية، واطلب التنفيذ. وبعد ما نبدأ هتتابع كل مرحلة بالصور من موبايلك.</p>
+  <p><a class="btn" href="/designs" data-testid="cta">اطلب تنفيذ</a> <a class="btn ghost" href="/projects">شوف شغلنا</a></p>
+</section>
+{% if designs %}
+<h2>تصميمات مختارة</h2>
+<div class="grid">
+  {% for d in designs %}{% include "templates/cc_design_card.html" %}{% endfor %}
+</div>
+{% endif %}
+{% if projects %}
+<h2>مشاريع شغالين فيها</h2>
+<div class="grid">
+  {% for p in projects %}{% include "templates/cc_project_card.html" %}{% endfor %}
+</div>
+{% endif %}
+{% endblock %}

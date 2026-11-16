@@ -1,0 +1,6 @@
+<a class="card" href="/projects/{{ p.slug }}" data-testid="project-card">
+  <b>{{ p.title }}</b>
+  {% if p.area %}<span class="muted" style="font-size:14px">{{ p.area }}</span>{% endif %}
+  <div class="bar"><div style="width:{{ frappe.utils.cint(p.progress) }}%"></div></div>
+  <span class="num muted" style="font-size:13px">الإنجاز {{ frappe.utils.cint(p.progress) }}%</span>
+</a>

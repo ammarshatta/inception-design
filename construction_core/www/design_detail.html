@@ -1,0 +1,55 @@
+{% extends "templates/cc_site.html" %}
+{% block content %}
+<article data-testid="design-page">
+  <h1>{{ d.title }}</h1>
+  <p class="muted">{{ d.style }} · {{ frappe.utils.cint(d.area_m2) }} م² · {{ d.bedrooms }} غرف · {{ d.bathrooms }} حمام</p>
+  {% if d.cover %}<img src="{{ d.cover }}" alt="{{ d.title }}" style="width:100%;max-height:480px;object-fit:cover;border-radius:16px">{% endif %}
+  {% if d.cost_from %}<p class="num" style="font-size:18px;font-weight:700" data-testid="cost-range">التكلفة التقديرية من {{ "{:,.0f}".format(d.cost_from) }} لـ {{ "{:,.0f}".format(d.cost_to or d.cost_from) }} ج.م</p>
+  <p class="muted" style="margin-top:-8px">السعر النهائي بعد المعاينة وحصر الكميات.</p>{% endif %}
+  {% if d.duration_weeks %}<p>مدة التنفيذ: <b>{{ d.duration_weeks }} أسبوع</b></p>{% endif %}
+  {% if d.description %}<div>{{ d.description }}</div>{% endif %}
+
+  {% if gallery %}<h2>الصور</h2>
+  <div class="grid">{% for m in gallery %}<figure style="margin:0"><img src="{{ m.url }}" alt="{{ m.caption }}" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px">{% if m.caption %}<figcaption class="muted" style="font-size:13px">{{ m.caption }}</figcaption>{% endif %}</figure>{% endfor %}</div>{% endif %}
+
+  {% if floor_plans %}<h2>المسقط الأفقي</h2>
+  {% for m in floor_plans %}<img src="{{ m.url }}" alt="المسقط الأفقي" data-testid="floor-plan" style="width:100%;max-width:720px;border-radius:12px;border:1px solid #E2E5E0">{% endfor %}{% endif %}
+
+  {% if d.stages %}<h2>مراحل التنفيذ</h2>
+  <ol data-testid="design-stages">{% for s in d.stages %}<li>{{ s.stage_name }}</li>{% endfor %}</ol>{% endif %}
+
+  <h2 id="request">اطلب معاينة وتنفيذ</h2>
+  <form id="request-form" style="display:flex;flex-direction:column;gap:10px;max-width:520px;background:#F4F5F2;padding:16px;border-radius:14px">
+    <label class="f">الاسم<input name="full_name" required maxlength="140" autocomplete="name"></label>
+    <label class="f">الموبايل<input name="mobile" required inputmode="tel" dir="ltr" placeholder="01x xxxx xxxx" style="text-align:right" autocomplete="tel"></label>
+    <label class="f">المحافظة<select name="governorate" required>{% for g in governorates %}<option>{{ g }}</option>{% endfor %}</select></label>
+    <label class="f">المدينة / المنطقة<input name="city" maxlength="140"></label>
+    <label class="f">مساحة الشقة م²<input name="apartment_area_m2" type="number" min="20" max="2000"></label>
+    <label class="f">ملاحظات<textarea name="notes" rows="3" maxlength="2000"></textarea></label>
+    <div style="position:absolute;left:-10000px" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+    <label style="display:flex;gap:8px;align-items:flex-start;font-size:13px"><input type="checkbox" name="consent" value="1" required style="min-height:auto;width:18px;height:18px"> موافق إن المكتب يتواصل معايا بخصوص الطلب ده (<a href="/privacy">سياسة الخصوصية</a>)</label>
+    <button class="btn" type="submit" data-testid="request-submit">اطلب التنفيذ</button>
+    <p id="request-msg" role="status" style="margin:0"></p>
+  </form>
+</article>
+<script>
+document.getElementById('request-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const f = e.target, msg = document.getElementById('request-msg'), btn = f.querySelector('button');
+  const body = new URLSearchParams(new FormData(f));
+  body.set('design', {{ d.slug | tojson }});
+  btn.disabled = true; msg.textContent = '';
+  try {
+    const r = await fetch('/api/method/construction_core.api.public.request_design', {method: 'POST', body, headers: {'Accept': 'application/json'}});
+    const data = await r.json().catch(() => ({}));
+    if (r.ok) { f.reset(); msg.style.color = '#14503F'; msg.textContent = 'وصلنا طلبك، وهنكلمك قريب.'; }
+    else {
+      let text = 'حصلت مشكلة، جرّب تاني.';
+      if (r.status === 429) text = 'بعت طلبات كتير. جرّب تاني بعد ساعة.';
+      else if (data._server_messages) { try { text = JSON.parse(JSON.parse(data._server_messages)[0]).message; } catch (_) {} }
+      msg.style.color = '#B42318'; msg.textContent = text;
+    }
+  } finally { btn.disabled = false; }
+});
+</script>
+{% endblock %}

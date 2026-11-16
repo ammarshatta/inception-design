@@ -56,6 +56,12 @@ def apply_login_settings():
 			"allow_login_after_fail": 900,
 		},
 	)
+	frappe.db.set_single_value(
+		"Website Settings",
+		"robots_txt",
+		"User-agent: *\nDisallow: /p/\nDisallow: /portal\nDisallow: /app\n"
+		"Sitemap: /api/method/construction_core.api.public.sitemap\n",
+	)
 	# A Social Login Key set to "Allow" would override disable_signup for that provider.
 	for key in frappe.get_all("Social Login Key", filters={"sign_ups": "Allow"}, pluck="name"):
 		frappe.db.set_value("Social Login Key", key, "sign_ups", "Deny")

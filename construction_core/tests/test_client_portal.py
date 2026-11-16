@@ -1,8 +1,11 @@
 """Phase 4: client portal API, approvals, notifications (P04-01..P04-07)."""
 
+import io
+
 import frappe
 from frappe.tests import IntegrationTestCase
 from frappe.utils import add_days, nowdate
+from PIL import Image
 
 from construction_core.api import portal
 from construction_core.tests.factories import make_milestone, make_update, make_world, stages_of
@@ -112,8 +115,10 @@ class TestClientPortal(IntegrationTestCase):
 
 	def test_message_with_photo(self):
 		with self.set_user(self.w.users.client1):
+			buf = io.BytesIO()
+			Image.new("RGB", (64, 48), (200, 180, 160)).save(buf, format="JPEG")
 			f = frappe.get_doc(
-				{"doctype": "File", "file_name": "chat.jpg", "content": b"\xff\xd8\xff\xd9", "is_private": 1}
+				{"doctype": "File", "file_name": "chat.jpg", "content": buf.getvalue(), "is_private": 1}
 			).insert(ignore_permissions=True)
 			msg = portal.send_message(self.w.p1, "", f.file_url)
 		self.assertEqual(frappe.db.get_value("File", f.name, "attached_to_name"), msg["name"])

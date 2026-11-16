@@ -1,0 +1,30 @@
+{% extends "templates/cc_site.html" %}
+{% block content %}
+<h1>التصميمات</h1>
+<form class="filters" method="get" data-testid="filters">
+  <label class="f">المساحة من<input type="number" name="area_min" value="{{ filters.area_min or '' }}" style="width:110px"></label>
+  <label class="f">لـ<input type="number" name="area_max" value="{{ filters.area_max or '' }}" style="width:110px"></label>
+  <label class="f">الغرف<select name="bedrooms"><option value="">الكل</option>{% for n in [1,2,3,4,5] %}<option value="{{ n }}" {% if filters.bedrooms|string == n|string %}selected{% endif %}>{{ n }}</option>{% endfor %}</select></label>
+  <label class="f">الحمامات<select name="bathrooms"><option value="">الكل</option>{% for n in [1,2,3,4] %}<option value="{{ n }}" {% if filters.bathrooms|string == n|string %}selected{% endif %}>{{ n }}</option>{% endfor %}</select></label>
+  <label class="f">الستايل<select name="style" data-testid="filter-style"><option value="">الكل</option>{% for s in styles %}<option {% if filters.style == s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></label>
+  <label class="f">السعر لحد<input type="number" name="price_max" value="{{ filters.price_max or '' }}" style="width:140px"></label>
+  <label class="f">الترتيب<select name="sort">
+    <option value="newest" {% if sort=='newest' %}selected{% endif %}>الأحدث</option>
+    <option value="price_asc" {% if sort=='price_asc' %}selected{% endif %}>الأرخص</option>
+    <option value="price_desc" {% if sort=='price_desc' %}selected{% endif %}>الأغلى</option>
+    <option value="area" {% if sort=='area' %}selected{% endif %}>المساحة</option>
+  </select></label>
+  <button class="btn" type="submit" data-testid="apply-filters">اعرض</button>
+</form>
+<p class="muted" data-testid="designs-total">{{ total }} تصميم</p>
+{% if designs %}
+<div class="grid">{% for d in designs %}{% include "templates/cc_design_card.html" %}{% endfor %}</div>
+{% else %}<p class="muted">مفيش تصميمات بالمواصفات دي. جرّب تغيّر الفلاتر.</p>{% endif %}
+{% if pages > 1 %}
+<div class="pager">
+  {% if page > 1 %}<a class="btn ghost" href="?{{ base_qs }}&page={{ page - 1 }}">السابق</a>{% endif %}
+  <span class="muted" style="align-self:center">صفحة {{ page }} من {{ pages }}</span>
+  {% if page < pages %}<a class="btn ghost" href="?{{ base_qs }}&page={{ page + 1 }}">التالي</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

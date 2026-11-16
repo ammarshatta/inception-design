@@ -344,4 +344,14 @@ jinja = {
 website_route_rules = [
 	{"from_route": "/portal/<path:app_path>", "to_route": "portal"},
 	{"from_route": "/p/<project>", "to_route": "public_project"},
+	{"from_route": "/designs/<slug>", "to_route": "design_detail"},
+	{"from_route": "/projects/<slug>", "to_route": "project_view"},
+	{"from_route": "/data-deletion", "to_route": "data_deletion"},
 ]
+
+# Public site home for visitors; clients and engineers land on the portal
+home_page = "home"
+role_home_page = {
+	"Construction Client": "portal",
+	"Construction Engineer": "portal",
+}

@@ -1,0 +1,6 @@
+<a class="card" href="/designs/{{ d.slug }}" data-testid="design-card">
+  <div class="cover" role="img" aria-label="{{ d.title }}" style="{% if d.cover %}background-image:url('{{ d.cover }}'){% endif %}">{% if d.style %}<span class="tag">{{ d.style }}</span>{% endif %}</div>
+  <b>{{ d.title }}</b>
+  <span class="muted" style="font-size:14px">{{ frappe.utils.cint(d.area_m2) }} م² · {{ d.bedrooms }} غرف · {{ d.bathrooms }} حمام{% if d.duration_weeks %} · {{ d.duration_weeks }} أسبوع{% endif %}</span>
+  {% if d.cost_from %}<span class="num" style="font-weight:700">من {{ "{:,.0f}".format(d.cost_from) }} لـ {{ "{:,.0f}".format(d.cost_to or d.cost_from) }} ج.م</span>{% endif %}
+</a>

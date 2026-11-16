@@ -1,25 +1,20 @@
-"""/p/<project>?t=<token>: the project page for visitors.
+"""/p/<project>?t=<token>: a project shared by secret link (noindex).
 
-The real page is built in phase 5. Until then a valid link shows a placeholder,
-and an invalid, revoked or expired link returns 404 (story P02-06).
-No project data is shown here (CLAUDE.md rule 6: public output is an allowlist).
+Invalid, revoked or expired links return the same 404 as a missing project.
 """
 
 import frappe
-from frappe import _
 
-from construction_core.branding import get_branding
-from construction_core.sharing import check_share_token
+from construction_core.api.public import NotFound, get_public_project
 
 no_cache = 1
 
 
 def get_context(context):
-	project = frappe.form_dict.get("project")
-	token = frappe.form_dict.get("t")
-	if not check_share_token(project, token):
+	try:
+		context.p = get_public_project(slug=frappe.form_dict.get("project"), token=frappe.form_dict.get("t"))
+	except NotFound:
 		raise frappe.PageDoesNotExistError
-	context.no_cache = 1
-	context.branding = get_branding()
-	context.title = _("Project page")
+	context.title = context.p["title"]
+	context.noindex = 1
 	return context

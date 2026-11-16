@@ -6,6 +6,10 @@ Everything here returns an explicit allowlist of fields.
 import json
 
 import frappe
+from frappe import _
+from frappe.rate_limiter import rate_limit
+from frappe.utils import cint, cstr, flt
+from frappe.utils.html_utils import clean_html
 from werkzeug.wrappers import Response
 
 from construction_core.branding import get_branding
@@ -79,9 +83,6 @@ def service_worker():
 # Every function returns named fields only. Private, missing, expired and revoked
 # items all raise the same NotFound.
 
-from frappe import _
-from frappe.rate_limiter import rate_limit
-from frappe.utils import cint, cstr, flt
 
 PAGE_SIZE = 12
 DESIGN_CARD_FIELDS = [
@@ -185,7 +186,7 @@ def get_public_design(slug: str) -> dict:
 	]
 	return {
 		**_design_card(d),
-		"description": d.description or "",
+		"description": clean_html(d.description or ""),
 		"media": media,
 		"stages": stages,
 	}

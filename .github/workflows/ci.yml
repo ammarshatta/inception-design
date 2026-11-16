@@ -140,6 +140,8 @@ jobs:
             --kwargs "{'project': '$E2E_ENG_PROJECT', 'email': 'e2e-chat-client@example.com', 'password': '$E2E_CHAT_CLIENT_PASSWORD'}"
           export E2E_CHAT_CLIENT=e2e-chat-client@example.com E2E_CHAT_CLIENT_PASSWORD
           mkdir -p /tmp/e2e-shots
+          bench --site test_site execute construction_core.setup.demo.install
+          export E2E_ADMIN_PASSWORD=admin
           bench --site test_site execute construction_core.tests.e2e_setup.make_invoice_pdf \
             --kwargs "{'project': '$E2E_ENG_PROJECT', 'path': '/tmp/e2e-shots/invoice.pdf'}"
           pdftoppm -png -r 110 -f 1 -l 1 /tmp/e2e-shots/invoice.pdf /tmp/e2e-shots/20-invoice-pdf

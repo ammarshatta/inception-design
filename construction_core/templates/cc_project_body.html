@@ -1,0 +1,13 @@
+<article data-testid="public-project">
+  <h1>{{ p.title }}</h1>
+  {% if p.area %}<p class="muted">{{ p.area }}</p>{% endif %}
+  {% if p.client_name %}<p>العميل: {{ p.client_name }}</p>{% endif %}
+  <div class="bar" style="max-width:520px"><div style="width:{{ frappe.utils.cint(p.progress) }}%"></div></div>
+  <p class="num">الإنجاز {{ frappe.utils.cint(p.progress) }}%</p>
+  {% if p.stages %}<h2>المراحل</h2>
+  <ul>{% for s in p.stages %}<li>{{ s.stage_name }} — <span class="num">{{ frappe.utils.cint(s.progress) }}%</span></li>{% endfor %}</ul>{% endif %}
+  {% if p.photos %}<h2>من الموقع</h2>
+  <div class="grid">{% for ph in p.photos %}<img src="{{ ph.url }}" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px">{% endfor %}</div>{% endif %}
+  {% if p.updates %}<h2>آخر التحديثات</h2>
+  {% for u in p.updates %}<p><span class="muted num">{{ u.date }}</span> · {{ u.text }}</p>{% endfor %}{% endif %}
+</article>
