@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>New site update</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1D6B57}a:hover{color:#14503F}
+</style>
+</helmet>
+<div dir="rtl" style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F2; color: #17201D; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <header style="padding: 16px 16px 8px; display: flex; align-items: center; gap: 8px">
+    <a href="EngineerProjects.dc.html" aria-label="رجوع" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 22px; background: #FFFFFF; border: 1px solid #E2E5E0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17201D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column">
+      <h1 style="margin: 0; font-size: 19px; font-weight: 700">تحديث جديد</h1>
+      <span style="font-size: 12px; color: #5B6661">شقة التجمع الخامس</span>
+    </div>
+  </header>
+
+  <main style="flex: 1; overflow: hidden; padding: 4px 16px 0; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="stage" style="font-size: 13px; font-weight: 600">المرحلة</label>
+      <select id="stage" style="min-height: 48px; border-radius: 12px; border: 1px solid #C9CFC9; background: #FFFFFF; padding: 0 12px; font-family: inherit; font-size: 15px; color: #17201D">
+        <option>محارة</option>
+        <option>تأسيس كهرباء</option>
+      </select>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="note" style="font-size: 13px; font-weight: 600">إيه اللي اتعمل النهارده؟</label>
+      <textarea id="note" rows="3" style="border-radius: 12px; border: 1px solid #C9CFC9; background: #FFFFFF; padding: 10px 12px; font-family: inherit; font-size: 15px; color: #17201D; resize: none">بدء طبقة البطانة في غرفة النوم الرئيسية وغرفة الأطفال.</textarea>
+    </div>
+
+    <section style="background: #FFFFFF; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="font-size: 13px; font-weight: 600">الصور (4)</span>
+        <span style="font-size: 12px; color: #5B6661">بتتصغّر قبل الرفع · من غير موقع</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+        <sc-for list="{{photos}}" as="p" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <div style="aspect-ratio: 1; border-radius: 8px; background: {{p.img}}; position: relative; overflow: hidden; border: 2px solid {{p.ring}}">
+              <sc-if value="{{p.publish}}" hint-placeholder-val="{{false}}">
+                <span style="position: absolute; top: 4px; right: 4px; font-size: 10px; font-weight: 700; background: #1D6B57; color: #FFFFFF; border-radius: 6px; padding: 0 5px">للنشر</span>
+              </sc-if>
+            </div>
+            <div style="height: 4px; background: #E9ECE7; border-radius: 2px; overflow: hidden"><div style="height: 4px; background: {{p.barColor}}; width: {{p.progress}}"></div></div>
+            <span style="font-size: 11px; color: {{p.textColor}}; font-weight: 600">{{p.state}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <button style="min-height: 44px; border-radius: 10px; border: 1px dashed #AEB7B1; background: #FAFBF9; font-family: inherit; font-size: 14px; font-weight: 600; color: #1D6B57">+ صور أو فيديو (دقيقة / 50MB)</button>
+    </section>
+
+    <section style="background: #FFFFFF; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 6px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <label for="prog" style="font-size: 13px; font-weight: 600">نسبة المرحلة بعد التحديث</label>
+        <span style="font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums">60%</span>
+      </div>
+      <input id="prog" type="range" min="0" max="100" value="60" style="accent-color: #1D6B57; width: 100%">
+    </section>
+
+    <label for="internal" style="background: #FFFFFF; border-radius: 14px; padding: 12px; display: flex; justify-content: space-between; align-items: center; min-height: 44px">
+      <span style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 600">داخلي فقط</span><span style="font-size: 12px; color: #5B6661">العميل مش هيشوف التحديث ده</span></span>
+      <input id="internal" type="checkbox" style="width: 22px; height: 22px; accent-color: #1D6B57">
+    </label>
+  </main>
+
+  <div style="padding: 12px 16px 22px; background: #F4F5F2">
+    <a href="EngineerProjects.dc.html" style="min-height: 52px; border-radius: 14px; background: #1D6B57; color: #FFFFFF; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; text-decoration: none">انشر التحديث</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const PH = {"plaster": "url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27 preserveAspectRatio=%27xMidYMid slice%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23A8A49D%27/%3E%3Crect y=%27230%27 width=%27400%27 height=%2770%27 fill=%27%238E8A84%27/%3E%3Crect x=%270%27 y=%270%27 width=%27220%27 height=%27230%27 fill=%27%23B9B5AE%27/%3E%3Crect x=%27220%27 y=%270%27 width=%27180%27 height=%27230%27 fill=%27%239F9B94%27/%3E%3Cpath d=%27M0 120 q60 -10 120 8 t100 -6 v110 H0z%27 fill=%27%23C8C4BD%27/%3E%3Cg stroke=%27%236B5B45%27 stroke-width=%276%27%3E%3Cline x1=%27270%27 y1=%2760%27 x2=%27250%27 y2=%27260%27/%3E%3Cline x1=%27320%27 y1=%2760%27 x2=%27340%27 y2=%27260%27/%3E%3C/g%3E%3Cg stroke=%27%236B5B45%27 stroke-width=%274%27%3E%3Cline x1=%27265%27 y1=%27110%27 x2=%27325%27 y2=%27110%27/%3E%3Cline x1=%27260%27 y1=%27160%27 x2=%27330%27 y2=%27160%27/%3E%3Cline x1=%27255%27 y1=%27210%27 x2=%27335%27 y2=%27210%27/%3E%3C/g%3E%3Crect x=%2760%27 y=%27245%27 width=%2750%27 height=%2740%27 rx=%274%27 fill=%27%233D3A36%27/%3E%3C/svg%3E') center/cover", "tiles": "url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27 preserveAspectRatio=%27xMidYMid slice%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23C9C3B8%27/%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23D9D4CA%27/%3E%3Cg fill=%27%23EDE7DC%27 stroke=%27%23B5AEA2%27%3E%3Crect x=%270%27 y=%27150%27 width=%27100%27 height=%2775%27/%3E%3Crect x=%27100%27 y=%27150%27 width=%27100%27 height=%2775%27/%3E%3Crect x=%270%27 y=%27225%27 width=%27100%27 height=%2775%27/%3E%3Crect x=%27100%27 y=%27225%27 width=%27100%27 height=%2775%27/%3E%3Crect x=%27200%27 y=%27225%27 width=%27100%27 height=%2775%27/%3E%3C/g%3E%3Crect x=%27200%27 y=%27150%27 width=%27200%27 height=%2775%27 fill=%27%239E978C%27/%3E%3Crect x=%27300%27 y=%27225%27 width=%27100%27 height=%2775%27 fill=%27%239E978C%27/%3E%3Crect x=%27300%27 y=%27175%27 width=%2760%27 height=%2722%27 rx=%274%27 fill=%27%23E0B341%27/%3E%3C/svg%3E') center/cover", "plumb": "url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27 preserveAspectRatio=%27xMidYMid slice%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23C4BFB7%27/%3E%3Crect y=%27170%27 width=%27400%27 height=%27130%27 fill=%27%239A958E%27/%3E%3Cg stroke=%27%232E6FB0%27 stroke-width=%2710%27 fill=%27none%27%3E%3Cpath d=%27M0 230 H180 V190%27/%3E%3C/g%3E%3Cg stroke=%27%23D9E2E8%27 stroke-width=%2714%27 fill=%27none%27%3E%3Cpath d=%27M220 300 V220 H400%27/%3E%3C/g%3E%3Crect x=%2760%27 y=%2760%27 width=%27120%27 height=%2790%27 fill=%27%23B3AEA6%27/%3E%3C/svg%3E') center/cover"};
+    const p = (state, progress, kind, publish, img) => ({
+      state, progress, publish, img: PH[img],
+      barColor: kind === 'fail' ? '#B42318' : '#1D6B57',
+      textColor: kind === 'fail' ? '#B42318' : (kind === 'done' ? '#14503F' : '#5B6661'),
+      ring: kind === 'fail' ? '#B42318' : 'transparent'
+    });
+    return {
+      photos: [
+        p('اترفعت', '100%', 'done', true, 'plaster'),
+        p('اترفعت', '100%', 'done', false, 'tiles'),
+        p('62%', '62%', 'up', false, 'plaster'),
+        p('فشلت · أعد', '30%', 'fail', false, 'plumb')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

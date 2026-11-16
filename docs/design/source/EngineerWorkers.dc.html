@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Crew workers</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1D6B57}a:hover{color:#14503F}
+</style>
+</helmet>
+<div dir="rtl" style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F2; color: #17201D; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; display: flex; flex-direction: column; overflow: hidden; position: relative">
+  <header style="padding: 16px 16px 8px; display: flex; align-items: center; gap: 8px">
+    <a href="EngineerProjects.dc.html" aria-label="رجوع" style="width: 44px; height: 44px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 22px; background: #FFFFFF; border: 1px solid #E2E5E0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17201D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; flex: 1; min-width: 0">
+      <h1 style="margin: 0; font-size: 19px; font-weight: 700">العمال</h1>
+      <span style="font-size: 12px; color: #5B6661">فريق محارة 1 · 6 عمال</span>
+    </div>
+    <button onClick="{{open}}" style="min-height: 40px; padding: 0 14px; border-radius: 10px; border: 0; background: #1D6B57; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 700">+ عامل</button>
+  </header>
+  <div role="tablist" aria-label="الفرق" style="display: flex; gap: 6px; padding: 4px 16px 8px; overflow: hidden">
+    <sc-for list="{{crews}}" as="c" hint-placeholder-count="3">
+      <span role="tab" aria-selected="{{c.on}}" style="flex-shrink: 0; min-height: 36px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 600; display: flex; align-items: center; border: 1px solid {{c.border}}; background: {{c.bg}}; color: {{c.fg}}">{{c.label}}</span>
+    </sc-for>
+  </div>
+  <main style="flex: 1; overflow: hidden; padding: 0 16px; display: flex; flex-direction: column; gap: 6px">
+    <sc-for list="{{rows}}" as="w" hint-placeholder-count="6">
+      <div style="background: #FFFFFF; border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; gap: 10px">
+        <span aria-hidden="true" style="width: 38px; height: 38px; flex-shrink: 0; border-radius: 19px; background: #E3F0EB; color: #14503F; font-weight: 700; display: flex; align-items: center; justify-content: center">{{w.init}}</span>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+          <span style="font-size: 14px; font-weight: 600">{{w.name}}</span>
+          <span style="font-size: 12px; color: #5B6661">{{w.trade}} · {{w.wage}} ج.م / يوم</span>
+        </div>
+        <span style="font-size: 12px; color: #5B6661; flex-shrink: 0">{{w.days}}</span>
+      </div>
+    </sc-for>
+  </main>
+
+  <sc-if value="{{sheet}}" hint-placeholder-val="{{true}}">
+    <div style="position: absolute; inset: 0; background: #17201D66; display: flex; flex-direction: column; justify-content: flex-end">
+      <section role="dialog" aria-label="عامل جديد" style="background: #FFFFFF; border-radius: 20px 20px 0 0; padding: 10px 16px 22px; display: flex; flex-direction: column; gap: 8px">
+        <span aria-hidden="true" style="align-self: center; width: 40px; height: 4px; border-radius: 2px; background: #C9CFC9"></span>
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <h2 style="margin: 0; font-size: 17px; font-weight: 700">عامل جديد</h2>
+          <button onClick="{{close}}" aria-label="إغلاق" style="width: 40px; height: 40px; border-radius: 20px; border: 0; background: #F4F5F2; font-family: inherit; font-size: 18px; color: #17201D">×</button>
+        </div>
+        <label for="wn" style="font-size: 12px; font-weight: 600">الاسم</label>
+        <input id="wn" value="أحمد مصطفى" style="min-height: 42px; border-radius: 10px; border: 1px solid #C9CFC9; background: #FFFFFF; padding: 0 12px; font-family: inherit; font-size: 14px; color: #17201D">
+        <label for="wm" style="font-size: 12px; font-weight: 600">الموبايل</label>
+        <input id="wm" inputmode="tel" dir="ltr" placeholder="01x xxxx xxxx" style="min-height: 42px; border-radius: 10px; border: 1px solid #C9CFC9; background: #FFFFFF; padding: 0 12px; font-family: inherit; font-size: 14px; color: #17201D">
+        <span style="font-size: 12px; font-weight: 600">الصنعة</span>
+        <div role="radiogroup" aria-label="الصنعة" style="display: flex; gap: 6px; flex-wrap: wrap">
+          <sc-for list="{{trades}}" as="c" hint-placeholder-count="5">
+            <button role="radio" aria-checked="{{c.on}}" onClick="{{c.pick}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; border: 1px solid {{c.border}}; background: {{c.bg}}; color: {{c.fg}}">{{c.label}}</button>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <label for="ww" style="font-size: 12px; font-weight: 600">اليومية ج.م</label>
+            <input id="ww" inputmode="numeric" value="450" style="min-height: 42px; border-radius: 10px; border: 1px solid #C9CFC9; background: #FFFFFF; padding: 0 12px; font-family: inherit; font-size: 14px; color: #17201D">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <label for="wc" style="font-size: 12px; font-weight: 600">الفريق</label>
+            <select id="wc"  style="min-height: 42px; border-radius: 10px; border: 1px solid #C9CFC9; background: #FFFFFF; padding: 0 12px; font-family: inherit; font-size: 14px; color: #17201D"><option>فريق محارة 1</option></select>
+          </div>
+        </div>
+        <span style="font-size: 11px; color: #5B6661">الرقم القومي مش مطلوب. أي بيانات شخصية بتتشاف للمكتب بس.</span>
+        <button onClick="{{close}}" style="margin-top: 4px; min-height: 50px; border-radius: 14px; border: 0; background: #1D6B57; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700">أضف العامل</button>
+      </section>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { sheet: true, pick: 0 }; }
+  renderVals() {
+    const chips = (names) => names.map((label, i) => {
+      const on = this.state.pick === i;
+      return { label, on: on ? 'true' : 'false', bg: on ? '#1D6B57' : '#FFFFFF', fg: on ? '#FFFFFF' : '#17201D', border: on ? '#1D6B57' : '#E2E5E0', pick: () => this.setState({ pick: i }) };
+    });
+    const base = { sheet: this.state.sheet, open: () => this.setState({ sheet: true }), close: () => this.setState({ sheet: false }) };
+    const w = (name, trade, wage, days) => ({ name, trade, wage, days, init: name.charAt(0) });
+    const crew = (label, on) => ({ label, on: on ? 'true' : 'false', bg: on ? '#1D6B57' : '#FFFFFF', fg: on ? '#FFFFFF' : '#17201D', border: on ? '#1D6B57' : '#E2E5E0' });
+    return Object.assign(base, {
+      crews: [crew('فريق محارة 1', true), crew('فريق كهرباء', false), crew('فريق سباكة 1', false)],
+      trades: chips(['محارة', 'كهرباء', 'سباكة', 'نقاشة', 'نجارة', 'مساعد']),
+      rows: [
+        w('عم سعيد', 'فورمان محارة', '650', '22 يوم'), w('محمود عبد الله', 'محارة', '500', '20 يوم'),
+        w('رضا فتحي', 'محارة', '500', '18 يوم'), w('حسن علي', 'مساعد', '350', '21 يوم'),
+        w('إسلام جمال', 'مساعد', '350', '15 يوم'), w('كريم سامي', 'مساعد', '350', '9 أيام')
+      ]
+    });
+  }
+}
+</script>
+</body>
+</html>

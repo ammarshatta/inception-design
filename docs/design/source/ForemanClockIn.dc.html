@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Clock-in and daily log</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1D6B57}a:hover{color:#14503F}
+</style>
+</helmet>
+<div dir="rtl" style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F2; color: #17201D; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <header style="padding: 16px 16px 8px; display: flex; align-items: center; gap: 8px">
+    <a href="EngineerProjects.dc.html" aria-label="رجوع" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 22px; background: #FFFFFF; border: 1px solid #E2E5E0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17201D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column">
+      <h1 style="margin: 0; font-size: 19px; font-weight: 700">الحضور واليومية</h1>
+      <span style="font-size: 12px; color: #5B6661">شقة التجمع الخامس · الأحد 15 نوفمبر</span>
+    </div>
+  </header>
+
+  <main style="flex: 1; overflow: hidden; padding: 4px 16px 0; display: flex; flex-direction: column; gap: 8px">
+    <section style="background: #E3F0EB; border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; gap: 12px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14503F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+      <div style="display: flex; flex-direction: column">
+        <span style="font-size: 15px; font-weight: 700; color: #14503F">إنت داخل الموقع</span>
+        <span style="font-size: 12px; color: #2D5A4D">على بعد 38 م · الدقة ±12 م</span>
+      </div>
+    </section>
+
+    <section style="background: #FFFFFF; border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 4px">
+        <span style="font-size: 14px; font-weight: 700">فريق محارة 1</span>
+        <span style="font-size: 12px; color: #5B6661">5 من 6 حاضرين</span>
+      </div>
+      <sc-for list="{{crew}}" as="w" hint-placeholder-count="6">
+        <label style="min-height: 34px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #EEF0EC">
+          <span style="font-size: 14px">{{w.name}}</span>
+          <input type="checkbox" checked="{{w.here}}" aria-label="حاضر" style="width: 22px; height: 22px; accent-color: #1D6B57">
+        </label>
+      </sc-for>
+    </section>
+
+    <section style="background: #FFFFFF; border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 14px; font-weight: 700">يومية النهارده</span>
+      <div role="radiogroup" aria-label="الجو" style="display: flex; gap: 6px; flex-wrap: wrap">
+        <sc-for list="{{weather}}" as="c" hint-placeholder-count="4">
+          <button role="radio" aria-checked="{{c.on}}" style="min-height: 36px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; border: 1px solid {{c.border}}; background: {{c.bg}}; color: {{c.fg}}">{{c.label}}</button>
+        </sc-for>
+      </div>
+      <label for="mat" style="font-size: 13px; font-weight: 600">خامات اتصرفت</label>
+      <input id="mat" value="أسمنت 12 شيكارة · رمل 1.5 م³" style="min-height: 44px; border-radius: 10px; border: 1px solid #C9CFC9; padding: 0 12px; font-family: inherit; font-size: 14px; color: #17201D">
+      <label for="issue" style="font-size: 13px; font-weight: 600">مشاكل أو ملاحظات</label>
+      <input id="issue" placeholder="مثلاً: تأخير توريد الرمل" style="min-height: 44px; border-radius: 10px; border: 1px solid #C9CFC9; padding: 0 12px; font-family: inherit; font-size: 14px; color: #17201D">
+    </section>
+  </main>
+
+  <div style="padding: 12px 16px 22px; background: #F4F5F2; display: flex; flex-direction: column; gap: 6px">
+    <button style="min-height: 52px; border-radius: 14px; border: 0; background: #1D6B57; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700">سجّل حضور 5 عمال</button>
+    <span style="font-size: 11px; color: #5B6661; text-align: center">الموقع بيتسجل وقت الحضور والانصراف بس، بعد موافقتك.</span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const names = ['عم سعيد (فورمان)', 'محمود عبد الله', 'رضا فتحي', 'حسن علي', 'إسلام جمال', 'كريم سامي'];
+    const chip = (label, on) => ({ label, on: on ? 'true' : 'false', bg: on ? '#1D6B57' : '#FFFFFF', fg: on ? '#FFFFFF' : '#17201D', border: on ? '#1D6B57' : '#E2E5E0' });
+    return {
+      crew: names.map((name, i) => ({ name, here: i !== 5 })),
+      weather: [chip('صافي', true), chip('حر شديد', false), chip('مطر', false), chip('رياح وتراب', false)]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "field:slug",
+ "creation": "2026-11-16 20:30:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "slug",
+  "published",
+  "cover",
+  "cb1",
+  "style",
+  "area_m2",
+  "bedrooms",
+  "bathrooms",
+  "cost_section",
+  "cost_from",
+  "cost_to",
+  "cb2",
+  "duration_weeks",
+  "phase_template",
+  "desc_section",
+  "description",
+  "media_section",
+  "media"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "اسم التصميم",
+   "reqd": 1
+  },
+  {
+   "description": "حروف إنجليزي صغيرة وأرقام وشرطة",
+   "fieldname": "slug",
+   "fieldtype": "Data",
+   "label": "الرابط (slug)",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "منشور"
+  },
+  {
+   "fieldname": "cover",
+   "fieldtype": "Attach Image",
+   "label": "صورة الغلاف"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "style",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "الستايل"
+  },
+  {
+   "fieldname": "area_m2",
+   "fieldtype": "Float",
+   "label": "المساحة م²"
+  },
+  {
+   "fieldname": "bedrooms",
+   "fieldtype": "Int",
+   "label": "الغرف"
+  },
+  {
+   "fieldname": "bathrooms",
+   "fieldtype": "Int",
+   "label": "الحمامات"
+  },
+  {
+   "fieldname": "cost_section",
+   "fieldtype": "Section Break",
+   "label": "التكلفة والمدة"
+  },
+  {
+   "fieldname": "cost_from",
+   "fieldtype": "Currency",
+   "label": "التكلفة من"
+  },
+  {
+   "fieldname": "cost_to",
+   "fieldtype": "Currency",
+   "label": "التكلفة لـ"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "duration_weeks",
+   "fieldtype": "Int",
+   "label": "المدة بالأسابيع"
+  },
+  {
+   "fieldname": "phase_template",
+   "fieldtype": "Link",
+   "label": "قالب المراحل",
+   "options": "Phase Template"
+  },
+  {
+   "fieldname": "desc_section",
+   "fieldtype": "Section Break",
+   "label": "الوصف"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "الوصف"
+  },
+  {
+   "fieldname": "media_section",
+   "fieldtype": "Section Break",
+   "label": "الصور"
+  },
+  {
+   "fieldname": "media",
+   "fieldtype": "Table",
+   "label": "الصور",
+   "options": "Design Media"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-16 20:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Design Template",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Construction Engineer"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title"
+}

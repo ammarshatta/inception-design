@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Site photos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1D6B57}a:hover{color:#14503F}
+</style>
+</helmet>
+<div dir="rtl" style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F2; color: #17201D; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <header style="padding: 20px 20px 8px; display: flex; flex-direction: column; gap: 4px">
+    <h1 style="margin: 0; font-size: 22px; font-weight: 700">صور الموقع</h1>
+    <span style="font-size: 13px; color: #5B6661">148 صورة و 6 فيديو</span>
+  </header>
+
+  <div role="tablist" aria-label="تصفية حسب المرحلة" style="display: flex; gap: 8px; padding: 8px 16px 12px; overflow: hidden">
+    <sc-for list="{{chips}}" as="c" hint-placeholder-count="4">
+      <button role="tab" aria-selected="{{c.on}}" onClick="{{c.pick}}" style="flex-shrink: 0; min-height: 40px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; border: 1px solid {{c.border}}; background: {{c.bg}}; color: {{c.fg}}">{{c.label}}</button>
+    </sc-for>
+  </div>
+
+  <main style="flex: 1; overflow: hidden; padding: 0 16px; display: flex; flex-direction: column; gap: 14px">
+    <sc-for list="{{groups}}" as="g" hint-placeholder-count="2">
+      <section style="display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline">
+          <h2 style="margin: 0; font-size: 15px; font-weight: 700">{{g.title}}</h2>
+          <span style="font-size: 12px; color: #5B6661">{{g.meta}}</span>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #3E4944">{{g.text}}</p>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+          <sc-for list="{{g.tiles}}" as="t" hint-placeholder-count="6">
+            <button aria-label="{{t.label}}" style="aspect-ratio: 1; border: 0; border-radius: 10px; background: {{t.bg}}; display: flex; align-items: flex-end; justify-content: flex-start; padding: 6px; position: relative">
+              <sc-if value="{{t.video}}" hint-placeholder-val="{{false}}">
+                <span style="position: absolute; top: 6px; right: 6px; font-size: 11px; font-weight: 600; color: #FFFFFF; background: #17201DB3; border-radius: 6px; padding: 1px 6px">فيديو</span>
+              </sc-if>
+            </button>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+  </main>
+
+  <nav aria-label="القائمة" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E2E5E0; padding: 6px 4px 18px">
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+      <a href="{{t.href}}" style="min-height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; text-decoration: none; color: {{t.color}}; font-weight: {{t.weight}}">
+        <span aria-hidden="true" style="width: 22px; height: 4px; border-radius: 2px; background: {{t.bar}}"></span>
+        {{t.label}}
+      </a>
+    </sc-for>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { chip: 0 }; }
+  renderVals() {
+    const PH = {"plaster": "url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27 preserveAspectRatio=%27xMidYMid slice%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23A8A49D%27/%3E%3Crect y=%27230%27 width=%27400%27 height=%2770%27 fill=%27%238E8A84%27/%3E%3Crect x=%270%27 y=%270%27 width=%27220%27 height=%27230%27 fill=%27%23B9B5AE%27/%3E%3Crect x=%27220%27 y=%270%27 width=%27180%27 height=%27230%27 fill=%27%239F9B94%27/%3E%3Cpath d=%27M0 120 q60 -10 120 8 t100 -6 v110 H0z%27 fill=%27%23C8C4BD%27/%3E%3Cg stroke=%27%236B5B45%27 stroke-width=%276%27%3E%3Cline x1=%27270%27 y1=%2760%27 x2=%27250%27 y2=%27260%27/%3E%3Cline x1=%27320%27 y1=%2760%27 x2=%27340%27 y2=%27260%27/%3E%3C/g%3E%3Cg stroke=%27%236B5B45%27 stroke-width=%274%27%3E%3Cline x1=%27265%27 y1=%27110%27 x2=%27325%27 y2=%27110%27/%3E%3Cline x1=%27260%27 y1=%27160%27 x2=%27330%27 y2=%27160%27/%3E%3Cline x1=%27255%27 y1=%27210%27 x2=%27335%27 y2=%27210%27/%3E%3C/g%3E%3Crect x=%2760%27 y=%27245%27 width=%2750%27 height=%2740%27 rx=%274%27 fill=%27%233D3A36%27/%3E%3C/svg%3E') center/cover", "tiles": "url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27 preserveAspectRatio=%27xMidYMid slice%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23C9C3B8%27/%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23D9D4CA%27/%3E%3Cg fill=%27%23EDE7DC%27 stroke=%27%23B5AEA2%27%3E%3Crect x=%270%27 y=%27150%27 width=%27100%27 height=%2775%27/%3E%3Crect x=%27100%27 y=%27150%27 width=%27100%27 height=%2775%27/%3E%3Crect x=%270%27 y=%27225%27 width=%27100%27 height=%2775%27/%3E%3Crect x=%27100%27 y=%27225%27 width=%27100%27 height=%2775%27/%3E%3Crect x=%27200%27 y=%27225%27 width=%27100%27 height=%2775%27/%3E%3C/g%3E%3Crect x=%27200%27 y=%27150%27 width=%27200%27 height=%2775%27 fill=%27%239E978C%27/%3E%3Crect x=%27300%27 y=%27225%27 width=%27100%27 height=%2775%27 fill=%27%239E978C%27/%3E%3Crect x=%27300%27 y=%27175%27 width=%2760%27 height=%2722%27 rx=%274%27 fill=%27%23E0B341%27/%3E%3C/svg%3E') center/cover", "plumb": "url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27 preserveAspectRatio=%27xMidYMid slice%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23C4BFB7%27/%3E%3Crect y=%27170%27 width=%27400%27 height=%27130%27 fill=%27%239A958E%27/%3E%3Cg stroke=%27%232E6FB0%27 stroke-width=%2710%27 fill=%27none%27%3E%3Cpath d=%27M0 230 H180 V190%27/%3E%3C/g%3E%3Cg stroke=%27%23D9E2E8%27 stroke-width=%2714%27 fill=%27none%27%3E%3Cpath d=%27M220 300 V220 H400%27/%3E%3C/g%3E%3Crect x=%2760%27 y=%2760%27 width=%27120%27 height=%2790%27 fill=%27%23B3AEA6%27/%3E%3C/svg%3E') center/cover", "electric": "url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27 preserveAspectRatio=%27xMidYMid slice%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23BDB8B0%27/%3E%3Crect y=%27235%27 width=%27400%27 height=%2765%27 fill=%27%238A857E%27/%3E%3Cg stroke=%27%23E07B2A%27 stroke-width=%276%27 fill=%27none%27%3E%3Cpath d=%27M40 0 V100 H140%27/%3E%3Cpath d=%27M200 0 V170%27/%3E%3Cpath d=%27M260 0 V60 H360 V140%27/%3E%3C/g%3E%3Cg fill=%27%235F5A54%27%3E%3Crect x=%27130%27 y=%2788%27 width=%2726%27 height=%2726%27/%3E%3Crect x=%27188%27 y=%27160%27 width=%2726%27 height=%2726%27/%3E%3Crect x=%27348%27 y=%27130%27 width=%2726%27 height=%2726%27/%3E%3C/g%3E%3C/svg%3E') center/cover"};
+    const names = ['كل المراحل', 'محارة', 'تأسيس كهرباء', 'تأسيس سباكة'];
+    const chips = names.map((label, i) => {
+      const on = this.state.chip === i;
+      return { label, on: on ? 'true' : 'false', bg: on ? '#1D6B57' : '#FFFFFF', fg: on ? '#FFFFFF' : '#17201D', border: on ? '#1D6B57' : '#E2E5E0', pick: () => this.setState({ chip: i }) };
+    });
+    const tiles = (sc, vid) => sc.map((k, i) => ({ label: 'صورة ' + (i + 1), bg: PH[k], video: vid === i }));
+    const tab = (label, href, on) => ({ label, href, color: on ? '#1D6B57' : '#5B6661', weight: on ? 700 : 500, bar: on ? '#1D6B57' : 'transparent' });
+    return {
+      chips,
+      groups: [
+        { title: 'محارة · غرف النوم', meta: 'امبارح · م. كريم', text: 'بدء طبقة البطانة في غرفة النوم الرئيسية والأطفال.', tiles: tiles(['plaster', 'tiles', 'plaster', 'plumb', 'plaster', 'tiles'], 2) },
+        { title: 'تأسيس كهرباء · الريسبشن', meta: '14 نوفمبر · م. كريم', text: 'خلص تمديد المواسير والعلب، والاستلام من الاستشاري تم.', tiles: tiles(['electric', 'plumb', 'electric', 'electric', 'plaster', 'electric'], -1) }
+      ],
+      tabs: [
+        tab('الرئيسية', 'Main.dc.html', false),
+        tab('المراحل', 'ClientTimeline.dc.html', false),
+        tab('الصور', 'ClientGallery.dc.html', true),
+        tab('الدفعات', 'ClientPayments.dc.html', false),
+        tab('الشات', 'ClientChat.dc.html', false)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

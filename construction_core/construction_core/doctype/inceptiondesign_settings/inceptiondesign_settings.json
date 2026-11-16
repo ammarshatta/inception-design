@@ -1,0 +1,152 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-11-16 20:30:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "brand_section",
+  "office_name",
+  "logo",
+  "whatsapp_number",
+  "cb1",
+  "primary_color",
+  "secondary_color",
+  "default_engineer",
+  "terms_section",
+  "terms_text",
+  "features_section",
+  "enable_selections",
+  "enable_gps_clock_in",
+  "enable_online_payments",
+  "cb2",
+  "enable_ai_assistant",
+  "enable_public_catalog"
+ ],
+ "fields": [
+  {
+   "fieldname": "brand_section",
+   "fieldtype": "Section Break",
+   "label": "هوية المكتب"
+  },
+  {
+   "fieldname": "office_name",
+   "fieldtype": "Data",
+   "label": "اسم المكتب"
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Attach Image",
+   "label": "اللوجو"
+  },
+  {
+   "fieldname": "whatsapp_number",
+   "fieldtype": "Data",
+   "label": "رقم واتساب",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#1D6B57",
+   "fieldname": "primary_color",
+   "fieldtype": "Color",
+   "label": "اللون الأساسي"
+  },
+  {
+   "default": "#17201D",
+   "fieldname": "secondary_color",
+   "fieldtype": "Color",
+   "label": "لون ثانوي"
+  },
+  {
+   "fieldname": "default_engineer",
+   "fieldtype": "Link",
+   "label": "المهندس الافتراضي",
+   "options": "User"
+  },
+  {
+   "fieldname": "terms_section",
+   "fieldtype": "Section Break",
+   "label": "الشروط"
+  },
+  {
+   "fieldname": "terms_text",
+   "fieldtype": "Text Editor",
+   "label": "نص الشروط"
+  },
+  {
+   "fieldname": "features_section",
+   "fieldtype": "Section Break",
+   "label": "تشغيل وإيقاف المزايا"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_selections",
+   "fieldtype": "Check",
+   "label": "اختيارات التشطيب"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_gps_clock_in",
+   "fieldtype": "Check",
+   "label": "الحضور بالموقع الجغرافي"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_online_payments",
+   "fieldtype": "Check",
+   "label": "الدفع أونلاين"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_ai_assistant",
+   "fieldtype": "Check",
+   "label": "المساعد الذكي"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_public_catalog",
+   "fieldtype": "Check",
+   "label": "كتالوج التصميمات العام"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-11-16 20:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Inceptiondesign Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

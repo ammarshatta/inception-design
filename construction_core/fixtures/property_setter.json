@@ -1,0 +1,15 @@
+[
+ {
+  "doc_type": "Project",
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocType",
+  "field_name": null,
+  "is_system_generated": 0,
+  "modified": "2026-11-16 20:30:00.000000",
+  "module": "Construction Core",
+  "name": "Project-main-track_changes",
+  "property": "track_changes",
+  "property_type": "Check",
+  "value": "1"
+ }
+]

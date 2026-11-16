@@ -1,0 +1,176 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "hash",
+ "creation": "2026-11-16 20:30:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "stage_name",
+  "sort_order",
+  "weight",
+  "cb1",
+  "status",
+  "progress_mode",
+  "progress",
+  "dates_section",
+  "planned_start",
+  "planned_end",
+  "cb2",
+  "actual_start",
+  "actual_end",
+  "checklist_section",
+  "checklist"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "stage_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "المرحلة",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "label": "الترتيب"
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "الوزن"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Not Started",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الحالة",
+   "options": "Not Started\nIn Progress\nOn Hold\nDone"
+  },
+  {
+   "default": "Auto",
+   "fieldname": "progress_mode",
+   "fieldtype": "Select",
+   "label": "طريقة حساب النسبة",
+   "options": "Auto\nManual"
+  },
+  {
+   "fieldname": "progress",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "نسبة الإنجاز",
+   "read_only_depends_on": "eval:doc.progress_mode=='Auto'"
+  },
+  {
+   "fieldname": "dates_section",
+   "fieldtype": "Section Break",
+   "label": "التواريخ"
+  },
+  {
+   "fieldname": "planned_start",
+   "fieldtype": "Date",
+   "label": "بداية مخططة"
+  },
+  {
+   "fieldname": "planned_end",
+   "fieldtype": "Date",
+   "label": "نهاية مخططة"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "actual_start",
+   "fieldtype": "Date",
+   "label": "بداية فعلية"
+  },
+  {
+   "fieldname": "actual_end",
+   "fieldtype": "Date",
+   "label": "نهاية فعلية"
+  },
+  {
+   "fieldname": "checklist_section",
+   "fieldtype": "Section Break",
+   "label": "بنود المراجعة"
+  },
+  {
+   "fieldname": "checklist",
+   "fieldtype": "Table",
+   "label": "بنود المراجعة",
+   "options": "Stage Checklist Item"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-16 20:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Project Stage",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Engineer",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Construction Client"
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "project,stage_name",
+ "show_title_field_in_link": 1,
+ "sort_field": "sort_order",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "stage_name",
+ "track_changes": 1
+}

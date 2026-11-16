@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Finish selection</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1D6B57}a:hover{color:#14503F}
+</style>
+</helmet>
+<div dir="rtl" style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F2; color: #17201D; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <header style="padding: 16px 16px 8px; display: flex; align-items: center; gap: 8px">
+    <a href="Main.dc.html" aria-label="رجوع" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 22px; background: #FFFFFF; border: 1px solid #E2E5E0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17201D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column">
+      <h1 style="margin: 0; font-size: 19px; font-weight: 700">سيراميك أرضيات الريسبشن</h1>
+      <span style="font-size: 12px; color: #5B6661">40 م² · آخر معاد للاختيار 20 نوفمبر</span>
+    </div>
+  </header>
+
+  <section style="margin: 4px 16px 10px; background: #FFFFFF; border-radius: 14px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center">
+    <span style="font-size: 13px; color: #5B6661">المسموح في العقد</span>
+    <span style="font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums">500 ج.م / م²</span>
+  </section>
+
+  <main style="flex: 1; overflow: hidden; padding: 0 16px; display: flex; flex-direction: column; gap: 10px">
+    <sc-for list="{{options}}" as="o" hint-placeholder-count="3">
+      <button onClick="{{o.pick}}" aria-pressed="{{o.on}}" style="text-align: right; font-family: inherit; color: #17201D; background: #FFFFFF; border-radius: 14px; border: 2px solid {{o.border}}; padding: 10px; display: flex; gap: 12px; align-items: stretch">
+        <span aria-hidden="true" style="width: 84px; height: 84px; flex-shrink: 0; border-radius: 10px; background: {{o.swatch}}; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; padding: 2px; box-sizing: border-box">
+          <span style="background: {{o.swatch}}; border: 1px solid #FFFFFF66; border-radius: 3px"></span><span style="background: {{o.swatch}}; border: 1px solid #FFFFFF66; border-radius: 3px"></span><span style="background: {{o.swatch}}; border: 1px solid #FFFFFF66; border-radius: 3px"></span><span style="background: {{o.swatch}}; border: 1px solid #FFFFFF66; border-radius: 3px"></span>
+        </span>
+        <span style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0">
+          <span style="font-size: 15px; font-weight: 700">{{o.name}}</span>
+          <span style="font-size: 12px; color: #5B6661">{{o.spec}}</span>
+          <span style="font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums">{{o.price}}</span>
+          <span style="align-self: flex-start; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: {{o.diffBg}}; color: {{o.diffFg}}">{{o.diff}}</span>
+        </span>
+      </button>
+    </sc-for>
+  </main>
+
+  <footer style="background: #FFFFFF; border-top: 1px solid #E2E5E0; padding: 12px 16px 22px; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline">
+      <span style="font-size: 13px; color: #5B6661">الفرق على العقد</span>
+      <span style="font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; color: {{totalColor}}">{{total}}</span>
+    </div>
+    <sc-if value="{{over}}" hint-placeholder-val="{{true}}">
+      <span style="font-size: 12px; color: #8A4A0C">الاختيار ده فوق المسموح، فهيتعمل أمر تغيير محتاج توقيعك.</span>
+    </sc-if>
+    <a href="{{nextHref}}" style="min-height: 48px; border-radius: 12px; background: #1D6B57; color: #FFFFFF; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; text-decoration: none">{{cta}}</a>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { picked: 1 }; }
+  renderVals() {
+    const allowance = 500, qty = 40;
+    const fmt = (n) => n.toLocaleString('en-US');
+    const raw = [
+      { name: 'بورسلين مط 60×60', spec: 'مصري · بيج فاتح', unit: 420, swatch: '#E4D9C6' },
+      { name: 'بورسلين لامع 60×120', spec: 'إسباني · رمادي', unit: 650, swatch: '#B9BDBC' },
+      { name: 'رخام صناعي 80×80', spec: 'مصري · أبيض معرّق', unit: 500, swatch: '#ECEBE6' }
+    ];
+    const options = raw.map((o, i) => {
+      const d = (o.unit - allowance) * qty;
+      const on = this.state.picked === i;
+      return {
+        ...o, on: on ? 'true' : 'false', border: on ? '#1D6B57' : '#E2E5E0',
+        price: fmt(o.unit) + ' ج.م / م²',
+        diff: d > 0 ? '+ ' + fmt(d) + ' ج.م' : 'ضمن الميزانية',
+        diffBg: d > 0 ? '#FBEFDF' : '#E3F0EB', diffFg: d > 0 ? '#8A4A0C' : '#14503F',
+        pick: () => this.setState({ picked: i })
+      };
+    });
+    const d = (raw[this.state.picked].unit - allowance) * qty;
+    return {
+      options,
+      over: d > 0,
+      total: d > 0 ? '+ ' + fmt(d) + ' ج.م' : '0 ج.م',
+      totalColor: d > 0 ? '#8A4A0C' : '#14503F',
+      cta: d > 0 ? 'أكّد وروح للتوقيع' : 'أكّد الاختيار',
+      nextHref: d > 0 ? 'ClientSign.dc.html' : 'Main.dc.html'
+    };
+  }
+}
+</script>
+</body>
+</html>

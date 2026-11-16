@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Project timeline</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1D6B57}a:hover{color:#14503F}
+</style>
+</helmet>
+<div dir="rtl" style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F2; color: #17201D; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <header style="padding: 20px 20px 8px; display: flex; flex-direction: column; gap: 4px">
+    <h1 style="margin: 0; font-size: 22px; font-weight: 700">مراحل المشروع</h1>
+    <span style="font-size: 13px; color: #5B6661">8 مراحل · الإنجاز الكلي 46% بالأوزان</span>
+  </header>
+
+  <div style="padding: 4px 20px 12px; display: flex; gap: 16px; font-size: 12px; color: #5B6661">
+    <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 16px; height: 6px; border-radius: 3px; background: #CBD2CC"></span>المخطط</span>
+    <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 16px; height: 6px; border-radius: 3px; background: #1D6B57"></span>الفعلي</span>
+  </div>
+
+  <main style="flex: 1; overflow: hidden; padding: 0 16px; display: flex; flex-direction: column; gap: 6px">
+    <sc-for list="{{stages}}" as="s" hint-placeholder-count="8">
+      <article style="background: #FFFFFF; border-radius: 14px; padding: 9px 14px; display: flex; flex-direction: column; gap: 6px">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+          <div style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+            <span style="font-size: 15px; font-weight: 600">{{s.name}}</span>
+            <span style="font-size: 12px; color: #5B6661">وزن {{s.weight}}% · {{s.dates}}</span>
+          </div>
+          <span style="flex-shrink: 0; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: {{s.pillBg}}; color: {{s.pillFg}}">{{s.status}}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <div style="height: 6px; background: #EEF0EC; border-radius: 3px; position: relative"><div style="position: absolute; top: 0; height: 6px; border-radius: 3px; background: #CBD2CC; right: {{s.planStart}}; width: {{s.planWidth}}"></div></div>
+          <div style="height: 6px; background: transparent; border-radius: 3px; position: relative"><div style="position: absolute; top: 0; height: 6px; border-radius: 3px; background: #1D6B57; right: {{s.actStart}}; width: {{s.actWidth}}"></div></div>
+        </div>
+        <sc-if value="{{s.late}}" hint-placeholder-val="{{false}}">
+          <span style="font-size: 12px; font-weight: 600; color: #B42318">متأخرة {{s.lateDays}} أيام</span>
+        </sc-if>
+      </article>
+    </sc-for>
+  </main>
+
+  <nav aria-label="القائمة" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E2E5E0; padding: 6px 4px 18px">
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+      <a href="{{t.href}}" style="min-height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; text-decoration: none; color: {{t.color}}; font-weight: {{t.weight}}">
+        <span aria-hidden="true" style="width: 22px; height: 4px; border-radius: 2px; background: {{t.bar}}"></span>
+        {{t.label}}
+      </a>
+    </sc-for>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const pill = { done: ['#E3F0EB', '#14503F', 'خلصت'], run: ['#E4ECF8', '#1F4687', 'جارية'], wait: ['#EEF0EC', '#4A5550', 'لم تبدأ'] };
+    const st = (name, weight, dates, kind, ps, pw, as, aw, lateDays) => ({
+      name, weight, dates, status: pill[kind][2], pillBg: pill[kind][0], pillFg: pill[kind][1],
+      planStart: ps + '%', planWidth: pw + '%', actStart: as + '%', actWidth: aw + '%', late: lateDays > 0, lateDays
+    });
+    const tab = (label, href, on) => ({ label, href, color: on ? '#1D6B57' : '#5B6661', weight: on ? 700 : 500, bar: on ? '#1D6B57' : 'transparent' });
+    return {
+      stages: [
+        st('هدم وتجهيز', 5, '1 – 8 سبتمبر', 'done', 0, 6, 0, 6, 0),
+        st('تأسيس سباكة', 10, '9 – 25 سبتمبر', 'done', 6, 12, 6, 15, 4),
+        st('تأسيس كهرباء', 10, '20 سبتمبر – 10 أكتوبر', 'done', 10, 14, 13, 14, 0),
+        st('محارة', 15, '11 أكتوبر – 25 نوفمبر', 'run', 24, 22, 27, 14, 0),
+        st('عزل وأرضيات', 20, '26 نوفمبر – 31 ديسمبر', 'wait', 46, 18, 0, 0, 0),
+        st('نجارة وأبواب', 15, 'يناير 2027', 'wait', 64, 14, 0, 0, 0),
+        st('دهانات', 15, 'فبراير 2027', 'wait', 78, 12, 0, 0, 0),
+        st('تشطيب نهائي وتسليم', 10, 'مارس 2027', 'wait', 90, 10, 0, 0, 0)
+      ],
+      tabs: [
+        tab('الرئيسية', 'Main.dc.html', false),
+        tab('المراحل', 'ClientTimeline.dc.html', true),
+        tab('الصور', 'ClientGallery.dc.html', false),
+        tab('الدفعات', 'ClientPayments.dc.html', false),
+        tab('الشات', 'ClientChat.dc.html', false)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

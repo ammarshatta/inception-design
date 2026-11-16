@@ -1,0 +1,67 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-11-16 20:30:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "file",
+  "kind",
+  "publishable",
+  "public_file",
+  "taken_at"
+ ],
+ "fields": [
+  {
+   "columns": 4,
+   "fieldname": "file",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "الملف",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "default": "Photo",
+   "fieldname": "kind",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "النوع",
+   "options": "Photo\nVideo"
+  },
+  {
+   "columns": 1,
+   "fieldname": "publishable",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "للنشر"
+  },
+  {
+   "fieldname": "public_file",
+   "fieldtype": "Attach",
+   "label": "نسخة عامة",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "taken_at",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "وقت التصوير"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-11-16 20:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Stage Update Media",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

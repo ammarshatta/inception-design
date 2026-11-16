@@ -1,0 +1,48 @@
+@import 'frappe-ui/style.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* IBM Plex Sans Arabic (SIL Open Font License), served from the app, no CDN */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/IBMPlexSansArabic-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/IBMPlexSansArabic-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-weight: 600;
+  font-display: swap;
+  src: url('./assets/fonts/IBMPlexSansArabic-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/IBMPlexSansArabic-Bold.woff2') format('woff2');
+}
+
+html,
+body {
+  font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif;
+  background: #f4f5f2;
+  color: #17201d;
+}
+
+/* Western digits that line up in money and percentages */
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* disable webkit tap highlight color */
+body {
+  -webkit-tap-highlight-color: transparent;
+}

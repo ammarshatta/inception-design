@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Client home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1D6B57}a:hover{color:#14503F}
+</style>
+</helmet>
+<div dir="rtl" style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F2; color: #17201D; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <header style="padding: 20px 20px 12px; display: flex; justify-content: space-between; align-items: center">
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 13px; color: #5B6661">أهلاً، أحمد</span>
+      <span style="font-size: 18px; font-weight: 700">شقة التجمع الخامس · 180 م²</span>
+    </div>
+    <button aria-label="الإشعارات" style="width: 44px; height: 44px; border-radius: 22px; border: 1px solid #E2E5E0; background: #FFFFFF; display: flex; align-items: center; justify-content: center; position: relative">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17201D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+      <span style="position: absolute; top: 9px; left: 10px; width: 8px; height: 8px; border-radius: 4px; background: #B42318"></span>
+    </button>
+  </header>
+
+  <main style="flex: 1; overflow: hidden; padding: 0 16px; display: flex; flex-direction: column; gap: 12px">
+    <section style="background: #FFFFFF; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <span style="font-size: 14px; color: #5B6661">نسبة الإنجاز</span>
+        <span style="font-size: 13px; color: #5B6661">التسليم المتوقع: 15 مارس 2027</span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 8px">
+        <span style="font-size: 44px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums">46%</span>
+        <span style="font-size: 13px; color: #1D6B57; font-weight: 600">في المعاد</span>
+      </div>
+      <div style="height: 10px; background: #E9ECE7; border-radius: 5px; overflow: hidden"><div style="width: 46%; height: 10px; background: #1D6B57; border-radius: 5px"></div></div>
+      <div style="font-size: 14px">المرحلة الحالية: <strong>محارة وتأسيس كهرباء</strong></div>
+    </section>
+
+    <section style="background: #FBEFDF; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 12px; font-weight: 700; color: #8A4A0C; letter-spacing: 0.2px">مطلوب منك</span>
+      <span style="font-size: 15px; font-weight: 600">اختيار سيراميك أرضيات الريسبشن قبل 20 نوفمبر</span>
+      <a href="ClientSelections.dc.html" style="align-self: flex-start; min-height: 44px; padding: 0 18px; border-radius: 12px; background: #1D6B57; color: #FFFFFF; font-size: 15px; font-weight: 600; display: flex; align-items: center; text-decoration: none">اختار دلوقتي</a>
+    </section>
+
+    <section style="background: #FFFFFF; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="font-size: 15px; font-weight: 700">آخر التحديثات</span>
+        <a href="ClientGallery.dc.html" style="font-size: 13px">كل الصور</a>
+      </div>
+      <sc-for list="{{updates}}" as="u" hint-placeholder-count="3">
+        <div style="display: flex; gap: 12px; align-items: center">
+          <a href="ClientGallery.dc.html" aria-label="صور التحديث" style="width: 56px; height: 56px; border-radius: 10px; background: {{u.img}}; flex-shrink: 0"></a>
+          <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+            <span style="font-size: 14px; font-weight: 600">{{u.title}}</span>
+            <span style="font-size: 12px; color: #5B6661">{{u.meta}}</span>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+
+    <a href="ClientPayments.dc.html" style="background: #FFFFFF; border-radius: 16px; padding: 16px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #17201D">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 13px; color: #5B6661">الدفعة الجاية · عند انتهاء المحارة</span>
+        <span style="font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums">85,000 ج.م</span>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6661" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+    </a>
+  </main>
+
+  <nav aria-label="القائمة" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E2E5E0; padding: 6px 4px 18px">
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+      <a href="{{t.href}}" style="min-height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; text-decoration: none; color: {{t.color}}; font-weight: {{t.weight}}">
+        <span aria-hidden="true" style="width: 22px; height: 4px; border-radius: 2px; background: {{t.bar}}"></span>
+        {{t.label}}
+      </a>
+    </sc-for>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const PH = {"electric": "url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27 preserveAspectRatio=%27xMidYMid slice%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23BDB8B0%27/%3E%3Crect y=%27235%27 width=%27400%27 height=%2765%27 fill=%27%238A857E%27/%3E%3Cg stroke=%27%23E07B2A%27 stroke-width=%276%27 fill=%27none%27%3E%3Cpath d=%27M40 0 V100 H140%27/%3E%3Cpath d=%27M200 0 V170%27/%3E%3Cpath d=%27M260 0 V60 H360 V140%27/%3E%3C/g%3E%3Cg fill=%27%235F5A54%27%3E%3Crect x=%27130%27 y=%2788%27 width=%2726%27 height=%2726%27/%3E%3Crect x=%27188%27 y=%27160%27 width=%2726%27 height=%2726%27/%3E%3Crect x=%27348%27 y=%27130%27 width=%2726%27 height=%2726%27/%3E%3C/g%3E%3C/svg%3E') center/cover", "plaster": "url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27 preserveAspectRatio=%27xMidYMid slice%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23A8A49D%27/%3E%3Crect y=%27230%27 width=%27400%27 height=%2770%27 fill=%27%238E8A84%27/%3E%3Crect x=%270%27 y=%270%27 width=%27220%27 height=%27230%27 fill=%27%23B9B5AE%27/%3E%3Crect x=%27220%27 y=%270%27 width=%27180%27 height=%27230%27 fill=%27%239F9B94%27/%3E%3Cpath d=%27M0 120 q60 -10 120 8 t100 -6 v110 H0z%27 fill=%27%23C8C4BD%27/%3E%3Cg stroke=%27%236B5B45%27 stroke-width=%276%27%3E%3Cline x1=%27270%27 y1=%2760%27 x2=%27250%27 y2=%27260%27/%3E%3Cline x1=%27320%27 y1=%2760%27 x2=%27340%27 y2=%27260%27/%3E%3C/g%3E%3Cg stroke=%27%236B5B45%27 stroke-width=%274%27%3E%3Cline x1=%27265%27 y1=%27110%27 x2=%27325%27 y2=%27110%27/%3E%3Cline x1=%27260%27 y1=%27160%27 x2=%27330%27 y2=%27160%27/%3E%3Cline x1=%27255%27 y1=%27210%27 x2=%27335%27 y2=%27210%27/%3E%3C/g%3E%3Crect x=%2760%27 y=%27245%27 width=%2750%27 height=%2740%27 rx=%274%27 fill=%27%233D3A36%27/%3E%3C/svg%3E') center/cover", "plumb": "url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27 preserveAspectRatio=%27xMidYMid slice%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23C4BFB7%27/%3E%3Crect y=%27170%27 width=%27400%27 height=%27130%27 fill=%27%239A958E%27/%3E%3Cg stroke=%27%232E6FB0%27 stroke-width=%2710%27 fill=%27none%27%3E%3Cpath d=%27M0 230 H180 V190%27/%3E%3C/g%3E%3Cg stroke=%27%23D9E2E8%27 stroke-width=%2714%27 fill=%27none%27%3E%3Cpath d=%27M220 300 V220 H400%27/%3E%3C/g%3E%3Crect x=%2760%27 y=%2760%27 width=%27120%27 height=%2790%27 fill=%27%23B3AEA6%27/%3E%3C/svg%3E') center/cover"};
+    const tab = (label, href, on) => ({ label, href, color: on ? '#1D6B57' : '#5B6661', weight: on ? 700 : 500, bar: on ? '#1D6B57' : 'transparent' });
+    return {
+      updates: [
+        { title: 'تأسيس كهرباء الريسبشن خلص', meta: 'م. كريم · النهارده 2:10 م · 6 صور', img: PH.electric },
+        { title: 'بدء المحارة في غرف النوم', meta: 'م. كريم · امبارح · 4 صور', img: PH.plaster },
+        { title: 'استلام مواسير السباكة', meta: 'م. كريم · 11 نوفمبر · 2 صور', img: PH.plumb }
+      ],
+      tabs: [
+        tab('الرئيسية', 'Main.dc.html', true),
+        tab('المراحل', 'ClientTimeline.dc.html', false),
+        tab('الصور', 'ClientGallery.dc.html', false),
+        tab('الدفعات', 'ClientPayments.dc.html', false),
+        tab('الشات', 'ClientChat.dc.html', false)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

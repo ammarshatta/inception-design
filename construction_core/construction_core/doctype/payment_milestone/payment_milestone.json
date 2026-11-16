@@ -1,0 +1,141 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:PM-{#####}",
+ "creation": "2026-11-16 20:30:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "project_stage",
+  "label",
+  "cb1",
+  "amount",
+  "status",
+  "due_date",
+  "sales_invoice"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "project_stage",
+   "fieldtype": "Link",
+   "label": "المرحلة",
+   "options": "Project Stage"
+  },
+  {
+   "fieldname": "label",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "الدفعة",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "المبلغ",
+   "reqd": 1
+  },
+  {
+   "default": "Upcoming",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الحالة",
+   "options": "Upcoming\nDue\nInvoiced\nPaid"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الاستحقاق"
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "الفاتورة",
+   "options": "Sales Invoice"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-16 20:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Payment Milestone",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Construction Engineer"
+  },
+  {
+   "read": 1,
+   "role": "Construction Client"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "label",
+ "track_changes": 1
+}
