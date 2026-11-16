@@ -293,9 +293,11 @@ class TestPipeline(IntegrationTestCase):
 		self.assertTrue(frappe.get_meta("Opportunity").track_changes, "track changes is off on Opportunity")
 		opp.pipeline_stage = "تسعير"
 		opp.save(ignore_permissions=True)
-		versions = frappe.get_all(
-			"Version", filters={"ref_doctype": "Opportunity", "docname": opp.name}, pluck="data"
-		)
 		self.assertEqual(frappe.db.get_value("Opportunity", opp.name, "pipeline_stage"), "تسعير")
-		self.assertTrue(any("pipeline_stage" in (v or "") for v in versions), f"versions: {versions}")
+		log = frappe.get_all(
+			"Comment",
+			filters={"reference_doctype": "Opportunity", "reference_name": opp.name, "comment_type": "Info"},
+			pluck="content",
+		)
+		self.assertTrue(any("تسعير" in (c or "") for c in log), f"log: {log}")
 		self.assertTrue(frappe.db.exists("Kanban Board", sales.KANBAN_BOARD))

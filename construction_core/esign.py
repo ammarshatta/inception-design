@@ -532,7 +532,9 @@ def kickoff(req) -> str:
 		stage.flags.ignore_permissions = True
 		stage.insert()
 		stage_by_section[section] = stage.name
-		task = frappe.get_doc({"doctype": "Task", "subject": section, "project": project.name})
+		task = frappe.get_doc(
+			{"doctype": "Task", "subject": section, "project": project.name, "project_stage": stage.name}
+		)
 		task.flags.ignore_permissions = True
 		task.insert()
 	for term, amount in zip(est.payment_terms, term_amounts(est), strict=True):

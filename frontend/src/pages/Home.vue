@@ -7,6 +7,8 @@
         <h1 data-testid="greeting" class="text-2xl font-bold">{{ __('أهلاً، {0}', [me.data.full_name]) }}</h1>
       </header>
 
+      <RouterLink v-if="me.data.roles.foreman" to="/foreman" class="mx-4 mt-2 flex min-h-[48px] items-center justify-center rounded-[14px] bg-[#17201D] font-bold text-white" data-testid="open-foreman">{{ __('شغلي النهارده') }}</RouterLink>
+
       <section v-if="signatures.length" class="flex flex-col gap-2 px-4 pt-2" data-testid="sign-list">
         <h2 class="px-1 text-sm font-semibold text-[#5B6661]">{{ __('مستندات للتوقيع') }}</h2>
         <RouterLink

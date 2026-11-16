@@ -47,6 +47,15 @@ def ensure_sales_setup():
 		).insert(ignore_permissions=True)
 
 
+def opportunity_on_update(doc, method=None):
+	"""Every stage change on the Kanban is logged on the opportunity (story P07-01)."""
+	if doc.has_value_changed("pipeline_stage"):
+		before = doc.get_doc_before_save()
+		old = before.pipeline_stage if before else None
+		if old:
+			doc.add_comment("Info", _("مرحلة البيع: {0} ← {1}").format(old, doc.pipeline_stage))
+
+
 # --- Price library --------------------------------------------------------------------
 
 

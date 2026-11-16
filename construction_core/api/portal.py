@@ -33,6 +33,7 @@ def get_me() -> dict:
 			"admin": has_full_access(user),
 			"engineer": ENGINEER_ROLE in roles,
 			"client": CLIENT_ROLE in roles,
+			"foreman": "Construction Foreman" in roles,
 		},
 		"branding": get_branding(),
 		"features": get_feature_flags(),

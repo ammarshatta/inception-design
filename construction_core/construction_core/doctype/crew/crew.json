@@ -1,0 +1,114 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "field:crew_name",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "crew_name",
+  "trade",
+  "foreman_user",
+  "foreman_employee",
+  "active",
+  "members_section",
+  "members"
+ ],
+ "fields": [
+  {
+   "fieldname": "crew_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "اسم الفريق",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "trade",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الصنعة"
+  },
+  {
+   "fieldname": "foreman_user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "الفورمان (مستخدم البوابة)",
+   "options": "User"
+  },
+  {
+   "fieldname": "foreman_employee",
+   "fieldtype": "Link",
+   "label": "الفورمان (موظف)",
+   "options": "Employee"
+  },
+  {
+   "default": "1",
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "شغال"
+  },
+  {
+   "fieldname": "members_section",
+   "fieldtype": "Section Break",
+   "label": "العمال"
+  },
+  {
+   "fieldname": "members",
+   "fieldtype": "Table",
+   "label": "العمال",
+   "options": "Crew Member"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Crew",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Construction Engineer",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Construction Foreman"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "crew_name"
+}

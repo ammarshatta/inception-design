@@ -300,5 +300,5 @@ class TestScheduleShift(IntegrationTestCase):
 			getdate(frappe.db.get_value("Project Stage", names[1], "planned_start")), getdate("2026-12-11")
 		)
 		self.assertEqual(
-			getdate(frappe.db.get_value("Project Stage", names[4], "planned_end")), getdate("2027-01-14")
+			getdate(frappe.db.get_value("Project Stage", names[4], "planned_end")), getdate("2027-01-23")
 		)

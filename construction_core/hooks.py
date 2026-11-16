@@ -297,7 +297,13 @@ fixtures = [
 			[
 				"name",
 				"in",
-				["Construction Admin", "Construction Engineer", "Construction Client", "Construction Sales"],
+				[
+					"Construction Admin",
+					"Construction Engineer",
+					"Construction Client",
+					"Construction Sales",
+					"Construction Foreman",
+				],
 			]
 		],
 	},
@@ -355,6 +361,8 @@ doc_events = {
 	},
 	"Company": {"after_insert": "construction_core.money.company_after_insert"},
 	"Item Price": {"on_trash": "construction_core.sales.item_price_on_trash"},
+	"Task": {"on_update": "construction_core.scheduling.task_on_update"},
+	"Opportunity": {"on_update": "construction_core.sales.opportunity_on_update"},
 	"Labor Rate": {"on_trash": "construction_core.sales.labor_rate_on_trash"},
 	"User": {"before_insert": "construction_core.auth.user_before_insert"},
 }
@@ -364,6 +372,7 @@ doctype_js = {
 	"Phase Template": "public/js/phase_template.js",
 	"Payment Milestone": "public/js/payment_milestone.js",
 	"Estimate": "public/js/estimate.js",
+	"Task": "public/js/task.js",
 }
 
 # Temporary passwords: nothing but the change-password page until it is changed
@@ -396,4 +405,5 @@ home_page = "home"
 role_home_page = {
 	"Construction Client": "portal",
 	"Construction Engineer": "portal",
+	"Construction Foreman": "portal",
 }

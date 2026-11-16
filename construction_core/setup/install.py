@@ -49,6 +49,10 @@ def after_migrate():
 	from construction_core.esign import ensure_contract_template
 
 	ensure_contract_template()
+	if frappe.is_setup_complete():
+		from construction_core.scheduling import ensure_holiday_list
+
+		ensure_holiday_list()
 
 
 def apply_site_config():
