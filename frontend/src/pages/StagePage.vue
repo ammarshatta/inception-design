@@ -26,6 +26,7 @@
           <input
             type="checkbox"
             class="h-[22px] w-[22px] accent-[#1D6B57]"
+            data-testid="checklist-item"
             :checked="!!item.done"
             :disabled="!data.can_post || busy === item.name"
             @change="toggle(item, ($event.target as HTMLInputElement).checked)"
@@ -64,6 +65,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { call } from '@/lib/api'
+import { cachedCall } from '@/lib/offline'
+import { enqueue } from '@/lib/queue'
+import { __ } from '@/translate'
 import { pct, shortDate } from '@/lib/format'
 import PageHeader from '@/components/PageHeader.vue'
 import ProgressBar from '@/components/ProgressBar.vue'
@@ -76,7 +80,7 @@ const busy = ref('')
 
 async function load() {
   try {
-    data.value = await call('construction_core.api.portal.stage_detail', { stage: props.name })
+    data.value = await cachedCall('construction_core.api.portal.stage_detail', { stage: props.name })
   } catch (e: any) {
     error.value = e.message
   }
@@ -84,6 +88,13 @@ async function load() {
 
 async function toggle(item: any, done: boolean) {
   busy.value = item.name
+  if (!navigator.onLine) {
+    // offline: tick now on the screen, send later (the server keeps a newer change made there)
+    await enqueue({ action: 'tick', payload: { stage: props.name, row: item.name, done: done ? 1 : 0 }, label: `${__('بند')}: ${item.label}` })
+    item.done = done ? 1 : 0
+    busy.value = ''
+    return
+  }
   try {
     const res = await call(
       'construction_core.api.portal.toggle_checklist_item',

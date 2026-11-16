@@ -34,7 +34,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 13 | Subcontractors and procurement | 🔵 | Cloud + CI | [phase-13.md](phase-13.md) | Code written, waiting for CI |
 | 14 | Documents, markup, takeoff | 🔵 | Cloud + CI | [phase-14.md](phase-14.md) | Code written, waiting for CI |
 | 15 | Online payments and reminders | 🔵 | Cloud + CI | [phase-15.md](phase-15.md) | Code written (gateway mocked); sandbox run needs the owner's Paymob test account |
-| 16 | Offline PWA and push | ⬜ | | | |
+| 16 | Offline PWA and push | 🔵 | Cloud + CI | [phase-16.md](phase-16.md) | Code written, waiting for CI |
 | 17 | Reports and dashboards | ⬜ | | | |
 | 18 | AI assistant | ⬜ | | | |
 | 19 | Launch: hosting and compliance | ⬜ | | | The first time a server is involved |
@@ -65,6 +65,7 @@ The owner asked for all phases to be built in a row and reviewed once at the end
 | Set up an outgoing email account (Tools → Email Account): signing codes are sent by email; without it the portal says it cannot send the code | 8 |
 | Open a free Paymob **test** account, put the test keys in Settings → الدفع أونلاين, and pay one milestone end to end | 15 |
 | Decide on Paymob live (fee per transaction) and set the clearing and manual-payment accounts in Settings | 15 / 19 |
+| Put VAPID keys in site_config.json, turn on notifications on an Android phone and receive a chat push | 16 |
 | Accountant enters the VAT rate in the "ضريبة القيمة المضافة" template (14% today) | 6 |
 
 ## Next actions (owner)

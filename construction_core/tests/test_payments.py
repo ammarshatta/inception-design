@@ -24,6 +24,14 @@ ACC_MANAGER = "cc-acc-manager@example.com"
 ACC_USER = "cc-acc-user@example.com"
 
 
+def jpeg() -> bytes:
+	from PIL import Image
+
+	out = io.BytesIO()
+	Image.new("RGB", (60, 40), (120, 160, 90)).save(out, format="JPEG")
+	return out.getvalue()
+
+
 def user_with(email, role):
 	if not frappe.db.exists("User", email):
 		u = frappe.get_doc({"doctype": "User", "email": email, "first_name": role, "send_welcome_email": 0})
@@ -207,7 +215,7 @@ class TestOnlinePayments(IntegrationTestCase):
 		m = self.due_milestone(label="دفعة التحويل")
 		frappe.set_user(self.client)
 		f = frappe.get_doc(
-			{"doctype": "File", "file_name": "transfer.jpg", "content": b"\xff\xd8receipt", "is_private": 1}
+			{"doctype": "File", "file_name": "transfer.jpg", "content": jpeg(), "is_private": 1}
 		).insert(ignore_permissions=True)
 		frappe.set_user("Administrator")
 		with self.set_user(self.client):

@@ -73,6 +73,21 @@ def clock(
 	device_info: str | None = None,
 ) -> list[str]:
 	"""Clock a crew (or one worker) in or out. `workers`: [{employee?, crew?, worker}]."""
+	return do_clock(project, event, workers, latitude, longitude, accuracy_m, device_info)
+
+
+def do_clock(
+	project: str,
+	event: str,
+	workers,
+	latitude=None,
+	longitude=None,
+	accuracy_m=None,
+	device_info=None,
+	at=None,
+) -> list[str]:
+	"""`at` is the phone's time for an event queued offline (checked by sync.apply); never
+	taken from a direct browser call."""
 	_require_staff()
 	assert_project_access(project)
 	if event not in ("In", "Out"):
@@ -104,7 +119,7 @@ def clock(
 				"doctype": "Clock Event",
 				"project": project,
 				"event": event,
-				"at": now_datetime(),
+				"at": at or now_datetime(),
 				"employee": w.get("employee"),
 				"crew": w.get("crew"),
 				"worker": w.get("worker") or w.get("employee") or frappe.utils.get_fullname(),

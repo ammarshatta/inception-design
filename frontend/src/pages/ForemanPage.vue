@@ -19,6 +19,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { call } from '@/lib/api'
+import { cachedCall } from '@/lib/offline'
 import PageHeader from '@/components/PageHeader.vue'
 
 const tabs = [
@@ -32,7 +33,7 @@ const error = ref('')
 async function load(s: string) {
   scope.value = s
   try {
-    rows.value = await call('construction_core.scheduling.foreman_assignments', { scope: s })
+    rows.value = await cachedCall('construction_core.scheduling.foreman_assignments', { scope: s })
     loaded.value = true
   } catch (e: any) {
     error.value = e.message

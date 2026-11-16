@@ -60,8 +60,14 @@
       </label>
 
       <div class="fixed inset-x-0 bottom-0 mx-auto max-w-md bg-[#F4F5F2] px-4 pb-5 pt-3">
+        <RouterLink
+          v-if="queued"
+          to="/sync"
+          data-testid="queued"
+          class="flex min-h-[52px] items-center justify-center rounded-[14px] bg-[#17201D] text-center text-sm font-bold text-white"
+        >{{ __('اتحفظ على الموبايل وهيتبعت أول ما النت يرجع') }}</RouterLink>
         <button
-          v-if="!finished"
+          v-else-if="!finished"
           type="submit"
           data-testid="publish"
           class="min-h-[52px] w-full rounded-[14px] bg-[#1D6B57] text-base font-bold text-white disabled:opacity-60"
@@ -81,8 +87,11 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { call, uploadFile } from '@/lib/api'
+import { cachedCall } from '@/lib/offline'
 import { checkVideo, resizePhoto } from '@/lib/media'
 import PageHeader from '@/components/PageHeader.vue'
+import { enqueue } from '@/lib/queue'
+import { __ } from '@/translate'
 
 type Item = {
   id: number
@@ -107,6 +116,7 @@ const items = ref<Item[]>([])
 const updateName = ref('')
 const busy = ref(false)
 const finished = ref(false)
+const queued = ref(false)
 const error = ref('')
 let nextId = 1
 
@@ -114,7 +124,7 @@ const isManual = computed(() => project.value?.stages.find((s: any) => s.name ==
 
 onMounted(async () => {
   try {
-    project.value = await call('construction_core.api.portal.project_detail', { project: name })
+    project.value = await cachedCall('construction_core.api.portal.project_detail', { project: name })
     const current = project.value.stages.find((s: any) => s.status === 'In Progress') || project.value.stages.find((s: any) => s.status !== 'Done')
     stage.value = (current || project.value.stages[0])?.name || ''
   } catch (e: any) {
@@ -192,9 +202,47 @@ async function retry(it: Item) {
   await uploadAll()
 }
 
+async function queueOffline() {
+  // No signal: keep everything on the phone and send it in order later (exactly once).
+  const updateUuid = await enqueue({
+    action: 'create_update',
+    payload: {
+      project: name,
+      stage: stage.value,
+      text: text.value,
+      progress_after: isManual.value ? progressAfter.value : null,
+      internal_only: internalOnly.value ? 1 : 0,
+    },
+    label: __('تحديث: {0}', [project.value.stages.find((s: any) => s.name === stage.value)?.stage_name || '']),
+  })
+  for (const it of items.value) {
+    const blob = it.kind === 'Photo' ? await resizePhoto(it.file) : it.file
+    await enqueue({
+      action: 'attach_media',
+      payload: { update: updateUuid, kind: it.kind },
+      label: it.kind === 'Photo' ? __('صورة') : __('فيديو'),
+      dependsOn: updateUuid,
+      media: true,
+      blob,
+      fileName: it.kind === 'Photo' ? it.file.name.replace(/\.[^.]+$/, '') + '.jpg' : it.file.name,
+    })
+  }
+  queued.value = true
+}
+
 async function submit() {
   error.value = ''
   busy.value = true
+  if (!updateName.value && !navigator.onLine) {
+    try {
+      await queueOffline()
+    } catch (e: any) {
+      error.value = e.message
+    } finally {
+      busy.value = false
+    }
+    return
+  }
   try {
     if (!updateName.value) {
       updateName.value = await call(

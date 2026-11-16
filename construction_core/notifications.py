@@ -38,6 +38,9 @@ def _notify(users: list[str], subject: str, doctype: str, name: str):
 			"from_user": frappe.session.user,
 		},
 	)
+	from construction_core.push import notify as push
+
+	push(users, doctype, name)
 
 
 def stage_update_after_insert(doc, method=None):

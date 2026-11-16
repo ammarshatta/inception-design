@@ -14,7 +14,7 @@ from werkzeug.wrappers import Response
 
 from construction_core.branding import get_branding
 
-SW_VERSION = "cc-portal-v1"
+SW_VERSION = "cc-portal-v2"
 
 
 @frappe.whitelist(allow_guest=True)
@@ -48,8 +48,13 @@ def manifest():
 
 SERVICE_WORKER = """
 const CACHE = '%(version)s';
-// Static assets only. Never /api, never pages with data.
-self.addEventListener('install', (e) => { self.skipWaiting(); });
+const SHELL = '/portal/';
+// Static assets: cache first. The portal page itself: network first, the last copy offline.
+// Never /api (data is cached by the app with its own "last updated" time).
+self.addEventListener('install', (e) => {
+  self.skipWaiting();
+  e.waitUntil(caches.open(CACHE).then((c) => c.add(SHELL)).catch(() => null));
+});
 self.addEventListener('activate', (e) => {
   e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))));
   self.clients.claim();
@@ -57,6 +62,15 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== location.origin) return;
+  if (e.request.mode === 'navigate' && url.pathname.startsWith('/portal')) {
+    e.respondWith(
+      fetch(e.request).then((res) => {
+        if (res.ok) caches.open(CACHE).then((c) => c.put(SHELL, res.clone()));
+        return res;
+      }).catch(() => caches.match(SHELL))
+    );
+    return;
+  }
   if (!url.pathname.startsWith('/assets/')) return;
   e.respondWith(
     caches.open(CACHE).then((cache) =>
@@ -66,6 +80,35 @@ self.addEventListener('fetch', (e) => {
       }))
     )
   );
+});
+// Web Push: the push has no payload; ask the server what to show (logged-in session).
+self.addEventListener('push', (e) => {
+  e.waitUntil(
+    fetch('/api/method/construction_core.push.latest', { credentials: 'include', headers: { Accept: 'application/json' } })
+      .then((r) => r.json())
+      .then((d) => {
+        const n = (d && d.message) || {};
+        return self.registration.showNotification(n.title || 'إشعار جديد', {
+          body: '', tag: n.tag || 'cc', data: { url: n.url || '/portal/' }, dir: 'rtl', lang: 'ar',
+          icon: '/assets/construction_core/pwa/icon-192.png',
+        });
+      })
+      .catch(() => self.registration.showNotification('إشعار جديد', { data: { url: '/portal/' } }))
+  );
+});
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  const url = (e.notification.data && e.notification.data.url) || '/portal/';
+  e.waitUntil(self.clients.matchAll({ type: 'window' }).then((wins) => {
+    for (const w of wins) { if ('focus' in w) { w.navigate(url); return w.focus(); } }
+    return self.clients.openWindow(url);
+  }));
+});
+// Background Sync (Android Chrome): wake the open portal to flush the queue.
+self.addEventListener('sync', (e) => {
+  if (e.tag === 'cc-queue') {
+    e.waitUntil(self.clients.matchAll().then((cs) => cs.forEach((c) => c.postMessage({ type: 'cc-sync' }))));
+  }
 });
 """
 

@@ -5,6 +5,10 @@
       <header class="flex flex-col gap-0.5 px-5 pb-2 pt-5">
         <span v-if="me.data.branding.office_name" class="text-sm text-[#5B6661]">{{ me.data.branding.office_name }}</span>
         <h1 data-testid="greeting" class="text-2xl font-bold">{{ __('أهلاً، {0}', [me.data.full_name]) }}</h1>
+        <div class="mt-1 flex items-center gap-2">
+          <SyncBadge />
+          <RouterLink to="/settings" class="text-xs font-semibold text-[#1D6B57]" data-testid="open-settings">{{ __('الإعدادات والإشعارات') }}</RouterLink>
+        </div>
       </header>
 
       <RouterLink v-if="me.data.roles.foreman" to="/foreman" class="mx-4 mt-2 flex min-h-[48px] items-center justify-center rounded-[14px] bg-[#17201D] font-bold text-white" data-testid="open-foreman">{{ __('شغلي النهارده') }}</RouterLink>
@@ -55,6 +59,8 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { me } from '@/data/me'
 import { call } from '@/lib/api'
+import { cachedCall } from '@/lib/offline'
+import SyncBadge from '@/components/SyncBadge.vue'
 import { pct, relDate } from '@/lib/format'
 import ProgressBar from '@/components/ProgressBar.vue'
 
@@ -79,7 +85,7 @@ const error = ref('')
 me.fetch()
 onMounted(async () => {
   try {
-    projects.value = await call('construction_core.api.portal.my_projects')
+    projects.value = await cachedCall('construction_core.api.portal.my_projects')
     await me.promise?.catch(() => {})
     if (!me.data) await me.fetch()
     if (isSigner()) {

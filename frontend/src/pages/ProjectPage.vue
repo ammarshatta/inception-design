@@ -57,6 +57,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { call } from '@/lib/api'
+import { cachedCall } from '@/lib/offline'
 import { pct } from '@/lib/format'
 import PageHeader from '@/components/PageHeader.vue'
 import ProgressBar from '@/components/ProgressBar.vue'
@@ -68,7 +69,7 @@ const error = ref('')
 
 onMounted(async () => {
   try {
-    data.value = await call('construction_core.api.portal.project_detail', { project: props.name })
+    data.value = await cachedCall('construction_core.api.portal.project_detail', { project: props.name })
   } catch (e: any) {
     error.value = e.message
   }

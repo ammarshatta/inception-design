@@ -3,6 +3,7 @@ import router from './router'
 import App from './App.vue'
 import './index.css'
 import { __ } from './translate'
+import { startQueue } from './lib/queue'
 
 import { Button, setConfig, frappeRequest, resourcesPlugin } from 'frappe-ui'
 
@@ -15,8 +16,9 @@ app.use(resourcesPlugin)
 
 app.component('Button', Button)
 app.mount('#app')
+startQueue()
 
-// PWA: the service worker caches static assets only (never /api).
+// PWA: the service worker caches static assets and the portal page (never /api), and shows pushes.
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   navigator.serviceWorker
     .register('/api/method/construction_core.api.public.service_worker', { scope: '/portal/' })
