@@ -55,6 +55,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | Is one chat thread per project enough? | Engineers' feedback | Phase 4 |
 | Construction Engineer is set with desk access **off**, as `phase-01` says. The roles table in `00-overview.md` calls it a "System User". | Owner | Phase 1 roles |
 | Does every material request need approval, or only those above an amount? | Engineers' feedback | Phase 13 |
+| Adding a client to a project sends ERPNext's welcome email, so a site needs an email account | Phase 2 design | Phase 2 |
 
 ## Session log
 
@@ -62,5 +63,3 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 |---|---|---|
 | 16 Nov 2026 | Cloud | Phases 0 and 1 code written. Plan, backlog and design docs added. |
 | 16 Nov 2026 | CI | 8 CI runs. Fixed welcome emails, the permission test method, the portal build path and the office-name fallback. All green. |
-
-| Adding a client to a project sends ERPNext's welcome email, so a site needs an email account | Phase 2 design | Phase 2 |
