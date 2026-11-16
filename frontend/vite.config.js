@@ -14,7 +14,8 @@ export default defineConfig({
       lucideIcons: true,
       jinjaBootData: true,
       buildConfig: {
-        indexHtmlPath: `../${getAppName()}/www/portal.html`,
+        // Relative to frontend/: apps/construction_core/construction_core/www/portal.html
+        indexHtmlPath: '../construction_core/www/portal.html',
       },
     }),
   ],
@@ -38,12 +39,3 @@ export default defineConfig({
   },
 })
 
-
-function getAppName() {
-  // frappe-ui projects are structured as follows:
-  // - apps
-  //   - <app_name>
-  //     - frontend
-  //       - vite.config.js
-  return path.basename(path.resolve(__dirname, '../..'))
-}
