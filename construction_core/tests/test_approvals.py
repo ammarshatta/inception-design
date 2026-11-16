@@ -1,6 +1,7 @@
 """Answered approvals are locked for everyone (P01-06)."""
 
 import frappe
+import frappe.client
 from frappe.tests import IntegrationTestCase
 
 from construction_core.tests.factories import make_message, make_world
@@ -54,4 +55,7 @@ class TestApprovals(IntegrationTestCase):
 	def test_other_client_cannot_answer(self):
 		name = self.new_approval()
 		with self.set_user(self.w.users.client2):
-			self.assertRaises(frappe.PermissionError, frappe.get_doc, "Project Message", name)
+			self.assertRaises(frappe.PermissionError, frappe.client.get, "Project Message", name)
+			doc = frappe.get_doc("Project Message", name)
+			doc.approval_status = "Approved"
+			self.assertRaises(frappe.PermissionError, doc.save)

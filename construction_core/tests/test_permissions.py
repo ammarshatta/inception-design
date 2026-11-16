@@ -1,6 +1,7 @@
 """Project-level permissions (story P01-01, P01-02; phase 1 required tests)."""
 
 import frappe
+import frappe.client
 from frappe.tests import IntegrationTestCase
 
 from construction_core.permissions import assert_project_access
@@ -26,16 +27,23 @@ class TestProjectPermissions(IntegrationTestCase):
 		cls.m2 = make_milestone(cls.w.p2, cls.s2)
 		cls.msg2 = make_message(cls.w.p2, text="hello")
 
-	def assert_hidden(self, user, doctype, name, project_field="project", project=None):
+	def assert_hidden(self, user, doctype, name):
+		"""Hidden by URL/API (frappe.client.get), by check_permission, and from lists.
+
+		Note: frappe.get_doc() itself never checks permissions in Python; the
+		checks run where the browser reaches the data (API, form load, lists).
+		"""
 		with self.set_user(user):
-			self.assertRaises(frappe.PermissionError, frappe.get_doc, doctype, name)
+			self.assertRaises(frappe.PermissionError, frappe.client.get, doctype, name)
+			doc = frappe.get_doc(doctype, name)
+			self.assertRaises(frappe.PermissionError, doc.check_permission, "read")
 			names = frappe.get_list(doctype, pluck="name", limit_page_length=0)
 			self.assertNotIn(name, names)
 
 	def assert_visible(self, user, doctype, name):
 		with self.set_user(user):
-			doc = frappe.get_doc(doctype, name)
-			doc.check_permission("read")
+			frappe.client.get(doctype, name)
+			frappe.get_doc(doctype, name).check_permission("read")
 			self.assertIn(name, frappe.get_list(doctype, pluck="name", limit_page_length=0))
 
 	# Engineer outside the project ------------------------------------------------------
