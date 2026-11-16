@@ -105,3 +105,13 @@ jobs:
           bench --site test_site run-tests --app construction_core
         env:
           TYPE: server
+
+      - name: Record versions
+        working-directory: /home/runner/frappe-bench
+        run: bench version
+
+      - name: Build portal
+        working-directory: /home/runner/frappe-bench
+        run: |
+          bench build --app construction_core
+          test -f apps/construction_core/construction_core/www/portal.html
