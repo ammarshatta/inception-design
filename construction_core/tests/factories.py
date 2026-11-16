@@ -85,7 +85,9 @@ def make_project(title: str, members: list[str], with_template: bool = True) -> 
 			"project_name": title,
 			"company": get_company(),
 			"phase_template": make_template() if with_template else None,
-			"users": [{"user": u} for u in members],
+			# welcome_email_sent=1: ERPNext emails new project users on validate,
+			# and test sites have no outgoing email account.
+			"users": [{"user": u, "welcome_email_sent": 1} for u in members],
 		}
 	)
 	project.insert(ignore_permissions=True)
