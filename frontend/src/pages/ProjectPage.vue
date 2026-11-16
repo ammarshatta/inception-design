@@ -19,6 +19,9 @@
       <RouterLink v-if="data.can_post" :to="`/projects/${encodeURIComponent(data.name)}/deliveries`" class="flex min-h-[44px] items-center justify-center rounded-xl border border-[#E2E5E0] bg-white text-sm font-semibold text-[#1D6B57]" data-testid="open-deliveries">
         {{ __('استلام خامات في الموقع') }}
       </RouterLink>
+      <RouterLink :to="`/projects/${encodeURIComponent(data.name)}/documents`" class="flex min-h-[44px] items-center justify-center rounded-xl border border-[#E2E5E0] bg-white text-sm font-semibold text-[#1D6B57]" data-testid="open-documents">
+        {{ __('المستندات والرسومات') }}
+      </RouterLink>
       <RouterLink :to="`/c/${encodeURIComponent(data.name)}/chat`" class="flex min-h-[44px] items-center justify-center rounded-xl border border-[#E2E5E0] bg-white text-sm font-semibold text-[#1D6B57]" data-testid="open-chat">
         {{ __('شات المشروع') }}
       </RouterLink>

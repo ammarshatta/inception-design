@@ -125,6 +125,11 @@ class TestESign(IntegrationTestCase):
 		self.assertEqual([m.amount for m in milestones], [30000, 40000, 30000])
 		self.assertEqual(milestones[0].status, "Due")
 		self.assertIn(self.client, [u.user for u in frappe.get_doc("Project", project).users])
+		# phase 14: the signed contract is in the project's documents, visible to the client
+		doc = frappe.get_doc("Project Document", {"signature_request": request})
+		self.assertEqual(
+			(doc.project, doc.folder, doc.client_visible, doc.current_version), (project, "عقود", 1, 1)
+		)
 
 	def test_signed_is_frozen_and_tamper_detected(self):
 		est = self.approved_estimate("عقد التجميد")

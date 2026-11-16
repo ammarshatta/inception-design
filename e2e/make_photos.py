@@ -19,4 +19,15 @@ for i in range(10):
 	assert buf.tell() >= 4 * 1024 * 1024, buf.tell()
 	with open(os.path.join(out_dir, f"site-{i + 1}.jpg"), "wb") as f:
 		f.write(buf.getvalue())
+
+# Phase 14: a floor plan PDF, 800 × 600 pt, 1 pt = 1 px at scale 1.
+# Calibration wall: (100, 500) → (350, 500) = 250 px = 5 m. Room: (100, 100)–(300, 350) = 4 × 5 m.
+if len(sys.argv) > 2:
+	from PIL import ImageDraw
+
+	plan = Image.new("RGB", (800, 600), "white")
+	d = ImageDraw.Draw(plan)
+	d.rectangle((100, 100, 300, 350), outline="black", width=3)
+	d.line((100, 500, 350, 500), fill="black", width=3)
+	plan.save(sys.argv[2], "PDF", resolution=72)
 print("ok")

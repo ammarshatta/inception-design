@@ -427,6 +427,9 @@ def sign(request: str, code: str, signature: str) -> dict:
 			from construction_core.subcontracts import on_signed as subcontract_signed
 
 			project = subcontract_signed(req)
+		from construction_core.documents import add_signed_contract
+
+		add_signed_contract(req, project)
 		_notify_office(req, _("اتوقّع: {0}").format(req.title))
 	return {"status": "Signed", "project": project}
 

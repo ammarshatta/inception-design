@@ -29,6 +29,7 @@
       <div class="mx-4 mt-3 grid grid-cols-2 gap-2">
         <RouterLink :to="`/c/${encodeURIComponent(project)}/selections`" class="flex min-h-[48px] items-center justify-center rounded-xl bg-white text-sm font-semibold text-[#17201D]" data-testid="open-selections">{{ __('اختياراتي') }}</RouterLink>
         <RouterLink :to="`/c/${encodeURIComponent(project)}/changes`" class="flex min-h-[48px] items-center justify-center rounded-xl bg-white text-sm font-semibold text-[#17201D]" data-testid="open-changes">{{ __('أوامر التغيير') }}</RouterLink>
+        <RouterLink :to="`/c/${encodeURIComponent(project)}/documents`" class="col-span-2 flex min-h-[48px] items-center justify-center rounded-xl bg-white text-sm font-semibold text-[#17201D]" data-testid="open-documents">{{ __('العقود والرسومات') }}</RouterLink>
       </div>
 
       <section class="mx-4 mt-3 flex flex-col gap-3 rounded-2xl bg-white p-4">

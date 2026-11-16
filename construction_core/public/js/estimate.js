@@ -1,6 +1,11 @@
 // Estimate: actions for revisions, comparison, quotation, and starting from a design.
 frappe.ui.form.on("Estimate", {
 	refresh(frm) {
+		if (frm.doc.docstatus === 0 && !frm.is_new()) {
+			frm.add_custom_button(__("قياس من الرسم"), () =>
+				window.open(`/portal/takeoff?estimate=${encodeURIComponent(frm.doc.name)}`, "_blank")
+			);
+		}
 		if (frm.doc.docstatus === 1 && frm.doc.status === "Approved") {
 			frm.add_custom_button(__("مراجعة جديدة"), () =>
 				frappe.call("construction_core.sales.revise", { estimate: frm.doc.name }).then(({ message }) =>

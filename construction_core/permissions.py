@@ -37,6 +37,8 @@ PROJECT_LINKED_DOCTYPES = (
 	"Clock Event",
 	"Subcontract",
 	"Subcontract Claim",
+	"Project Document",
+	"Markup",
 )
 SCOPED_DOCTYPES = ("Project", *PROJECT_LINKED_DOCTYPES)
 
@@ -126,6 +128,8 @@ def has_permission(doc, ptype: str = "read", user: str | None = None, debug: boo
 			return False
 		if doc.doctype == "Project Message" and ptype == "create" and (doc.get("kind") or "Text") != "Text":
 			return False
+		if doc.doctype == "Project Document" and (ptype != "read" or not doc.get("client_visible")):
+			return False
 
 	return True
 
@@ -157,6 +161,8 @@ def get_permission_query_conditions(user: str | None = None, doctype: str | None
 	condition = f"`tab{doctype}`.`project` in ({members})"
 	if doctype == "Stage Update" and is_client(user):
 		condition += " and ifnull(`tabStage Update`.`internal_only`, 0) = 0"
+	if doctype == "Project Document" and is_client(user):
+		condition += " and `tabProject Document`.`client_visible` = 1"
 	return condition
 
 

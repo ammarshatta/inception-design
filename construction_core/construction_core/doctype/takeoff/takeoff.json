@@ -1,0 +1,143 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:TKO-{#####}",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "project",
+  "estimate",
+  "drawing",
+  "drawing_file",
+  "cb1",
+  "page",
+  "calibration_json",
+  "calibration_m",
+  "scale_px_per_m",
+  "m_section",
+  "measurements"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "العنوان",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project"
+  },
+  {
+   "fieldname": "estimate",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "التسعير",
+   "options": "Estimate"
+  },
+  {
+   "fieldname": "drawing",
+   "fieldtype": "Link",
+   "label": "الرسم",
+   "options": "Project Document"
+  },
+  {
+   "fieldname": "drawing_file",
+   "fieldtype": "Data",
+   "label": "ملف الرسم",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "page",
+   "fieldtype": "Int",
+   "label": "الصفحة"
+  },
+  {
+   "fieldname": "calibration_json",
+   "fieldtype": "Code",
+   "label": "خط المعايرة",
+   "options": "JSON"
+  },
+  {
+   "fieldname": "calibration_m",
+   "fieldtype": "Float",
+   "label": "طول خط المعايرة (متر)"
+  },
+  {
+   "fieldname": "scale_px_per_m",
+   "fieldtype": "Float",
+   "label": "بكسل لكل متر",
+   "precision": "4",
+   "read_only": 1
+  },
+  {
+   "fieldname": "m_section",
+   "fieldtype": "Section Break",
+   "label": "القياسات"
+  },
+  {
+   "fieldname": "measurements",
+   "fieldtype": "Table",
+   "label": "القياسات",
+   "options": "Takeoff Measurement"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Takeoff",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Sales",
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

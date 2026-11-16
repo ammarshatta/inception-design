@@ -324,11 +324,14 @@ _SCOPED = (
 	"Clock Event",
 	"Subcontract",
 	"Subcontract Claim",
+	"Project Document",
+	"Markup",
 )
 
 has_permission = {
 	**{dt: "construction_core.permissions.has_permission" for dt in _SCOPED},
 	"Signature Request": "construction_core.permissions.signature_request_has_permission",
+	"File": "construction_core.documents.file_has_permission",
 }
 
 permission_query_conditions = {

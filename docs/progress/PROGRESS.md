@@ -32,7 +32,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 11 | Scheduling and crews | 🔵 | Cloud + CI | [phase-11.md](phase-11.md) | Code written, waiting for CI |
 | 12 | Daily logs, timesheets, GPS clock-in | 🟢 | Cloud + CI | [phase-12.md](phase-12.md) | Unit tests green; e2e pending. Weekly PDF (Could) not done |
 | 13 | Subcontractors and procurement | 🔵 | Cloud + CI | [phase-13.md](phase-13.md) | Code written, waiting for CI |
-| 14 | Documents, markup, takeoff | ⬜ | | | |
+| 14 | Documents, markup, takeoff | 🔵 | Cloud + CI | [phase-14.md](phase-14.md) | Code written, waiting for CI |
 | 15 | Online payments and reminders | ⬜ | | | |
 | 16 | Offline PWA and push | ⬜ | | | |
 | 17 | Reports and dashboards | ⬜ | | | |

@@ -47,6 +47,13 @@
             <img v-if="m.kind === 'Photo'" :src="m.file" loading="lazy" class="h-full w-full object-cover" alt="" />
             <span v-else class="absolute inset-0 flex items-center justify-center text-xs font-semibold">{{ __('فيديو') }}</span>
             <span v-if="m.publishable" class="absolute right-1 top-1 rounded bg-[#1D6B57] px-1 text-[10px] font-bold text-white">{{ __('للنشر') }}</span>
+            <RouterLink
+              v-if="m.kind === 'Photo'"
+              :to="{ path: '/markup', query: { file: m.file } }"
+              class="absolute bottom-1 left-1 rounded bg-white/90 px-1.5 text-[11px] font-bold text-[#17201D]"
+              data-testid="markup-photo"
+              @click.stop
+            >{{ __('ارسم') }}</RouterLink>
           </a>
         </div>
       </article>

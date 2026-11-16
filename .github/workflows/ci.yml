@@ -132,7 +132,8 @@ jobs:
             --kwargs "{'email': 'e2e-eng@example.com', 'password': '$E2E_ENG_PASSWORD'}" > /tmp/eng.json
           E2E_ENG_PROJECT="$(python3 -c "import ast;print(ast.literal_eval(open('/tmp/eng.json').read().strip().splitlines()[-1])['project'])")"
           E2E_ENG_USER=e2e-eng@example.com
-          ./env/bin/python apps/construction_core/e2e/make_photos.py /tmp/e2e-photos
+          ./env/bin/python apps/construction_core/e2e/make_photos.py /tmp/e2e-photos /tmp/e2e-plan.pdf
+          export E2E_PLAN_PDF=/tmp/e2e-plan.pdf
           export E2E_ENG_USER E2E_ENG_PASSWORD E2E_ENG_PROJECT
           export E2E_PHOTOS_DIR=/tmp/e2e-photos
           E2E_CHAT_CLIENT_PASSWORD="$(openssl rand -hex 16)"
