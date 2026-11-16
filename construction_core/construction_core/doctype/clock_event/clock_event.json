@@ -1,0 +1,224 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:CLK-{######}",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "event",
+  "at",
+  "employee",
+  "crew",
+  "worker",
+  "cb1",
+  "recorded_by",
+  "consent_version",
+  "device_info",
+  "geo_section",
+  "latitude",
+  "longitude",
+  "accuracy_m",
+  "distance_m",
+  "inside_geofence",
+  "location_missing",
+  "cb2",
+  "needs_approval",
+  "approved_by",
+  "unpaired",
+  "timesheet"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "event",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "الحدث",
+   "options": "In\nOut",
+   "reqd": 1
+  },
+  {
+   "fieldname": "at",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "الوقت",
+   "reqd": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "الموظف",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "crew",
+   "fieldtype": "Link",
+   "label": "الفريق",
+   "options": "Crew"
+  },
+  {
+   "fieldname": "worker",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "العامل"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "recorded_by",
+   "fieldtype": "Link",
+   "label": "سجّله",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "consent_version",
+   "fieldtype": "Data",
+   "label": "نسخة الموافقة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "device_info",
+   "fieldtype": "Small Text",
+   "label": "الجهاز",
+   "read_only": 1
+  },
+  {
+   "fieldname": "geo_section",
+   "fieldtype": "Section Break",
+   "label": "الموقع"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Float",
+   "label": "خط العرض",
+   "precision": "7",
+   "read_only": 1
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Float",
+   "label": "خط الطول",
+   "precision": "7",
+   "read_only": 1
+  },
+  {
+   "fieldname": "accuracy_m",
+   "fieldtype": "Float",
+   "label": "الدقة (متر)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "distance_m",
+   "fieldtype": "Float",
+   "label": "المسافة من الموقع (متر)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "inside_geofence",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "جوه الموقع",
+   "read_only": 1
+  },
+  {
+   "fieldname": "location_missing",
+   "fieldtype": "Check",
+   "label": "من غير موقع",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "needs_approval",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "محتاج موافقة المهندس",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "وافق",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "unpaired",
+   "fieldtype": "Check",
+   "label": "حضور من غير انصراف",
+   "read_only": 1
+  },
+  {
+   "fieldname": "timesheet",
+   "fieldtype": "Link",
+   "label": "سجل الساعات",
+   "options": "Timesheet",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Clock Event",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Construction Engineer"
+  },
+  {
+   "read": 1,
+   "role": "Construction Foreman"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "worker"
+}

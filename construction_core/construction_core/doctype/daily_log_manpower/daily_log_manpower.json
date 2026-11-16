@@ -1,0 +1,67 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "crew",
+  "supplier",
+  "trade",
+  "headcount",
+  "hours"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "crew",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "الفريق",
+   "options": "Crew"
+  },
+  {
+   "columns": 3,
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "مقاول باطن",
+   "options": "Supplier"
+  },
+  {
+   "columns": 2,
+   "fieldname": "trade",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "الصنعة"
+  },
+  {
+   "columns": 1,
+   "fieldname": "headcount",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "العدد"
+  },
+  {
+   "columns": 1,
+   "fieldname": "hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "الساعات"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Daily Log Manpower",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

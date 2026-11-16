@@ -29,6 +29,8 @@ PROJECT_LINKED_DOCTYPES = (
 	"Project Message",
 	"Project Selection",
 	"Change Order",
+	"Daily Log",
+	"Clock Event",
 )
 SCOPED_DOCTYPES = ("Project", *PROJECT_LINKED_DOCTYPES)
 

@@ -1,0 +1,188 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:DL-{#####}",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "log_date",
+  "title",
+  "cb1",
+  "author",
+  "weather",
+  "internal_only",
+  "work_section",
+  "work_done",
+  "issues",
+  "visitors",
+  "equipment",
+  "manpower_section",
+  "manpower",
+  "materials_section",
+  "materials_used",
+  "photos_section",
+  "photos"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "log_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "اليوم",
+   "reqd": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "العنوان",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "author",
+   "fieldtype": "Link",
+   "label": "كتبها",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "default": "صافي",
+   "fieldname": "weather",
+   "fieldtype": "Select",
+   "label": "الجو",
+   "options": "صافي\nحر شديد\nمطر\nرياح/تراب"
+  },
+  {
+   "fieldname": "internal_only",
+   "fieldtype": "Check",
+   "label": "داخلي فقط"
+  },
+  {
+   "fieldname": "work_section",
+   "fieldtype": "Section Break",
+   "label": "الشغل"
+  },
+  {
+   "fieldname": "work_done",
+   "fieldtype": "Small Text",
+   "label": "اللي اتعمل"
+  },
+  {
+   "fieldname": "issues",
+   "fieldtype": "Small Text",
+   "label": "مشاكل"
+  },
+  {
+   "fieldname": "visitors",
+   "fieldtype": "Small Text",
+   "label": "زيارات"
+  },
+  {
+   "fieldname": "equipment",
+   "fieldtype": "Small Text",
+   "label": "معدات"
+  },
+  {
+   "fieldname": "manpower_section",
+   "fieldtype": "Section Break",
+   "label": "العمالة"
+  },
+  {
+   "fieldname": "manpower",
+   "fieldtype": "Table",
+   "label": "العمالة",
+   "options": "Daily Log Manpower"
+  },
+  {
+   "fieldname": "materials_section",
+   "fieldtype": "Section Break",
+   "label": "الخامات المستخدمة"
+  },
+  {
+   "fieldname": "materials_used",
+   "fieldtype": "Table",
+   "label": "الخامات",
+   "options": "Daily Log Material"
+  },
+  {
+   "fieldname": "photos_section",
+   "fieldtype": "Section Break",
+   "label": "الصور"
+  },
+  {
+   "fieldname": "photos",
+   "fieldtype": "Table",
+   "label": "الصور",
+   "options": "Stage Update Media"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Daily Log",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Engineer",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Construction Foreman",
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

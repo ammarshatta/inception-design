@@ -74,10 +74,13 @@ def ensure_holiday_list(year: int | None = None) -> str:
 	d = getdate(doc.from_date)
 	end = getdate(doc.to_date)
 	while d <= end:
-		if d.weekday() == 4 and d not in existing:  # Friday
-			doc.append("holidays", {"holiday_date": d, "description": "الجمعة", "weekly_off": 1})
-		if (d.month, d.day) in FIXED_HOLIDAYS and d not in existing:
-			doc.append("holidays", {"holiday_date": d, "description": "إجازة رسمية"})
+		if d not in existing:
+			if (d.month, d.day) in FIXED_HOLIDAYS:
+				doc.append("holidays", {"holiday_date": d, "description": "إجازة رسمية"})
+				existing.add(d)
+			elif d.weekday() == 4:  # Friday
+				doc.append("holidays", {"holiday_date": d, "description": "الجمعة", "weekly_off": 1})
+				existing.add(d)
 		d += timedelta(days=1)
 	doc.save(ignore_permissions=True)
 	return doc.name

@@ -319,6 +319,8 @@ _SCOPED = (
 	"Project Message",
 	"Project Selection",
 	"Change Order",
+	"Daily Log",
+	"Clock Event",
 )
 
 has_permission = {
@@ -335,6 +337,7 @@ scheduler_events = {
 	"daily": [
 		"construction_core.esign.expire_requests",
 		"construction_core.selections.send_reminders",
+		"construction_core.sitelog.build_timesheets",
 	],
 }
 

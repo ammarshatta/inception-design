@@ -62,6 +62,11 @@ def create_engineer_project(email: str, password: str) -> dict:
 	update_password(email, password)
 	project = make_project("مشروع تجربة المهندس", [])
 	add_engineer(project, email)
+	# phase 12: GPS clock-in on, with the site in New Cairo and a 150 m radius
+	frappe.db.set_single_value("Inceptiondesign Settings", "enable_gps_clock_in", 1)
+	frappe.db.set_value(
+		"Project", project, {"site_latitude": 30.008, "site_longitude": 31.43, "site_radius_m": 150}
+	)
 	frappe.db.commit()
 	return {"project": project}
 

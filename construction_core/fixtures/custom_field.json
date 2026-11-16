@@ -410,6 +410,20 @@
  {
   "doctype": "Custom Field",
   "dt": "User",
+  "fieldname": "clock_consent_version",
+  "fieldtype": "Data",
+  "insert_after": "must_change_password",
+  "is_system_generated": 0,
+  "label": "وافق على تسجيل الموقع (نسخة)",
+  "modified": "2026-11-17 02:30:00.000000",
+  "module": "Construction Core",
+  "name": "User-clock_consent_version",
+  "no_copy": 1,
+  "read_only": 1
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "User",
   "fieldname": "must_change_password",
   "fieldtype": "Check",
   "insert_after": "new_password",

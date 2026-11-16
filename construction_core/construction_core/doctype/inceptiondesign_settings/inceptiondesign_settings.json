@@ -21,7 +21,11 @@
   "enable_online_payments",
   "cb2",
   "enable_ai_assistant",
-  "enable_public_catalog"
+  "enable_public_catalog",
+  "clock_section",
+  "clock_consent_version",
+  "clock_consent_text",
+  "labor_hours_per_day"
  ],
  "fields": [
   {
@@ -115,12 +119,35 @@
    "fieldname": "enable_public_catalog",
    "fieldtype": "Check",
    "label": "كتالوج التصميمات العام"
+  },
+  {
+   "fieldname": "clock_section",
+   "fieldtype": "Section Break",
+   "label": "الحضور بالموقع"
+  },
+  {
+   "default": "2026-11",
+   "fieldname": "clock_consent_version",
+   "fieldtype": "Data",
+   "label": "نسخة نص الموافقة"
+  },
+  {
+   "default": "بنسجّل موقعك وقت الحضور والانصراف بس، عشان نتأكد إنك في الموقع ونحسب ساعات الشغل. مش بنتتبعك طول اليوم. موافق؟",
+   "fieldname": "clock_consent_text",
+   "fieldtype": "Small Text",
+   "label": "نص الموافقة"
+  },
+  {
+   "default": "8",
+   "fieldname": "labor_hours_per_day",
+   "fieldtype": "Float",
+   "label": "ساعات اليومية"
   }
  ],
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-11-16 20:30:00.000000",
+ "modified": "2026-11-17 02:30:00.000000",
  "modified_by": "Administrator",
  "module": "Construction Core",
  "name": "Inceptiondesign Settings",
