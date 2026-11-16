@@ -24,3 +24,12 @@ def before_insert(doc, method=None):
 		return
 	if doc.attached_to_doctype in PRIVATE_DOCTYPES or doc.attached_to_doctype == "Inceptiondesign Settings":
 		doc.is_private = 1
+
+
+def on_trash(doc, method=None):
+	"""Files of a signature request are evidence: they are never deleted."""
+	if doc.attached_to_doctype == "Signature Request" and doc.attached_to_name:
+		import frappe
+		from frappe import _
+
+		frappe.throw(_("Signed documents and their files cannot be deleted"), frappe.PermissionError)

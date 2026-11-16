@@ -131,3 +131,20 @@ def get_permission_query_conditions(user: str | None = None, doctype: str | None
 	if doctype == "Stage Update" and is_client(user):
 		condition += " and ifnull(`tabStage Update`.`internal_only`, 0) = 0"
 	return condition
+
+
+# --- Signature Request: a client sees only the requests addressed to them ----------------
+
+
+def signature_request_has_permission(doc, ptype="read", user=None, debug=False) -> bool:
+	user = user or frappe.session.user
+	if not is_client(user):
+		return True
+	return ptype == "read" and doc.get("signer_user") == user
+
+
+def signature_request_query(user=None, doctype=None) -> str:
+	user = user or frappe.session.user
+	if not is_client(user):
+		return ""
+	return f"`tabSignature Request`.`signer_user` = {frappe.db.escape(user)}"

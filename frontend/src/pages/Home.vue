@@ -7,6 +7,21 @@
         <h1 data-testid="greeting" class="text-2xl font-bold">{{ __('أهلاً، {0}', [me.data.full_name]) }}</h1>
       </header>
 
+      <section v-if="signatures.length" class="flex flex-col gap-2 px-4 pt-2" data-testid="sign-list">
+        <h2 class="px-1 text-sm font-semibold text-[#5B6661]">{{ __('مستندات للتوقيع') }}</h2>
+        <RouterLink
+          v-for="s in signatures"
+          :key="s.name"
+          :to="`/sign/${encodeURIComponent(s.name)}`"
+          class="flex items-center justify-between rounded-[14px] p-3.5 text-[#17201D]"
+          :class="['Sent', 'Viewed'].includes(s.status) ? 'bg-[#FBEFDF]' : 'bg-white'"
+          data-testid="sign-item"
+        >
+          <span class="text-sm font-semibold">{{ s.title }}</span>
+          <span class="text-xs">{{ ['Sent', 'Viewed'].includes(s.status) ? __('وقّع') : s.status === 'Signed' ? __('اتوقّع') : s.status }}</span>
+        </RouterLink>
+      </section>
+
       <section v-if="projects.length || !loadingProjects" class="flex flex-col gap-2.5 px-4 pb-24 pt-2">
         <h2 class="px-1 text-sm font-semibold text-[#5B6661]">{{ __('مشاريعي') }}</h2>
         <p v-if="!projects.length" class="px-1 text-sm text-[#5B6661]">{{ __('مفيش مشاريع متضافة ليك لسه.') }}</p>
@@ -43,6 +58,7 @@ import ProgressBar from '@/components/ProgressBar.vue'
 
 const router = useRouter()
 const projects = ref<any[]>([])
+const signatures = ref<any[]>([])
 
 function isClientOnly() {
   const r = me.data?.roles
@@ -60,7 +76,11 @@ onMounted(async () => {
     projects.value = await call('construction_core.api.portal.my_projects')
     await me.promise?.catch(() => {})
     if (!me.data) await me.fetch()
-    if (isClientOnly() && projects.value.length === 1) router.replace(projectLink(projects.value[0].name))
+    if (isClientOnly()) {
+      signatures.value = await call('construction_core.esign.my_signature_requests')
+      const pending = signatures.value.some((s) => ['Sent', 'Viewed'].includes(s.status))
+      if (!pending && projects.value.length === 1) router.replace(projectLink(projects.value[0].name))
+    }
   } catch (e: any) {
     error.value = e.message
   } finally {

@@ -154,8 +154,10 @@ class TestMoney(IntegrationTestCase):
 		t.save(ignore_permissions=True)
 		project = self.project_with_customer("مشروع الضريبة")
 		si = frappe.get_doc("Sales Invoice", money.make_invoice(self.due_milestone(project, 1000)))
+		from erpnext.controllers.accounts_controller import get_taxes_and_charges
+
 		si.taxes_and_charges = template
-		si.set("taxes", [])
+		si.set("taxes", get_taxes_and_charges("Sales Taxes and Charges Template", template))
 		si.save()
 		self.assertEqual(flt(si.total_taxes_and_charges, 2), 140.0)
 		self.assertEqual(flt(si.grand_total, 2), 1140.0)

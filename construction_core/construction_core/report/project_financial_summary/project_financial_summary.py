@@ -2,7 +2,8 @@
 
 Every figure is read from submitted ERPNext documents, so it matches the General Ledger:
 - contract value: sum of the project's payment milestones
-- invoiced: submitted Sales Invoices with this project (grand total, after VAT)
+- invoiced: submitted Sales Invoices with this project (grand total after VAT, or the rounded
+  total when ERPNext rounding is on: that is what the receivable carries)
 - collected: invoiced − outstanding
 - outstanding: sum of the invoices' outstanding amounts (Accounts Receivable)
 - expenses: submitted Purchase Invoice items (net, before tax) by item group and by stage
@@ -67,7 +68,8 @@ def get_summary(project: str) -> frappe._dict:
 		precision,
 	)
 	si = frappe.db.sql(
-		"""select ifnull(sum(base_grand_total), 0), ifnull(sum(outstanding_amount), 0)
+		"""select ifnull(sum(if(disable_rounded_total = 1 or base_rounded_total = 0,
+			base_grand_total, base_rounded_total)), 0), ifnull(sum(outstanding_amount), 0)
 		from `tabSales Invoice` where project=%s and docstatus=1""",
 		project,
 	)[0]

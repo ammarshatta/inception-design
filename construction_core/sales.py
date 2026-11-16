@@ -21,6 +21,12 @@ def _require_sales():
 
 
 def ensure_sales_setup():
+	from frappe.custom.doctype.property_setter.property_setter import make_property_setter
+
+	# Every drag on the Kanban is logged (story P07-01)
+	if not frappe.get_meta("Opportunity").track_changes:
+		make_property_setter("Opportunity", None, "track_changes", 1, "Check", for_doctype=True)
+		frappe.clear_cache(doctype="Opportunity")
 	if not frappe.is_setup_complete():
 		return
 	ensure_price_list()
@@ -173,6 +179,9 @@ def revise(estimate: str) -> str:
 	if old.docstatus != 1 or old.status != "Approved":
 		frappe.throw(_("Only an approved estimate can be revised"))
 	new = frappe.copy_doc(old)
+	new.docstatus = 0
+	for row in new.get_all_children():
+		row.docstatus = 0
 	new.revision = cint(old.revision) + 1
 	new.previous_revision = old.name
 	new.status = "Draft"

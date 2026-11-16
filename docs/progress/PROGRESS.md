@@ -26,7 +26,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 5 | Design catalog, public pages, lead form | 🔵 | Cloud + CI | [phase-5.md](phase-5.md) | Code written, waiting for CI |
 | 6 | Money: milestones, invoices, expenses | 🔵 | Cloud + CI | [phase-6.md](phase-6.md) | Code written, waiting for CI |
 | 7 | Sales and estimating | 🔵 | Cloud + CI | [phase-7.md](phase-7.md) | Code written, waiting for CI |
-| 8 | Proposals and e-signature | ⬜ | | | |
+| 8 | Proposals and e-signature | 🔵 | Cloud + CI | [phase-8.md](phase-8.md) | Code written, waiting for CI |
 | 9 | Finish selections | ⬜ | | | |
 | 10 | Change orders | ⬜ | | | |
 | 11 | Scheduling and crews | ⬜ | | | |
@@ -73,6 +73,8 @@ The owner asked for all phases to be built in a row and reviewed once at the end
 | Is one chat thread per project enough? | Engineers' feedback | Phase 4 |
 | Construction Engineer is set with desk access **off**, as `phase-01` says. The roles table in `00-overview.md` calls it a "System User". | Owner | Phase 1 roles |
 | Does every material request need approval, or only those above an amount? | Engineers' feedback | Phase 13 |
+| E-signature level: is a simple e-signature with an audit trail enough, or do you need an ITIDA-licensed provider? (lawyer) | Owner + lawyer | Phase 8 |
+| Signing codes for clients without email: WhatsApp/SMS needs a paid provider | Owner (cost) | Phase 8 |
 | Adding a client to a project sends ERPNext's welcome email, so a site needs an email account | Phase 2 design | Phase 2 |
 
 ## Session log

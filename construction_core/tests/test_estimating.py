@@ -287,6 +287,7 @@ class TestPipeline(IntegrationTestCase):
 		opp = make_opportunity(lead.name)
 		opp.insert(ignore_permissions=True)
 		self.assertEqual(opp.pipeline_stage, "جديد")
+		self.assertTrue(frappe.get_meta("Opportunity").track_changes, "track changes is off on Opportunity")
 		opp.pipeline_stage = "تسعير"
 		opp.save(ignore_permissions=True)
 		versions = frappe.get_all(

@@ -146,6 +146,8 @@ def make_invoice(milestone: str) -> str:
 			"project": project.name,
 			"posting_date": nowdate(),
 			"payment_milestone": milestone,
+			# Milestones are exact amounts: no rounding to whole pounds
+			"disable_rounded_total": 1,
 			"items": [
 				{
 					"item_code": ensure_service_item(),

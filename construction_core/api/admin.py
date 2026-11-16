@@ -284,3 +284,31 @@ def engineer_query(doctype, txt, searchfield, start, page_len, filters):
 		.offset(start)
 		.run()
 	)
+
+
+@frappe.whitelist(methods=["POST"])
+def create_client(full_name: str, mobile: str, email: str | None = None, username: str | None = None) -> dict:
+	"""A portal client without a project yet (for example, to sign a contract)."""
+	_require_admin()
+	mobile = normalize_mobile(mobile)
+	email = cstr(email).strip().lower() or None
+	username = cstr(username).strip().lower() or None
+	if not EGYPT_MOBILE_RE.match(mobile):
+		frappe.throw(_("Mobile number must be an Egyptian mobile like 01xxxxxxxxx"))
+	if not email and not (username and USERNAME_RE.match(username)):
+		frappe.throw(_("Username is required when there is no email"))
+	user, created = _get_or_create_user(cstr(full_name).strip(), mobile, email, username)
+	result = {"user": user, "created": created}
+	if not email:
+		pwd = temp_password()
+		update_password(user, pwd)
+		frappe.db.set_value("User", user, "must_change_password", 1)
+		login_name = frappe.db.get_value("User", user, "username") or user
+		result.update(
+			{
+				"username": login_name,
+				"temp_password": pwd,
+				"whatsapp_url": whatsapp_url(mobile, full_name, login_name, pwd),
+			}
+		)
+	return result

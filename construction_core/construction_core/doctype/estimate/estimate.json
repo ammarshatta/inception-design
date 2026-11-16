@@ -25,6 +25,9 @@
   "overhead_pct",
   "profit_pct",
   "taxes_template",
+  "terms_section",
+  "payment_terms",
+  "contract_template",
   "totals_section",
   "material_total",
   "labor_total",
@@ -66,6 +69,7 @@
    "options": "Opportunity"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "project",
    "fieldtype": "Link",
    "label": "المشروع",
@@ -170,6 +174,23 @@
    "options": "Sales Taxes and Charges Template"
   },
   {
+   "fieldname": "terms_section",
+   "fieldtype": "Section Break",
+   "label": "الدفعات"
+  },
+  {
+   "fieldname": "payment_terms",
+   "fieldtype": "Table",
+   "label": "الدفعات",
+   "options": "Estimate Payment Term"
+  },
+  {
+   "fieldname": "contract_template",
+   "fieldtype": "Link",
+   "label": "قالب العقد",
+   "options": "Contract Template"
+  },
+  {
    "fieldname": "totals_section",
    "fieldtype": "Section Break",
    "label": "الإجماليات"
@@ -238,7 +259,7 @@
  "index_web_pages_for_search": 0,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-11-17 00:00:00.000000",
+ "modified": "2026-11-17 00:30:00.000000",
  "modified_by": "Administrator",
  "module": "Construction Core",
  "name": "Estimate",

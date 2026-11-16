@@ -1,0 +1,73 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "event",
+  "at",
+  "user",
+  "ip",
+  "user_agent",
+  "note"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "event",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "الحدث",
+   "options": "Sent\nViewed\nOTP Sent\nOTP Failed\nLocked\nResent\nSigned\nDeclined\nExpired"
+  },
+  {
+   "columns": 2,
+   "fieldname": "at",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "الوقت"
+  },
+  {
+   "columns": 2,
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "المستخدم",
+   "options": "User"
+  },
+  {
+   "columns": 2,
+   "fieldname": "ip",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "IP"
+  },
+  {
+   "columns": 2,
+   "fieldname": "user_agent",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "المتصفح"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "ملاحظة"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Signature Event",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -144,16 +144,27 @@ jobs:
           for i in $(seq 1 45); do curl -sf http://localhost:8000/api/method/ping && break; sleep 2; done
           mkdir -p /tmp/e2e-shots
           bench --site test_site execute construction_core.setup.demo.install
+          bench --site test_site execute construction_core.money.ensure_finance_setup
+          bench --site test_site execute construction_core.sales.ensure_sales_setup
           export E2E_ADMIN_PASSWORD=admin
           bench --site test_site execute construction_core.tests.e2e_setup.make_invoice_pdf \
             --kwargs "{'project': '$E2E_ENG_PROJECT', 'path': '/tmp/e2e-shots/invoice.pdf'}"
           pdftoppm -png -r 110 -f 1 -l 1 /tmp/e2e-shots/invoice.pdf /tmp/e2e-shots/20-invoice-pdf
+          bench --site test_site set-config cc_test_otp 1
+          E2E_SIGN_CLIENT_PASSWORD="$(openssl rand -hex 16)"
+          bench --site test_site execute construction_core.tests.e2e_setup.prepare_signature \
+            --kwargs "{'email': 'e2e-sign@example.com', 'password': '$E2E_SIGN_CLIENT_PASSWORD'}" > /tmp/sign.json
+          E2E_SIGN_REQUEST="$(python3 -c "import ast;print(ast.literal_eval(open('/tmp/sign.json').read().strip().splitlines()[-1])['request'])")"
+          export E2E_SIGN_CLIENT=e2e-sign@example.com E2E_SIGN_CLIENT_PASSWORD E2E_SIGN_REQUEST
           export E2E_SHOTS_DIR=/tmp/e2e-shots
           cd apps/construction_core/e2e
           yarn install --non-interactive
           npx playwright install --with-deps chromium
           E2E_BASE_URL=http://localhost:8000 E2E_USER=e2e-client@example.com E2E_PASSWORD="$E2E_PASSWORD" \
             E2E_FULL_NAME="عميل التجربة" yarn test
+          cd /home/runner/frappe-bench
+          SIGNED="$(bench --site test_site execute construction_core.tests.e2e_setup.signed_pdf_path --kwargs "{'request': '$E2E_SIGN_REQUEST'}" | tail -1 | tr -d '"')"
+          pdftoppm -png -r 110 "$SIGNED" /tmp/e2e-shots/53-signed-pdf
 
       - name: Server log and Playwright report (on failure)
         if: failure()

@@ -307,10 +307,18 @@ fixtures = [
 
 _SCOPED = ("Project", "Project Stage", "Stage Update", "Payment Milestone", "Project Message")
 
-has_permission = {dt: "construction_core.permissions.has_permission" for dt in _SCOPED}
+has_permission = {
+	**{dt: "construction_core.permissions.has_permission" for dt in _SCOPED},
+	"Signature Request": "construction_core.permissions.signature_request_has_permission",
+}
 
 permission_query_conditions = {
-	dt: "construction_core.permissions.get_permission_query_conditions" for dt in _SCOPED
+	**{dt: "construction_core.permissions.get_permission_query_conditions" for dt in _SCOPED},
+	"Signature Request": "construction_core.permissions.signature_request_query",
+}
+
+scheduler_events = {
+	"daily": ["construction_core.esign.expire_requests"],
 }
 
 doc_events = {
@@ -318,7 +326,10 @@ doc_events = {
 		"before_validate": "construction_core.overrides.project.before_validate",
 		"after_insert": "construction_core.overrides.project.after_insert",
 	},
-	"File": {"before_insert": "construction_core.overrides.file.before_insert"},
+	"File": {
+		"before_insert": "construction_core.overrides.file.before_insert",
+		"on_trash": "construction_core.overrides.file.on_trash",
+	},
 	"Stage Update": {"after_insert": "construction_core.notifications.stage_update_after_insert"},
 	"Project Stage": {"on_update": "construction_core.notifications.project_stage_on_update"},
 	"Project Message": {"after_insert": "construction_core.notifications.project_message_after_insert"},
@@ -356,6 +367,7 @@ override_whitelisted_methods = {
 jinja = {
 	"methods": [
 		"construction_core.branding.get_branding",
+		"construction_core.esign.render_contract_body",
 	],
 }
 

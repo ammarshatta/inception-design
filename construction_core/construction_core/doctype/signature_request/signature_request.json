@@ -1,0 +1,263 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:SIG-{#####}",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "reference_doctype",
+  "reference_name",
+  "contract_template",
+  "customer",
+  "signer_user",
+  "cb1",
+  "status",
+  "sent_on",
+  "expires_on",
+  "project",
+  "doc_section",
+  "document_pdf",
+  "pdf_sha256",
+  "otp_section",
+  "otp_hash",
+  "otp_expires_on",
+  "otp_attempts",
+  "signed_section",
+  "signature_image",
+  "signed_on",
+  "signed_ip",
+  "signed_pdf",
+  "signed_pdf_sha256",
+  "decline_reason",
+  "events_section",
+  "events"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "العنوان",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "label": "نوع المستند",
+   "options": "DocType",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "المستند",
+   "options": "reference_doctype",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "contract_template",
+   "fieldtype": "Link",
+   "label": "قالب العقد",
+   "options": "Contract Template",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "العميل",
+   "options": "Customer",
+   "read_only": 1
+  },
+  {
+   "fieldname": "signer_user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "الموقّع",
+   "options": "User",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Sent",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الحالة",
+   "options": "Sent\nViewed\nSigned\nDeclined\nExpired\nLocked",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sent_on",
+   "fieldtype": "Datetime",
+   "label": "اتبعت",
+   "read_only": 1
+  },
+  {
+   "fieldname": "expires_on",
+   "fieldtype": "Datetime",
+   "label": "ينتهي",
+   "read_only": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "المشروع الناتج",
+   "options": "Project",
+   "read_only": 1
+  },
+  {
+   "fieldname": "doc_section",
+   "fieldtype": "Section Break",
+   "label": "المستند"
+  },
+  {
+   "fieldname": "document_pdf",
+   "fieldtype": "Attach",
+   "label": "الملف الأصلي",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pdf_sha256",
+   "fieldtype": "Data",
+   "label": "بصمة الملف الأصلي",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "otp_section",
+   "fieldtype": "Section Break",
+   "label": "الكود"
+  },
+  {
+   "fieldname": "otp_hash",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "otp hash",
+   "read_only": 1
+  },
+  {
+   "fieldname": "otp_expires_on",
+   "fieldtype": "Datetime",
+   "label": "انتهاء الكود",
+   "read_only": 1
+  },
+  {
+   "fieldname": "otp_attempts",
+   "fieldtype": "Int",
+   "label": "محاولات خاطئة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "signed_section",
+   "fieldtype": "Section Break",
+   "label": "التوقيع"
+  },
+  {
+   "fieldname": "signature_image",
+   "fieldtype": "Signature",
+   "label": "التوقيع",
+   "read_only": 1
+  },
+  {
+   "fieldname": "signed_on",
+   "fieldtype": "Datetime",
+   "label": "وقت التوقيع",
+   "read_only": 1
+  },
+  {
+   "fieldname": "signed_ip",
+   "fieldtype": "Data",
+   "label": "IP التوقيع",
+   "read_only": 1
+  },
+  {
+   "fieldname": "signed_pdf",
+   "fieldtype": "Attach",
+   "label": "الملف الموقّع",
+   "read_only": 1
+  },
+  {
+   "fieldname": "signed_pdf_sha256",
+   "fieldtype": "Data",
+   "label": "بصمة الملف الموقّع",
+   "read_only": 1
+  },
+  {
+   "fieldname": "decline_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب الرفض",
+   "read_only": 1
+  },
+  {
+   "fieldname": "events_section",
+   "fieldtype": "Section Break",
+   "label": "السجل"
+  },
+  {
+   "fieldname": "events",
+   "fieldtype": "Table",
+   "label": "السجل",
+   "options": "Signature Event",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Signature Request",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Construction Sales"
+  },
+  {
+   "read": 1,
+   "role": "Construction Client"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

@@ -46,6 +46,9 @@ def after_migrate():
 
 	ensure_finance_setup()
 	ensure_sales_setup()
+	from construction_core.esign import ensure_contract_template
+
+	ensure_contract_template()
 
 
 def apply_site_config():

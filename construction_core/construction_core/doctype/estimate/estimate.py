@@ -13,6 +13,8 @@ class Estimate(Document):
 	def validate(self):
 		if not self.customer and not self.lead:
 			frappe.throw(_("Choose a customer or a lead"))
+		if self.payment_terms and sum(D(t.percent) for t in self.payment_terms) != D(100):
+			frappe.throw(_("Payment terms must add up to 100%"))
 		self.recalculate()
 
 	def before_submit(self):

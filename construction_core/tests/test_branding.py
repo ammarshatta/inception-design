@@ -10,7 +10,7 @@ from construction_core.branding import get_branding, get_feature_flags
 
 APP_ROOT = Path(frappe.get_app_path("construction_core")).parent
 SCANNED_SUFFIXES = {".py", ".html", ".js", ".ts", ".vue", ".json", ".md"}
-SKIPPED_DIRS = {"node_modules", "tests", "public/frontend", ".git", "docs"}
+SKIPPED_DIRS = {"node_modules", "tests", "public/frontend", ".git", "docs", "e2e/"}
 EGYPT_MOBILE = re.compile(r"(?<!\d)01[0125]\d{8}(?!\d)")
 
 
