@@ -210,10 +210,13 @@ class TestEstimates(IntegrationTestCase):
 		self.assertEqual(D(est.grand_total), Decimal("5840.51"))
 
 	def test_approved_estimate_keeps_captured_price(self):
-		est = self.new_estimate([{"section": "أ", "line_type": "Material", "item": "ترويبة", "qty": 100}])
+		price("خامة الاعتماد", 20, "2026-01-01")
+		est = self.new_estimate(
+			[{"section": "أ", "line_type": "Material", "item": "خامة الاعتماد", "qty": 100}]
+		)
 		self.assertEqual(D(est.lines[0].unit_cost), D(20))
 		est.submit()
-		price("ترويبة", 99, "2026-01-15")  # a new price, dated before the estimate date
+		price("خامة الاعتماد", 99, "2026-01-15")  # a new price, dated before the estimate date
 		est.reload()
 		self.assertEqual(D(est.lines[0].unit_cost), D(20))
 		self.assertEqual(
@@ -293,5 +296,6 @@ class TestPipeline(IntegrationTestCase):
 		versions = frappe.get_all(
 			"Version", filters={"ref_doctype": "Opportunity", "docname": opp.name}, pluck="data"
 		)
-		self.assertTrue(any("pipeline_stage" in v for v in versions))
+		self.assertEqual(frappe.db.get_value("Opportunity", opp.name, "pipeline_stage"), "تسعير")
+		self.assertTrue(any("pipeline_stage" in (v or "") for v in versions), f"versions: {versions}")
 		self.assertTrue(frappe.db.exists("Kanban Board", sales.KANBAN_BOARD))

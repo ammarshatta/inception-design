@@ -6,7 +6,8 @@ Every figure is read from submitted ERPNext documents, so it matches the General
   total when ERPNext rounding is on: that is what the receivable carries)
 - collected: invoiced − outstanding
 - outstanding: sum of the invoices' outstanding amounts (Accounts Receivable)
-- expenses: submitted Purchase Invoice items (net, before tax) by item group and by stage
+- expenses: submitted Purchase Invoice items (net, before tax) by item group and by stage,
+  plus the invoices' rounding adjustments (booked by ERPNext to the Round Off expense account)
 - budget vs actual: Project.estimated_costing vs expenses
 """
 
@@ -94,6 +95,19 @@ def get_summary(project: str) -> frappe._dict:
 		by_group[r.item_group] = flt(by_group.get(r.item_group, 0) + flt(r.amount), precision)
 		stage = stage_names.get(r.project_stage, r.project_stage)
 		by_stage[stage] = flt(by_stage.get(stage, 0) + flt(r.amount), precision)
+	# ERPNext books the rounding of a purchase invoice to the Round Off (expense) account,
+	# so it is part of the project's cost in the General Ledger.
+	for r in frappe.db.sql(
+		"""select project_stage, sum(base_rounding_adjustment) as amount
+		from `tabPurchase Invoice` where docstatus = 1 and project = %s group by project_stage""",
+		project,
+		as_dict=True,
+	):
+		if flt(r.amount, precision):
+			label = _("تقريب الفواتير")
+			by_group[label] = flt(by_group.get(label, 0) + flt(r.amount), precision)
+			stage = stage_names.get(r.project_stage, r.project_stage)
+			by_stage[stage] = flt(by_stage.get(stage, 0) + flt(r.amount), precision)
 	expenses = flt(sum(by_group.values()), precision)
 	return frappe._dict(
 		contract_value=contract_value,

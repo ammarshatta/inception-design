@@ -6,6 +6,13 @@
       <div class="rounded-[14px] bg-white p-3.5">
         <ProgressBar :value="data.weighted_progress" />
       </div>
+      <div v-if="data.overdue_selections?.length" class="rounded-xl bg-[#FDE8E6] p-3 text-sm text-[#B42318]" data-testid="overdue-selections">
+        <b>{{ __('اختيارات متأخرة:') }}</b>
+        <span v-for="s in data.overdue_selections" :key="s.name" class="block">{{ s.title }}</span>
+      </div>
+      <RouterLink :to="`/c/${encodeURIComponent(data.name)}/changes`" class="flex min-h-[44px] items-center justify-center rounded-xl border border-[#E2E5E0] bg-white text-sm font-semibold text-[#1D6B57]" data-testid="open-changes">
+        {{ __('أوامر التغيير / تعديل من الموقع') }}
+      </RouterLink>
       <RouterLink :to="`/c/${encodeURIComponent(data.name)}/chat`" class="flex min-h-[44px] items-center justify-center rounded-xl border border-[#E2E5E0] bg-white text-sm font-semibold text-[#1D6B57]" data-testid="open-chat">
         {{ __('شات المشروع') }}
       </RouterLink>

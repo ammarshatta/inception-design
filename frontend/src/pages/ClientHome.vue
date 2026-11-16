@@ -26,6 +26,11 @@
         <span class="text-[15px] font-semibold">{{ a.approval_title }}</span>
       </RouterLink>
 
+      <div class="mx-4 mt-3 grid grid-cols-2 gap-2">
+        <RouterLink :to="`/c/${encodeURIComponent(project)}/selections`" class="flex min-h-[48px] items-center justify-center rounded-xl bg-white text-sm font-semibold text-[#17201D]" data-testid="open-selections">{{ __('اختياراتي') }}</RouterLink>
+        <RouterLink :to="`/c/${encodeURIComponent(project)}/changes`" class="flex min-h-[48px] items-center justify-center rounded-xl bg-white text-sm font-semibold text-[#17201D]" data-testid="open-changes">{{ __('أوامر التغيير') }}</RouterLink>
+      </div>
+
       <section class="mx-4 mt-3 flex flex-col gap-3 rounded-2xl bg-white p-4">
         <div class="flex items-center justify-between">
           <span class="text-[15px] font-bold">{{ __('آخر التحديثات') }}</span>

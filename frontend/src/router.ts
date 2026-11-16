@@ -10,6 +10,8 @@ const routes = [
   { path: '/c/:project/timeline', name: 'ClientTimeline', component: () => import('@/pages/ClientTimeline.vue'), props: true },
   { path: '/c/:project/gallery', name: 'ClientGallery', component: () => import('@/pages/ClientGallery.vue'), props: true },
   { path: '/c/:project/payments', name: 'ClientPayments', component: () => import('@/pages/ClientPayments.vue'), props: true },
+  { path: '/c/:project/selections', name: 'ClientSelections', component: () => import('@/pages/ClientSelections.vue'), props: true },
+  { path: '/c/:project/changes', name: 'ClientChanges', component: () => import('@/pages/ClientChanges.vue'), props: true },
   { path: '/c/:project/chat', name: 'Chat', component: () => import('@/pages/ChatPage.vue'), props: true },
 ]
 

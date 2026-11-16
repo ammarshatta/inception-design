@@ -1,0 +1,283 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:CO-{#####}",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "title",
+  "source",
+  "description",
+  "cb1",
+  "status",
+  "project_stage",
+  "schedule_impact_days",
+  "project_selection",
+  "amended_from",
+  "lines_section",
+  "lines",
+  "pct_section",
+  "overhead_pct",
+  "profit_pct",
+  "taxes_template",
+  "cb2",
+  "cost_subtotal",
+  "tax_amount",
+  "cost_difference",
+  "result_section",
+  "signature_request",
+  "payment_milestone",
+  "credit_mode",
+  "credit_note",
+  "reject_reason",
+  "photos_section",
+  "photos"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "العنوان",
+   "reqd": 1
+  },
+  {
+   "default": "Office",
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "المصدر",
+   "options": "Client Request\nOffice\nSelection\nSite Condition",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "الوصف"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الحالة",
+   "options": "Draft\nEngineer Approved\nSent to Client\nApproved\nRejected\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "project_stage",
+   "fieldtype": "Link",
+   "label": "مرتبط بمرحلة",
+   "options": "Project Stage"
+  },
+  {
+   "fieldname": "schedule_impact_days",
+   "fieldtype": "Int",
+   "label": "تأثير على المدة (أيام)"
+  },
+  {
+   "fieldname": "project_selection",
+   "fieldtype": "Link",
+   "label": "الاختيار",
+   "options": "Project Selection",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Change Order",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "lines_section",
+   "fieldtype": "Section Break",
+   "label": "البنود (البنود المشالة بكمية سالبة)"
+  },
+  {
+   "fieldname": "lines",
+   "fieldtype": "Table",
+   "label": "البنود",
+   "options": "Estimate Line"
+  },
+  {
+   "fieldname": "pct_section",
+   "fieldtype": "Section Break",
+   "label": "الإضافات"
+  },
+  {
+   "default": "10",
+   "fieldname": "overhead_pct",
+   "fieldtype": "Percent",
+   "label": "مصاريف عمومية %"
+  },
+  {
+   "default": "15",
+   "fieldname": "profit_pct",
+   "fieldtype": "Percent",
+   "label": "ربح %"
+  },
+  {
+   "fieldname": "taxes_template",
+   "fieldtype": "Link",
+   "label": "قالب الضرائب",
+   "options": "Sales Taxes and Charges Template"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cost_subtotal",
+   "fieldtype": "Currency",
+   "label": "تكلفة البنود",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tax_amount",
+   "fieldtype": "Currency",
+   "label": "ضرائب",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "cost_difference",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "قيمة أمر التغيير للعميل",
+   "read_only": 1
+  },
+  {
+   "fieldname": "result_section",
+   "fieldtype": "Section Break",
+   "label": "النتيجة"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "signature_request",
+   "fieldtype": "Link",
+   "label": "طلب التوقيع",
+   "options": "Signature Request",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "payment_milestone",
+   "fieldtype": "Link",
+   "label": "الدفعة",
+   "options": "Payment Milestone",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "credit_mode",
+   "fieldtype": "Select",
+   "label": "طريقة الخصم (للأوامر بالسالب)",
+   "options": "\nReduce next milestone\nCredit note"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "credit_note",
+   "fieldtype": "Link",
+   "label": "إشعار دائن",
+   "options": "Sales Invoice",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "reject_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب الرفض",
+   "read_only": 1
+  },
+  {
+   "fieldname": "photos_section",
+   "fieldtype": "Section Break",
+   "label": "الصور"
+  },
+  {
+   "fieldname": "photos",
+   "fieldtype": "Table",
+   "label": "الصور",
+   "options": "Selection Option Image"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Change Order",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Engineer",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Construction Client"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

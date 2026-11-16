@@ -27,8 +27,8 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 6 | Money: milestones, invoices, expenses | 🔵 | Cloud + CI | [phase-6.md](phase-6.md) | Code written, waiting for CI |
 | 7 | Sales and estimating | 🔵 | Cloud + CI | [phase-7.md](phase-7.md) | Code written, waiting for CI |
 | 8 | Proposals and e-signature | 🔵 | Cloud + CI | [phase-8.md](phase-8.md) | Code written, waiting for CI |
-| 9 | Finish selections | ⬜ | | | |
-| 10 | Change orders | ⬜ | | | |
+| 9 | Finish selections | 🔵 | Cloud + CI | [phase-9.md](phase-9.md) | Code written, waiting for CI |
+| 10 | Change orders | 🔵 | Cloud + CI | [phase-10.md](phase-10.md) | Code written, waiting for CI |
 | 11 | Scheduling and crews | ⬜ | | | |
 | 12 | Daily logs, timesheets, GPS clock-in | ⬜ | | | |
 | 13 | Subcontractors and procurement | ⬜ | | | |

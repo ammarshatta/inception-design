@@ -233,7 +233,14 @@ class TestMoney(IntegrationTestCase):
 		self.assertEqual(s.outstanding, gl_outstanding)
 		self.assertEqual(s.collected, flt(gl_invoiced - gl_outstanding, 2))
 		self.assertEqual(s.expenses, gl_expenses)
-		self.assertEqual(s.expenses, flt(2 * 1500.5 + 2 * 3200.25, 2))
+		rounding = flt(
+			frappe.db.sql(
+				"select sum(base_rounding_adjustment) from `tabPurchase Invoice` where project=%s and docstatus=1",
+				project,
+			)[0][0],
+			2,
+		)
+		self.assertEqual(s.expenses, flt(2 * 1500.5 + 2 * 3200.25 + rounding, 2))
 		self.assertEqual(s.expenses_by_group["خامات"], 3001.0)
 		self.assertEqual(s.budget, 120000)
 		ar = flt(

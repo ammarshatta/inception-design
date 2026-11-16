@@ -1,0 +1,218 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:SEL-{#####}",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "project_stage",
+  "category",
+  "room_or_area",
+  "title",
+  "cb1",
+  "qty",
+  "uom",
+  "allowance_amount",
+  "due_date",
+  "choice_section",
+  "status",
+  "chosen_option",
+  "chosen_unit_price",
+  "price_difference",
+  "cb2",
+  "signature_request",
+  "change_order",
+  "previous_selection",
+  "approved_on",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "project_stage",
+   "fieldtype": "Link",
+   "label": "المرحلة",
+   "options": "Project Stage"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "الفئة",
+   "options": "Selection Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "room_or_area",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "المكان"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "العنوان",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "label": "الكمية",
+   "reqd": 1
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "الوحدة",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "allowance_amount",
+   "fieldtype": "Currency",
+   "label": "المسموح في العقد (إجمالي)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "آخر ميعاد للاختيار"
+  },
+  {
+   "fieldname": "choice_section",
+   "fieldtype": "Section Break",
+   "label": "الاختيار"
+  },
+  {
+   "default": "Open",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الحالة",
+   "options": "Open\nChosen\nAwaiting Signature\nApproved\nLocked\nSuperseded",
+   "read_only": 1
+  },
+  {
+   "fieldname": "chosen_option",
+   "fieldtype": "Link",
+   "label": "الاختيار",
+   "options": "Selection Option",
+   "read_only": 1
+  },
+  {
+   "fieldname": "chosen_unit_price",
+   "fieldtype": "Currency",
+   "label": "سعر الوحدة وقت الاختيار",
+   "read_only": 1
+  },
+  {
+   "fieldname": "price_difference",
+   "fieldtype": "Currency",
+   "label": "الفرق عن المسموح",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "signature_request",
+   "fieldtype": "Link",
+   "label": "طلب التوقيع",
+   "options": "Signature Request",
+   "read_only": 1
+  },
+  {
+   "fieldname": "change_order",
+   "fieldtype": "Link",
+   "label": "أمر التغيير",
+   "options": "Change Order",
+   "read_only": 1
+  },
+  {
+   "fieldname": "previous_selection",
+   "fieldtype": "Link",
+   "label": "النسخة السابقة",
+   "options": "Project Selection",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approved_on",
+   "fieldtype": "Datetime",
+   "label": "اتوافق في",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "ملاحظات"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Project Selection",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Engineer",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Construction Client"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

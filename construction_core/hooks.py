@@ -305,7 +305,15 @@ fixtures = [
 	{"dt": "Property Setter", "filters": [["module", "=", "Construction Core"]]},
 ]
 
-_SCOPED = ("Project", "Project Stage", "Stage Update", "Payment Milestone", "Project Message")
+_SCOPED = (
+	"Project",
+	"Project Stage",
+	"Stage Update",
+	"Payment Milestone",
+	"Project Message",
+	"Project Selection",
+	"Change Order",
+)
 
 has_permission = {
 	**{dt: "construction_core.permissions.has_permission" for dt in _SCOPED},
@@ -318,7 +326,10 @@ permission_query_conditions = {
 }
 
 scheduler_events = {
-	"daily": ["construction_core.esign.expire_requests"],
+	"daily": [
+		"construction_core.esign.expire_requests",
+		"construction_core.selections.send_reminders",
+	],
 }
 
 doc_events = {

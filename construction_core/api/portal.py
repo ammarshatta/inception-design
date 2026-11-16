@@ -14,6 +14,7 @@ from construction_core.permissions import (
 	has_full_access,
 	is_client,
 )
+from construction_core.selections import overdue_for_project
 
 MAX_VIDEO_BYTES = 50 * 1024 * 1024
 
@@ -111,6 +112,7 @@ def project_detail(project: str) -> dict:
 		"area_label": doc.get("area_label"),
 		"stages": stages,
 		"can_post": not is_client(),
+		"overdue_selections": [] if is_client() else overdue_for_project(project),
 	}
 
 

@@ -22,7 +22,14 @@ CLIENT_ROLE = "Construction Client"
 SCOPED_ROLES = frozenset({ENGINEER_ROLE, CLIENT_ROLE})
 
 # DocTypes that carry a `project` Link field and follow the project's access.
-PROJECT_LINKED_DOCTYPES = ("Project Stage", "Stage Update", "Payment Milestone", "Project Message")
+PROJECT_LINKED_DOCTYPES = (
+	"Project Stage",
+	"Stage Update",
+	"Payment Milestone",
+	"Project Message",
+	"Project Selection",
+	"Change Order",
+)
 SCOPED_DOCTYPES = ("Project", *PROJECT_LINKED_DOCTYPES)
 
 

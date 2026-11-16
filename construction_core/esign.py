@@ -162,35 +162,40 @@ def _require_admin():
 		frappe.throw(_("Only the office can do this"), frappe.PermissionError)
 
 
-@frappe.whitelist(methods=["POST"])
-def send_for_signature(
-	estimate: str, signer_user: str, contract_template: str | None = None, expires_in_days: int = 14
-) -> dict:
-	""" "ابعت للتوقيع": render the PDF, store it privately with its hash, create the request, notify."""
-	_require_admin()
-	est = frappe.get_doc("Estimate", estimate)
-	if est.docstatus != 1 or est.status != "Approved":
-		frappe.throw(_("Approve the estimate first"))
+PRINT_FORMATS = {
+	"Estimate": CONTRACT_PRINT_FORMAT,
+	"Change Order": "Inceptiondesign Change Order",
+	"Project Selection": "Inceptiondesign Selection",
+}
+
+
+def create_signature_request(
+	reference_doctype: str, reference_name: str, signer_user: str, title: str, **extra
+):
+	"""Render the reference document, store the PDF privately with its hash, create the request, notify."""
 	if "Construction Client" not in frappe.get_roles(signer_user):
 		frappe.throw(_("The signer must be a client with portal access"))
-	if contract_template:
-		est.db_set("contract_template", contract_template)
-	ensure_contract_template()
-	pdf = frappe.get_print(
-		"Estimate", est.name, print_format=CONTRACT_PRINT_FORMAT, as_pdf=True, no_letterhead=1
-	)
+	from construction_core.utils import as_system
+
+	with as_system():  # the client may start this (selection approval) without print rights
+		pdf = frappe.get_print(
+			reference_doctype,
+			reference_name,
+			print_format=PRINT_FORMATS[reference_doctype],
+			as_pdf=True,
+			no_letterhead=1,
+		)
 	req = frappe.get_doc(
 		{
 			"doctype": "Signature Request",
-			"title": est.title,
-			"reference_doctype": "Estimate",
-			"reference_name": est.name,
-			"contract_template": est.contract_template or DEFAULT_TEMPLATE,
-			"customer": est.customer,
+			"title": title,
+			"reference_doctype": reference_doctype,
+			"reference_name": reference_name,
 			"signer_user": signer_user,
 			"status": "Sent",
 			"sent_on": now_datetime(),
-			"expires_on": add_days(now_datetime(), cint(expires_in_days) or 14),
+			"expires_on": add_days(now_datetime(), cint(extra.pop("expires_in_days", 14)) or 14),
+			**extra,
 		}
 	)
 	_event(req, "Sent")
@@ -199,15 +204,43 @@ def send_for_signature(
 	req.pdf_sha256 = sha256(pdf)
 	req.flags.allow_system_update = True
 	req.save(ignore_permissions=True)
-	_notify(signer_user, req, _("مستند مستني توقيعك: {0}").format(est.title))
-	mobile = frappe.db.get_value("User", signer_user, "mobile_no") or ""
+	_notify(signer_user, req, _("مستند مستني توقيعك: {0}").format(title))
+	return req
+
+
+def signing_links(req) -> dict:
+	mobile = frappe.db.get_value("User", req.signer_user, "mobile_no") or ""
 	link = get_url(f"/portal/sign/{req.name}")
 	wa = ""
 	if mobile.startswith("01"):
 		from urllib.parse import quote
 
-		wa = f"https://wa.me/20{mobile[1:]}?text=" + quote(f"مستند مستني توقيعك: {est.title}\n{link}")
+		wa = f"https://wa.me/20{mobile[1:]}?text=" + quote(f"مستند مستني توقيعك: {req.title}\n{link}")
 	return {"request": req.name, "link": link, "whatsapp_url": wa}
+
+
+@frappe.whitelist(methods=["POST"])
+def send_for_signature(
+	estimate: str, signer_user: str, contract_template: str | None = None, expires_in_days: int = 14
+) -> dict:
+	""" "ابعت للتوقيع" for an approved estimate (proposal or contract)."""
+	_require_admin()
+	est = frappe.get_doc("Estimate", estimate)
+	if est.docstatus != 1 or est.status != "Approved":
+		frappe.throw(_("Approve the estimate first"))
+	if contract_template:
+		est.db_set("contract_template", contract_template)
+	ensure_contract_template()
+	req = create_signature_request(
+		"Estimate",
+		est.name,
+		signer_user,
+		est.title,
+		contract_template=est.contract_template or DEFAULT_TEMPLATE,
+		customer=est.customer,
+		expires_in_days=expires_in_days,
+	)
+	return signing_links(req)
 
 
 @frappe.whitelist(methods=["POST"])
@@ -370,8 +403,21 @@ def sign(request: str, code: str, signature: str) -> dict:
 	req.flags.final_write = True
 	req.save(ignore_permissions=True)
 
-	project = kickoff(req) if req.reference_doctype == "Estimate" else None
-	_notify_office(req, _("اتوقّع: {0}").format(req.title))
+	from construction_core.utils import as_system
+
+	project = None
+	with as_system():
+		if req.reference_doctype == "Estimate":
+			project = kickoff(req)
+		elif req.reference_doctype == "Project Selection":
+			from construction_core.selections import on_signed as selection_signed
+
+			project = selection_signed(req)
+		elif req.reference_doctype == "Change Order":
+			from construction_core.change_orders import on_signed as change_order_signed
+
+			project = change_order_signed(req)
+		_notify_office(req, _("اتوقّع: {0}").format(req.title))
 	return {"status": "Signed", "project": project}
 
 
@@ -386,6 +432,17 @@ def decline(request: str, reason: str) -> dict:
 	_event(req, "Declined", req.decline_reason)
 	req.flags.allow_system_update = True
 	req.save(ignore_permissions=True)
+	from construction_core.utils import as_system
+
+	with as_system():
+		if req.reference_doctype == "Change Order":
+			from construction_core.change_orders import on_declined
+
+			on_declined(req)
+		elif req.reference_doctype == "Project Selection":
+			from construction_core.selections import on_declined as selection_declined
+
+			selection_declined(req)
 	_notify_office(req, _("العميل رفض «{0}»: {1}").format(req.title, req.decline_reason))
 	return {"status": "Declined"}
 
@@ -397,10 +454,13 @@ def build_signed_pdf(req) -> bytes:
 	"""Original pages + a signature page (name, signature image, time, IP, both hashes)."""
 	from pypdf import PdfReader, PdfWriter
 
+	from construction_core.utils import as_system
+
 	original = _file_content(req.document_pdf)
-	page = frappe.get_print(
-		"Signature Request", req.name, print_format=SIGNATURE_PAGE_FORMAT, as_pdf=True, no_letterhead=1
-	)
+	with as_system():
+		page = frappe.get_print(
+			"Signature Request", req.name, print_format=SIGNATURE_PAGE_FORMAT, as_pdf=True, no_letterhead=1
+		)
 	writer = PdfWriter()
 	for part in (original, page):
 		for p in PdfReader(io.BytesIO(part)).pages:
