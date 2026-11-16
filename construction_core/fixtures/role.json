@@ -28,5 +28,15 @@
   "name": "Construction Client",
   "role_name": "Construction Client",
   "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "doctype": "Role",
+  "is_custom": 0,
+  "modified": "2026-11-17 00:00:00.000000",
+  "name": "Construction Sales",
+  "role_name": "Construction Sales",
+  "two_factor_auth": 0
  }
 ]

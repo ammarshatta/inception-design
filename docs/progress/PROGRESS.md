@@ -25,7 +25,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 4 | Client portal, chat, approvals | 🔵 | Cloud + CI | [phase-4.md](phase-4.md) | Code written, waiting for CI |
 | 5 | Design catalog, public pages, lead form | 🔵 | Cloud + CI | [phase-5.md](phase-5.md) | Code written, waiting for CI |
 | 6 | Money: milestones, invoices, expenses | 🔵 | Cloud + CI | [phase-6.md](phase-6.md) | Code written, waiting for CI |
-| 7 | Sales and estimating | ⬜ | | | |
+| 7 | Sales and estimating | 🔵 | Cloud + CI | [phase-7.md](phase-7.md) | Code written, waiting for CI |
 | 8 | Proposals and e-signature | ⬜ | | | |
 | 9 | Finish selections | ⬜ | | | |
 | 10 | Change orders | ⬜ | | | |

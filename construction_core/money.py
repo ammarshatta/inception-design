@@ -98,13 +98,19 @@ def ensure_vat_template(company: str) -> str | None:
 
 
 def ensure_finance_setup():
+	if not frappe.is_setup_complete():
+		return
 	ensure_item_groups()
 	for company in frappe.get_all("Company", pluck="name"):
 		ensure_vat_template(company)
 
 
 def company_after_insert(doc, method=None):
-	ensure_vat_template(doc.name)
+	# Never let our extra setup break company creation (it runs inside the setup wizard).
+	try:
+		ensure_vat_template(doc.name)
+	except Exception:
+		frappe.log_error(title="construction_core: VAT template for new company")
 
 
 # --- Milestone → invoice ---------------------------------------------------------------

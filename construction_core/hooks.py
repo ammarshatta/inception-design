@@ -293,7 +293,13 @@ before_tests = "construction_core.setup.install.before_tests"
 fixtures = [
 	{
 		"dt": "Role",
-		"filters": [["name", "in", ["Construction Admin", "Construction Engineer", "Construction Client"]]],
+		"filters": [
+			[
+				"name",
+				"in",
+				["Construction Admin", "Construction Engineer", "Construction Client", "Construction Sales"],
+			]
+		],
 	},
 	{"dt": "Custom Field", "filters": [["module", "=", "Construction Core"]]},
 	{"dt": "Property Setter", "filters": [["module", "=", "Construction Core"]]},
@@ -326,6 +332,8 @@ doc_events = {
 		"on_cancel": "construction_core.money.payment_entry_on_cancel",
 	},
 	"Company": {"after_insert": "construction_core.money.company_after_insert"},
+	"Item Price": {"on_trash": "construction_core.sales.item_price_on_trash"},
+	"Labor Rate": {"on_trash": "construction_core.sales.labor_rate_on_trash"},
 	"User": {"before_insert": "construction_core.auth.user_before_insert"},
 }
 
@@ -333,6 +341,7 @@ doctype_js = {
 	"Project": "public/js/project.js",
 	"Phase Template": "public/js/phase_template.js",
 	"Payment Milestone": "public/js/payment_milestone.js",
+	"Estimate": "public/js/estimate.js",
 }
 
 # Temporary passwords: nothing but the change-password page until it is changed

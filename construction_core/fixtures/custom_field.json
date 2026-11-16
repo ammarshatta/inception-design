@@ -1,6 +1,31 @@
 [
  {
   "doctype": "Custom Field",
+  "dt": "Item Price",
+  "fieldname": "price_source",
+  "fieldtype": "Select",
+  "insert_after": "price_list_rate",
+  "is_system_generated": 0,
+  "label": "مصدر السعر",
+  "modified": "2026-11-17 00:00:00.000000",
+  "module": "Construction Core",
+  "name": "Item Price-price_source",
+  "options": "\nQuotation\nInvoice\nMarket survey"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Item Price",
+  "fieldname": "source_ref",
+  "fieldtype": "Data",
+  "insert_after": "price_source",
+  "is_system_generated": 0,
+  "label": "مرجع المصدر",
+  "modified": "2026-11-17 00:00:00.000000",
+  "module": "Construction Core",
+  "name": "Item Price-source_ref"
+ },
+ {
+  "doctype": "Custom Field",
   "dt": "Lead",
   "fieldname": "apartment_area_m2",
   "fieldtype": "Float",
@@ -35,6 +60,22 @@
   "modified": "2026-11-16 20:30:00.000000",
   "module": "Construction Core",
   "name": "Lead-governorate"
+ },
+ {
+  "default": "جديد",
+  "doctype": "Custom Field",
+  "dt": "Opportunity",
+  "fieldname": "pipeline_stage",
+  "fieldtype": "Select",
+  "in_list_view": 1,
+  "in_standard_filter": 1,
+  "insert_after": "status",
+  "is_system_generated": 0,
+  "label": "مرحلة البيع",
+  "modified": "2026-11-17 00:00:00.000000",
+  "module": "Construction Core",
+  "name": "Opportunity-pipeline_stage",
+  "options": "جديد\nمعاينة\nتسعير\nعرض مرسل\nتفاوض\nاتكسب\nاتخسر"
  },
  {
   "doctype": "Custom Field",
@@ -257,6 +298,21 @@
   "module": "Construction Core",
   "name": "Purchase Invoice-project_stage",
   "options": "Project Stage"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Quotation",
+  "fieldname": "estimate",
+  "fieldtype": "Link",
+  "insert_after": "order_type",
+  "is_system_generated": 0,
+  "label": "التسعير",
+  "modified": "2026-11-17 00:00:00.000000",
+  "module": "Construction Core",
+  "name": "Quotation-estimate",
+  "no_copy": 1,
+  "options": "Estimate",
+  "read_only": 1
  },
  {
   "allow_on_submit": 0,

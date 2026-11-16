@@ -1,0 +1,300 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:EST-{#####}",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "customer",
+  "lead",
+  "opportunity",
+  "project",
+  "design_template",
+  "cb1",
+  "estimate_date",
+  "revision",
+  "previous_revision",
+  "status",
+  "quotation",
+  "amended_from",
+  "lines_section",
+  "lines",
+  "pct_section",
+  "overhead_pct",
+  "profit_pct",
+  "taxes_template",
+  "totals_section",
+  "material_total",
+  "labor_total",
+  "equipment_total",
+  "other_total",
+  "cb2",
+  "subtotal",
+  "overhead_amount",
+  "profit_amount",
+  "tax_amount",
+  "grand_total"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "العنوان",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "العميل",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "lead",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "العميل المحتمل",
+   "options": "Lead"
+  },
+  {
+   "fieldname": "opportunity",
+   "fieldtype": "Link",
+   "label": "الفرصة",
+   "options": "Opportunity"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "المشروع",
+   "options": "Project"
+  },
+  {
+   "fieldname": "design_template",
+   "fieldtype": "Link",
+   "label": "التصميم",
+   "options": "Design Template"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "estimate_date",
+   "fieldtype": "Date",
+   "label": "تاريخ التسعير",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "revision",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "المراجعة",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "previous_revision",
+   "fieldtype": "Link",
+   "label": "المراجعة السابقة",
+   "no_copy": 1,
+   "options": "Estimate",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الحالة",
+   "no_copy": 1,
+   "options": "Draft\nApproved\nSuperseded",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "عرض السعر",
+   "no_copy": 1,
+   "options": "Quotation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Estimate",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "lines_section",
+   "fieldtype": "Section Break",
+   "label": "البنود"
+  },
+  {
+   "fieldname": "lines",
+   "fieldtype": "Table",
+   "label": "البنود",
+   "options": "Estimate Line"
+  },
+  {
+   "fieldname": "pct_section",
+   "fieldtype": "Section Break",
+   "label": "الإضافات"
+  },
+  {
+   "default": "10",
+   "fieldname": "overhead_pct",
+   "fieldtype": "Percent",
+   "label": "مصاريف عمومية %"
+  },
+  {
+   "default": "15",
+   "fieldname": "profit_pct",
+   "fieldtype": "Percent",
+   "label": "ربح %"
+  },
+  {
+   "fieldname": "taxes_template",
+   "fieldtype": "Link",
+   "label": "قالب الضرائب",
+   "options": "Sales Taxes and Charges Template"
+  },
+  {
+   "fieldname": "totals_section",
+   "fieldtype": "Section Break",
+   "label": "الإجماليات"
+  },
+  {
+   "fieldname": "material_total",
+   "fieldtype": "Currency",
+   "label": "خامات",
+   "read_only": 1
+  },
+  {
+   "fieldname": "labor_total",
+   "fieldtype": "Currency",
+   "label": "عمالة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "equipment_total",
+   "fieldtype": "Currency",
+   "label": "معدات",
+   "read_only": 1
+  },
+  {
+   "fieldname": "other_total",
+   "fieldtype": "Currency",
+   "label": "أخرى",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "subtotal",
+   "fieldtype": "Currency",
+   "label": "إجمالي البنود",
+   "read_only": 1
+  },
+  {
+   "fieldname": "overhead_amount",
+   "fieldtype": "Currency",
+   "label": "مصاريف عمومية",
+   "read_only": 1
+  },
+  {
+   "fieldname": "profit_amount",
+   "fieldtype": "Currency",
+   "label": "ربح",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tax_amount",
+   "fieldtype": "Currency",
+   "label": "ضرائب",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "الإجمالي النهائي",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Estimate",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Sales",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

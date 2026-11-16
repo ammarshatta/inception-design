@@ -22,6 +22,12 @@ ERPNEXT_DOCPERMS = {
 		"Construction Engineer": ("read", "select"),
 		"Construction Client": ("read", "select"),
 	},
+	"Lead": {"Construction Sales": ("read", "write", "create", "report", "email", "print")},
+	"Opportunity": {"Construction Sales": ("read", "write", "create", "report", "email", "print")},
+	"Quotation": {"Construction Sales": ("read", "write", "create", "submit", "report", "email", "print")},
+	"Item Price": {"Construction Sales": ("read", "write", "create", "report")},
+	"Item": {"Construction Sales": ("read", "report")},
+	"Customer": {"Construction Sales": ("read", "write", "create", "report")},
 }
 
 
@@ -36,8 +42,10 @@ def after_migrate():
 	apply_login_settings()
 	apply_site_config()
 	from construction_core.money import ensure_finance_setup
+	from construction_core.sales import ensure_sales_setup
 
 	ensure_finance_setup()
+	ensure_sales_setup()
 
 
 def apply_site_config():

@@ -37,7 +37,19 @@ ALLOWED_METHODS = frozenset(
 UNREGISTERED_MESSAGE = "الحساب ده مش مسجّل، كلّم المكتب"
 
 
-STATIC_EXTENSIONS = (".js", ".css", ".map", ".png", ".jpg", ".jpeg", ".svg", ".ico", ".woff", ".woff2", ".ttf")
+STATIC_EXTENSIONS = (
+	".js",
+	".css",
+	".map",
+	".png",
+	".jpg",
+	".jpeg",
+	".svg",
+	".ico",
+	".woff",
+	".woff2",
+	".ttf",
+)
 
 
 def is_allowed_while_changing_password(path: str) -> bool:
