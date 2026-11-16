@@ -265,9 +265,10 @@ def _credit_note(co, credit) -> str:
 @frappe.whitelist()
 def project_change_orders(project: str) -> list[dict]:
 	assert_project_access(project)
+	client = is_client()
 	rows = frappe.get_list(
 		"Change Order",
-		filters={"project": project, "status": ["!=", "Draft"] if is_client() else ["is", "set"]},
+		filters={"project": project},
 		fields=[
 			"name",
 			"title",
@@ -276,10 +277,22 @@ def project_change_orders(project: str) -> list[dict]:
 			"schedule_impact_days",
 			"signature_request",
 			"creation",
+			"owner",
 		],
 		order_by="creation desc",
 		limit_page_length=0,
 	)
+	if client:
+		# A client sees what was sent to them, plus their own requests while the office prices them
+		# (without the draft price).
+		user = frappe.session.user
+		rows = [r for r in rows if r.status != "Draft" or r.owner == user]
+		for r in rows:
+			if r.status == "Draft":
+				r.cost_difference = None
+				r.schedule_impact_days = None
+	for r in rows:
+		r.pop("owner", None)
 	for r in rows:
 		r.signed_pdf = (
 			frappe.db.get_value("Signature Request", r.signature_request, "signed_pdf")

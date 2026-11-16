@@ -1,0 +1,253 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:SUB-{#####}",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "supplier",
+  "project",
+  "company",
+  "currency",
+  "cb1",
+  "status",
+  "start_date",
+  "end_date",
+  "signer_user",
+  "signature_request",
+  "scope_section",
+  "scope",
+  "lines",
+  "terms_section",
+  "contract_value",
+  "retention_pct",
+  "advance_amount",
+  "cb2",
+  "advance_journal_entry",
+  "retention_release_entry",
+  "retention_payment",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "العنوان",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "مقاول الباطن",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "project.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "default": "EGP",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "العملة",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الحالة",
+   "options": "Draft\nAwaiting Signature\nActive\nCompleted\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "البداية"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "النهاية"
+  },
+  {
+   "fieldname": "signer_user",
+   "fieldtype": "Link",
+   "label": "مستخدم التوقيع (المقاول)",
+   "options": "User"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "signature_request",
+   "fieldtype": "Link",
+   "label": "طلب التوقيع",
+   "options": "Signature Request",
+   "read_only": 1
+  },
+  {
+   "fieldname": "scope_section",
+   "fieldtype": "Section Break",
+   "label": "نطاق الشغل"
+  },
+  {
+   "fieldname": "scope",
+   "fieldtype": "Small Text",
+   "label": "النطاق"
+  },
+  {
+   "fieldname": "lines",
+   "fieldtype": "Table",
+   "label": "البنود",
+   "options": "Subcontract Line",
+   "reqd": 1
+  },
+  {
+   "fieldname": "terms_section",
+   "fieldtype": "Section Break",
+   "label": "الشروط"
+  },
+  {
+   "fieldname": "contract_value",
+   "fieldtype": "Currency",
+   "label": "قيمة العقد",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "10",
+   "fieldname": "retention_pct",
+   "fieldtype": "Percent",
+   "label": "نسبة المحتجز"
+  },
+  {
+   "fieldname": "advance_amount",
+   "fieldtype": "Currency",
+   "label": "الدفعة المقدمة",
+   "options": "currency"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "advance_journal_entry",
+   "fieldtype": "Link",
+   "label": "قيد الدفعة المقدمة",
+   "no_copy": 1,
+   "options": "Journal Entry",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "retention_release_entry",
+   "fieldtype": "Link",
+   "label": "قيد صرف المحتجز",
+   "no_copy": 1,
+   "options": "Journal Entry",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "retention_payment",
+   "fieldtype": "Link",
+   "label": "دفعة صرف المحتجز",
+   "no_copy": 1,
+   "options": "Payment Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Subcontract",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Subcontract",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User"
+  },
+  {
+   "read": 1,
+   "role": "Construction Engineer"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

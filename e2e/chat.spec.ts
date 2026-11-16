@@ -41,7 +41,9 @@ test('chat: message within 5 s, approval answered and locked', async ({ browser 
   const problems: string[] = []
   for (const pg of [e.page, c.page]) {
     pg.on('pageerror', (err) => problems.push(String(err)))
-    pg.on('response', (r) => r.status() >= 400 && problems.push(`${r.status()} ${r.url()}`))
+    pg.on('response', async (r) => {
+      if (r.status() >= 400) problems.push(`${r.status()} ${r.url()} ${(await r.text().catch(() => '')).slice(0, 600)}`)
+    })
   }
   const text = `سؤال ${Date.now()}`
   await c.page.getByTestId('chat-input').fill(text)

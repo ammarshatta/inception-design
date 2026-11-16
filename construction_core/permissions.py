@@ -19,7 +19,11 @@ from frappe import _
 FULL_ACCESS_ROLES = frozenset({"System Manager", "Construction Admin"})
 ENGINEER_ROLE = "Construction Engineer"
 CLIENT_ROLE = "Construction Client"
-SCOPED_ROLES = frozenset({ENGINEER_ROLE, CLIENT_ROLE})
+FOREMAN_ROLE = "Construction Foreman"
+SUBCONTRACTOR_ROLE = "Construction Subcontractor"
+# Foremen reach the projects their crews are assigned to; subcontractors reach no project
+# records at all (they only sign their own subcontracts).
+SCOPED_ROLES = frozenset({ENGINEER_ROLE, CLIENT_ROLE, FOREMAN_ROLE, SUBCONTRACTOR_ROLE})
 
 # DocTypes that carry a `project` Link field and follow the project's access.
 PROJECT_LINKED_DOCTYPES = (
@@ -31,6 +35,8 @@ PROJECT_LINKED_DOCTYPES = (
 	"Change Order",
 	"Daily Log",
 	"Clock Event",
+	"Subcontract",
+	"Subcontract Claim",
 )
 SCOPED_DOCTYPES = ("Project", *PROJECT_LINKED_DOCTYPES)
 
@@ -65,7 +71,15 @@ def is_project_member(project: str | None, user: str | None = None) -> bool:
 	user = user or frappe.session.user
 	if not project:
 		return False
-	return bool(frappe.db.exists("Project User", {"parenttype": "Project", "parent": project, "user": user}))
+	if frappe.db.exists("Project User", {"parenttype": "Project", "parent": project, "user": user}):
+		return True
+	return bool(
+		frappe.db.sql(
+			"""select 1 from `tabCrew Assignment` ca join `tabCrew` c on c.name = ca.crew
+			where ca.project = %s and c.foreman_user = %s and ifnull(ca.status, '') != 'Cancelled' limit 1""",
+			(project, user),
+		)
+	)
 
 
 def can_access_project(project: str | None, user: str | None = None) -> bool:
@@ -120,10 +134,14 @@ def has_permission(doc, ptype: str = "read", user: str | None = None, debug: boo
 
 
 def _member_projects_subquery(user: str) -> str:
+	u = frappe.db.escape(user)
 	return (
 		"select `tabProject User`.`parent` from `tabProject User` "
 		"where `tabProject User`.`parenttype` = 'Project' "
-		f"and `tabProject User`.`user` = {frappe.db.escape(user)}"
+		f"and `tabProject User`.`user` = {u} "
+		"union select `tabCrew Assignment`.`project` from `tabCrew Assignment` "
+		"join `tabCrew` on `tabCrew`.`name` = `tabCrew Assignment`.`crew` "
+		f"where `tabCrew`.`foreman_user` = {u} and ifnull(`tabCrew Assignment`.`status`, '') != 'Cancelled'"
 	)
 
 
@@ -145,15 +163,23 @@ def get_permission_query_conditions(user: str | None = None, doctype: str | None
 # --- Signature Request: a client sees only the requests addressed to them ----------------
 
 
+def is_external_signer(user: str | None = None) -> bool:
+	"""Clients and subcontractors: they see only the signature requests addressed to them."""
+	user = user or frappe.session.user
+	return is_client(user) or (
+		is_scoped(user) and SUBCONTRACTOR_ROLE in _roles(user) and ENGINEER_ROLE not in _roles(user)
+	)
+
+
 def signature_request_has_permission(doc, ptype="read", user=None, debug=False) -> bool:
 	user = user or frappe.session.user
-	if not is_client(user):
+	if not is_external_signer(user):
 		return True
 	return ptype == "read" and doc.get("signer_user") == user
 
 
 def signature_request_query(user=None, doctype=None) -> str:
 	user = user or frappe.session.user
-	if not is_client(user):
+	if not is_external_signer(user):
 		return ""
 	return f"`tabSignature Request`.`signer_user` = {frappe.db.escape(user)}"

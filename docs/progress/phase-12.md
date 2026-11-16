@@ -1,6 +1,6 @@
 # Phase 12 — Daily logs, timesheets, GPS clock-in
 
-**Status:** 🔵 Code written on 17 Nov 2026; waiting for CI.
+**Status:** 🟢 Unit tests green in CI (run 43971272948, 126 tests). The e2e daily-log test runs with the phase 13 commit.
 
 **Approval:** built without waiting between phases, as the owner asked on 16 Nov 2026. CI is the gate.
 
@@ -36,12 +36,12 @@
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| P12-01: today's log exists → same log is edited; new day prefilled from the previous one | `test_sitelog.test_daily_log_one_per_day_and_client_view`; `e2e/daily.spec.ts` reload check | pending CI |
-| P12-02 AC1: consent accepted, within 150 m → inside the site area | `test_clock_requires_consent_and_stores_version`; `e2e/daily.spec.ts` | pending CI |
-| P12-02 AC2: far away → saved and flagged for approval | same unit test (≈1.1 km) | pending CI |
-| P12-02 AC3: no consent → consent shown first, nothing recorded | unit test (PermissionError); e2e shows the sheet before any event exists | pending CI |
-| P12-03 AC1: matched events → Timesheet; submit raises labor cost by hours × rate | `test_timesheet_from_events_raises_labor_cost` (6 h × 50 = 300) | pending CI |
-| P12-03 AC2: In without Out → flagged, not counted | same test + `test_pairing_with_missing_out` | pending CI |
-| P12-04: client sees work done, no manpower | `test_daily_log_one_per_day_and_client_view` | pending CI |
+| P12-01: today's log exists → same log is edited; new day prefilled from the previous one | `test_sitelog.test_daily_log_one_per_day_and_client_view`; `e2e/daily.spec.ts` reload check | ✅ unit · e2e pending |
+| P12-02 AC1: consent accepted, within 150 m → inside the site area | `test_clock_requires_consent_and_stores_version`; `e2e/daily.spec.ts` | ✅ unit · e2e pending |
+| P12-02 AC2: far away → saved and flagged for approval | same unit test (≈1.1 km) | ✅ CI |
+| P12-02 AC3: no consent → consent shown first, nothing recorded | unit test (PermissionError); e2e shows the sheet before any event exists | ✅ unit · e2e pending |
+| P12-03 AC1: matched events → Timesheet; submit raises labor cost by hours × rate | `test_timesheet_from_events_raises_labor_cost` (6 h × 50 = 300) | ✅ CI |
+| P12-03 AC2: In without Out → flagged, not counted | same test + `test_pairing_with_missing_out` | ✅ CI |
+| P12-04: client sees work done, no manpower | `test_daily_log_one_per_day_and_client_view` | ✅ CI |
 | P12-05: weekly PDF | — | ✗ not built (Could) |
 | Real phone at the site | Owner check | ☐ (owner) |

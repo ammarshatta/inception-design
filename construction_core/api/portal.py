@@ -34,6 +34,7 @@ def get_me() -> dict:
 			"engineer": ENGINEER_ROLE in roles,
 			"client": CLIENT_ROLE in roles,
 			"foreman": "Construction Foreman" in roles,
+			"subcontractor": "Construction Subcontractor" in roles,
 		},
 		"branding": get_branding(),
 		"features": get_feature_flags(),

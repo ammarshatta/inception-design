@@ -5,6 +5,7 @@ const routes = [
   { path: '/projects/:name', name: 'Project', component: () => import('@/pages/ProjectPage.vue'), props: true },
   { path: '/projects/:name/update', name: 'NewUpdate', component: () => import('@/pages/NewUpdate.vue'), props: true },
   { path: '/projects/:name/daily', name: 'DailyLog', component: () => import('@/pages/DailyLogPage.vue'), props: true },
+  { path: '/projects/:name/deliveries', name: 'Deliveries', component: () => import('@/pages/DeliveriesPage.vue'), props: true },
   { path: '/stages/:name', name: 'Stage', component: () => import('@/pages/StagePage.vue'), props: true },
   { path: '/foreman', name: 'Foreman', component: () => import('@/pages/ForemanPage.vue') },
   { path: '/sign/:name', name: 'Sign', component: () => import('@/pages/SignPage.vue'), props: true },

@@ -59,7 +59,7 @@ export async function call<T = any>(method: string, args: Record<string, any> = 
         window.location.href = '/login?redirect-to=' + encodeURIComponent(window.location.pathname)
       }
     }
-    throw new ApiError(errorMessage(data, `خطأ ${res.status}`), res.status, data?.exc_type)
+    throw new ApiError(errorMessage(data, `خطأ ${res.status}${data?.exc_type ? ' (' + data.exc_type + ')' : ''}`), res.status, data?.exc_type)
   }
   return data?.message as T
 }

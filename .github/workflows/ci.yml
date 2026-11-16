@@ -113,7 +113,7 @@ jobs:
       - name: Build portal
         working-directory: /home/runner/frappe-bench
         run: |
-          bench build --app construction_core
+          bench build
           test -f apps/construction_core/construction_core/www/portal.html
 
       - name: Portal end-to-end (Playwright)
@@ -146,6 +146,7 @@ jobs:
           bench --site test_site execute construction_core.setup.demo.install
           bench --site test_site execute construction_core.money.ensure_finance_setup
           bench --site test_site execute construction_core.sales.ensure_sales_setup
+          bench --site test_site execute construction_core.subcontracts.ensure_procurement_setup
           export E2E_ADMIN_PASSWORD=admin
           bench --site test_site execute construction_core.tests.e2e_setup.make_invoice_pdf \
             --kwargs "{'project': '$E2E_ENG_PROJECT', 'path': '/tmp/e2e-shots/invoice.pdf'}"

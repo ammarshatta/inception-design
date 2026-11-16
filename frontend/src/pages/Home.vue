@@ -66,6 +66,10 @@ function isClientOnly() {
   const r = me.data?.roles
   return !!r?.client && !r?.engineer && !r?.admin
 }
+function isSigner() {
+  const r = me.data?.roles
+  return isClientOnly() || (!!r?.subcontractor && !r?.engineer && !r?.admin)
+}
 function projectLink(name: string) {
   return isClientOnly() ? `/c/${encodeURIComponent(name)}` : `/projects/${encodeURIComponent(name)}`
 }
@@ -78,10 +82,10 @@ onMounted(async () => {
     projects.value = await call('construction_core.api.portal.my_projects')
     await me.promise?.catch(() => {})
     if (!me.data) await me.fetch()
-    if (isClientOnly()) {
+    if (isSigner()) {
       signatures.value = await call('construction_core.esign.my_signature_requests')
       const pending = signatures.value.some((s) => ['Sent', 'Viewed'].includes(s.status))
-      if (!pending && projects.value.length === 1) router.replace(projectLink(projects.value[0].name))
+      if (isClientOnly() && !pending && projects.value.length === 1) router.replace(projectLink(projects.value[0].name))
     }
   } catch (e: any) {
     error.value = e.message

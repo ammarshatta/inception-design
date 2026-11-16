@@ -1,0 +1,103 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "subcontract_line",
+  "description",
+  "project_stage",
+  "contract_qty",
+  "rate",
+  "previous_qty",
+  "current_qty",
+  "cumulative_qty",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "subcontract_line",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "سطر العقد",
+   "read_only": 1
+  },
+  {
+   "columns": 3,
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "البند",
+   "read_only": 1
+  },
+  {
+   "fieldname": "project_stage",
+   "fieldtype": "Link",
+   "label": "المرحلة",
+   "options": "Project Stage",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "contract_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "كمية العقد",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "الفئة",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "previous_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "السابق",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "current_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "الحالي"
+  },
+  {
+   "columns": 1,
+   "fieldname": "cumulative_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "الإجمالي",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "قيمة الحالي",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Subcontract Claim Line",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

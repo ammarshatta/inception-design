@@ -3,7 +3,7 @@ import { createResource } from 'frappe-ui'
 export type Me = {
   user: string
   full_name: string
-  roles: { admin: boolean; engineer: boolean; client: boolean; foreman: boolean }
+  roles: { admin: boolean; engineer: boolean; client: boolean; foreman: boolean; subcontractor?: boolean }
   branding: {
     office_name: string
     logo: string

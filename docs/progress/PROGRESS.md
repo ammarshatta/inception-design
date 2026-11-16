@@ -30,8 +30,8 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 9 | Finish selections | 🔵 | Cloud + CI | [phase-9.md](phase-9.md) | Code written, waiting for CI |
 | 10 | Change orders | 🔵 | Cloud + CI | [phase-10.md](phase-10.md) | Code written, waiting for CI |
 | 11 | Scheduling and crews | 🔵 | Cloud + CI | [phase-11.md](phase-11.md) | Code written, waiting for CI |
-| 12 | Daily logs, timesheets, GPS clock-in | 🔵 | Cloud + CI | [phase-12.md](phase-12.md) | Code written, waiting for CI. Weekly PDF (Could) not done |
-| 13 | Subcontractors and procurement | ⬜ | | | |
+| 12 | Daily logs, timesheets, GPS clock-in | 🟢 | Cloud + CI | [phase-12.md](phase-12.md) | Unit tests green; e2e pending. Weekly PDF (Could) not done |
+| 13 | Subcontractors and procurement | 🔵 | Cloud + CI | [phase-13.md](phase-13.md) | Code written, waiting for CI |
 | 14 | Documents, markup, takeoff | ⬜ | | | |
 | 15 | Online payments and reminders | ⬜ | | | |
 | 16 | Offline PWA and push | ⬜ | | | |
@@ -60,6 +60,9 @@ The owner asked for all phases to be built in a row and reviewed once at the end
 | Clock in on a real phone at the site, once inside and once ~400 m away | 12 |
 | Lawyer review of the Arabic location-consent text in Settings | 12 / 19 |
 | Link each crew member to an Employee so timesheets are built | 12 |
+| Accountant checks the two new accounts (محتجزات / سلف مقاولين الباطن) sit where they want in the chart of accounts | 13 |
+| Create a portal user for each subcontractor (role Construction Subcontractor) with a mobile number for the signing code | 13 |
+| Set up an outgoing email account (Tools → Email Account): signing codes are sent by email; without it the portal says it cannot send the code | 8 |
 | Accountant enters the VAT rate in the "ضريبة القيمة المضافة" template (14% today) | 6 |
 
 ## Next actions (owner)

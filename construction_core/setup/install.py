@@ -53,6 +53,9 @@ def after_migrate():
 		from construction_core.scheduling import ensure_holiday_list
 
 		ensure_holiday_list()
+		from construction_core.subcontracts import ensure_procurement_setup
+
+		ensure_procurement_setup()
 
 
 def apply_site_config():

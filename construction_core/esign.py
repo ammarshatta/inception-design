@@ -166,15 +166,17 @@ PRINT_FORMATS = {
 	"Estimate": CONTRACT_PRINT_FORMAT,
 	"Change Order": "Inceptiondesign Change Order",
 	"Project Selection": "Inceptiondesign Selection",
+	"Subcontract": "Inceptiondesign Subcontract",
 }
+SIGNER_ROLES = {"Construction Client", "Construction Subcontractor"}
 
 
 def create_signature_request(
 	reference_doctype: str, reference_name: str, signer_user: str, title: str, **extra
 ):
 	"""Render the reference document, store the PDF privately with its hash, create the request, notify."""
-	if "Construction Client" not in frappe.get_roles(signer_user):
-		frappe.throw(_("The signer must be a client with portal access"))
+	if not SIGNER_ROLES & set(frappe.get_roles(signer_user)):
+		frappe.throw(_("The signer must be a client or subcontractor with portal access"))
 	from construction_core.utils import as_system
 
 	with as_system():  # the client may start this (selection approval) without print rights
@@ -345,8 +347,12 @@ def request_otp(request: str) -> dict:
 
 
 def _deliver_otp(req, code: str):
+	test_mode = frappe.conf.get("allow_tests") and frappe.conf.get("cc_test_otp")
 	email = frappe.db.get_value("User", req.signer_user, "email")
-	if email and not email.endswith("@no-email.invalid"):
+	has_outgoing = frappe.db.exists("Email Account", {"enable_outgoing": 1, "default_outgoing": 1})
+	if not test_mode and not (email and not email.endswith("@no-email.invalid") and has_outgoing):
+		frappe.throw(_("مش قادرين نبعت كود التوقيع دلوقتي. كلّم المكتب."))
+	if email and not email.endswith("@no-email.invalid") and has_outgoing:
 		frappe.sendmail(
 			recipients=[email],
 			subject=_("كود التوقيع: {0}").format(code),
@@ -357,7 +363,7 @@ def _deliver_otp(req, code: str):
 			reference_name=req.name,
 			now=False,
 		)
-	if frappe.conf.get("allow_tests") and frappe.conf.get("cc_test_otp"):
+	if test_mode:
 		# CI/test sites only: lets the Playwright test read the code (never on a real site).
 		frappe.cache.set_value(f"cc:test-otp:{req.name}", code, expires_in_sec=OTP_MINUTES * 60)
 
@@ -417,6 +423,10 @@ def sign(request: str, code: str, signature: str) -> dict:
 			from construction_core.change_orders import on_signed as change_order_signed
 
 			project = change_order_signed(req)
+		elif req.reference_doctype == "Subcontract":
+			from construction_core.subcontracts import on_signed as subcontract_signed
+
+			project = subcontract_signed(req)
 		_notify_office(req, _("اتوقّع: {0}").format(req.title))
 	return {"status": "Signed", "project": project}
 
@@ -443,6 +453,8 @@ def decline(request: str, reason: str) -> dict:
 			from construction_core.selections import on_declined as selection_declined
 
 			selection_declined(req)
+		elif req.reference_doctype == "Subcontract":
+			frappe.db.set_value("Subcontract", req.reference_name, "status", "Draft")
 	_notify_office(req, _("العميل رفض «{0}»: {1}").format(req.title, req.decline_reason))
 	return {"status": "Declined"}
 

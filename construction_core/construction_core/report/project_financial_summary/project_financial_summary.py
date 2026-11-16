@@ -77,11 +77,13 @@ def get_summary(project: str) -> frappe._dict:
 	invoiced = flt(si[0], precision)
 	outstanding = flt(si[1], precision)
 	rows = frappe.db.sql(
-		"""select pii.item_group, pi.project_stage, sum(pii.base_net_amount) as amount
+		"""select pii.item_group,
+			coalesce(nullif(pii.project_stage, ''), pi.project_stage) as project_stage,
+			sum(pii.base_net_amount) as amount
 		from `tabPurchase Invoice Item` pii
 		join `tabPurchase Invoice` pi on pi.name = pii.parent
-		where pi.docstatus = 1 and ifnull(pii.project, pi.project) = %s
-		group by pii.item_group, pi.project_stage""",
+		where pi.docstatus = 1 and coalesce(nullif(pii.project, ''), pi.project) = %s
+		group by pii.item_group, coalesce(nullif(pii.project_stage, ''), pi.project_stage)""",
 		project,
 		as_dict=True,
 	)

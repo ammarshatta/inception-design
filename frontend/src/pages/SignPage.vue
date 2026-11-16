@@ -48,6 +48,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { call } from '@/lib/api'
+import { me } from '@/data/me'
 import PageHeader from '@/components/PageHeader.vue'
 import SignaturePad from '@/components/SignaturePad.vue'
 
@@ -97,7 +98,7 @@ const requestOtp = () => run(async () => {
 })
 const doSign = () => run(async () => {
   const res = await call('construction_core.esign.sign', { request: props.name, code: code.value, signature: signature.value }, true)
-  project.value = res.project || ''
+  project.value = me.data?.roles?.subcontractor && !me.data?.roles?.client ? '' : res.project || ''
   await load()
 })
 const doDecline = () => run(async () => {

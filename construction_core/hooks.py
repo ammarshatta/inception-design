@@ -303,6 +303,7 @@ fixtures = [
 					"Construction Client",
 					"Construction Sales",
 					"Construction Foreman",
+					"Construction Subcontractor",
 				],
 			]
 		],
@@ -321,6 +322,8 @@ _SCOPED = (
 	"Change Order",
 	"Daily Log",
 	"Clock Event",
+	"Subcontract",
+	"Subcontract Claim",
 )
 
 has_permission = {
@@ -409,4 +412,5 @@ role_home_page = {
 	"Construction Client": "portal",
 	"Construction Engineer": "portal",
 	"Construction Foreman": "portal",
+	"Construction Subcontractor": "portal",
 }

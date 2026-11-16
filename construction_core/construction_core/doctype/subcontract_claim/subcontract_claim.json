@@ -1,0 +1,237 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:CLM-{#####}",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "subcontract",
+  "title",
+  "supplier",
+  "project",
+  "cb1",
+  "claim_no",
+  "period_to",
+  "status",
+  "lines_section",
+  "lines",
+  "totals_section",
+  "gross",
+  "retention_amount",
+  "advance_recovery",
+  "net_due",
+  "cb2",
+  "admin_override",
+  "override_reason",
+  "approved_by",
+  "purchase_invoice",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "subcontract",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "العقد",
+   "options": "Subcontract",
+   "reqd": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "العنوان",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "subcontract.supplier",
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "مقاول الباطن",
+   "options": "Supplier",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "subcontract.project",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "المشروع",
+   "options": "Project",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "claim_no",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "رقم المستخلص",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "period_to",
+   "fieldtype": "Date",
+   "label": "لغاية",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "الحالة",
+   "options": "Draft\nApproved\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "lines_section",
+   "fieldtype": "Section Break",
+   "label": "الكميات"
+  },
+  {
+   "fieldname": "lines",
+   "fieldtype": "Table",
+   "label": "البنود",
+   "options": "Subcontract Claim Line"
+  },
+  {
+   "fieldname": "totals_section",
+   "fieldtype": "Section Break",
+   "label": "الحساب"
+  },
+  {
+   "fieldname": "gross",
+   "fieldtype": "Currency",
+   "label": "إجمالي الأعمال الحالية",
+   "read_only": 1
+  },
+  {
+   "fieldname": "retention_amount",
+   "fieldtype": "Currency",
+   "label": "المحتجز",
+   "read_only": 1
+  },
+  {
+   "fieldname": "advance_recovery",
+   "fieldtype": "Currency",
+   "label": "استرداد الدفعة المقدمة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_due",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "الصافي المستحق",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "admin_override",
+   "fieldtype": "Check",
+   "label": "تجاوز كمية العقد (للمدير فقط)"
+  },
+  {
+   "depends_on": "admin_override",
+   "fieldname": "override_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب التجاوز",
+   "mandatory_depends_on": "admin_override"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "اعتمده",
+   "no_copy": 1,
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "purchase_invoice",
+   "fieldtype": "Link",
+   "label": "فاتورة المشتريات",
+   "no_copy": 1,
+   "options": "Purchase Invoice",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Subcontract Claim",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "Subcontract Claim",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Construction Engineer",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}
