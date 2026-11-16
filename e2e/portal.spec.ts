@@ -27,3 +27,26 @@ test('logged in: Arabic RTL greeting with the full name', async ({ page }) => {
   await expect(greeting).toContainText('أهلاً', { timeout: 15000 })
   if (fullName) await expect(greeting).toContainText(fullName)
 })
+
+// Story P02-04: a temporary password allows only the change-password page.
+const tempUser = process.env.E2E_TEMP_USER || ''
+const tempPassword = process.env.E2E_TEMP_PASSWORD || ''
+
+test('temporary password: only the change-password page until changed', async ({ page }) => {
+  test.skip(!tempUser || !tempPassword, 'Set E2E_TEMP_USER and E2E_TEMP_PASSWORD')
+  const res = await page.request.post('/api/method/login', { form: { usr: tempUser, pwd: tempPassword } })
+  expect(res.ok(), await res.text()).toBeTruthy()
+
+  await page.goto('/portal')
+  await expect(page).toHaveURL(/\/update-password/)
+  const api = await page.request.get('/api/method/construction_core.api.portal.get_me')
+  expect(api.status()).toBe(403)
+
+  const newPassword = 'Nw-' + tempPassword + '-9x'
+  await page.fill('#old_password', tempPassword)
+  await page.fill('#new_password', newPassword)
+  await page.fill('#confirm_password', newPassword)
+  await page.locator('#update').click()
+  await page.waitForURL(/\/portal/, { timeout: 15000 })
+  await expect(page.getByTestId('greeting')).toContainText('أهلاً', { timeout: 15000 })
+})

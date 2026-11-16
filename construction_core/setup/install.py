@@ -27,10 +27,28 @@ ERPNEXT_DOCPERMS = {
 
 def after_install():
 	ensure_permissions()
+	apply_login_settings()
 
 
 def after_migrate():
 	ensure_permissions()
+	apply_login_settings()
+
+
+def apply_login_settings():
+	"""Phase 2, task 5: no self-signup, username login, lockout after 5 failed attempts."""
+	frappe.db.set_single_value("Website Settings", "disable_signup", 1)
+	frappe.db.set_single_value(
+		"System Settings",
+		{
+			"allow_login_using_user_name": 1,
+			"allow_consecutive_login_attempts": 5,
+			"allow_login_after_fail": 900,
+		},
+	)
+	# A Social Login Key set to "Allow" would override disable_signup for that provider.
+	for key in frappe.get_all("Social Login Key", filters={"sign_ups": "Allow"}, pluck="name"):
+		frappe.db.set_value("Social Login Key", key, "sign_ups", "Deny")
 
 
 def ensure_permissions():

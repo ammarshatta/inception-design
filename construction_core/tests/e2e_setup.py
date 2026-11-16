@@ -22,3 +22,19 @@ def create_e2e_user(email: str, password: str, first_name: str = "عميل", las
 	update_password(email, password)
 	frappe.db.commit()
 	return frappe.db.get_value("User", email, "full_name")
+
+
+def create_temp_password_client(username: str = "e2e.temp") -> dict:
+	"""A project plus a client added without email (temporary password), for Playwright."""
+	if not frappe.conf.get("allow_tests"):
+		frappe.throw("Only on test sites (allow_tests is off)")
+	from construction_core.api.admin import add_client
+	from construction_core.tests.factories import make_project
+
+	existing = frappe.db.get_value("User", {"username": username}, "name")
+	if existing:
+		frappe.delete_doc("User", existing, ignore_permissions=True, force=True)
+	project = make_project("مشروع تجربة كلمة السر المؤقتة", [])
+	res = add_client(project, "عميل مؤقت", "01098765432", username=username)
+	frappe.db.commit()
+	return {"username": res["username"], "password": res["temp_password"]}

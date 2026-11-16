@@ -308,11 +308,27 @@ permission_query_conditions = {
 }
 
 doc_events = {
-	"Project": {"after_insert": "construction_core.overrides.project.after_insert"},
+	"Project": {
+		"before_validate": "construction_core.overrides.project.before_validate",
+		"after_insert": "construction_core.overrides.project.after_insert",
+	},
 	"File": {"before_insert": "construction_core.overrides.file.before_insert"},
+	"User": {"before_insert": "construction_core.auth.user_before_insert"},
 }
 
-doctype_js = {"Project": "public/js/project.js"}
+doctype_js = {
+	"Project": "public/js/project.js",
+	"Phase Template": "public/js/phase_template.js",
+}
+
+# Temporary passwords: nothing but the change-password page until it is changed
+before_request = ["construction_core.auth.force_password_change"]
+
+override_whitelisted_methods = {
+	"frappe.core.doctype.user.user.update_password": "construction_core.auth.update_password",
+	"frappe.integrations.oauth2_logins.login_via_google": "construction_core.auth.login_via_google",
+	"frappe.integrations.oauth2_logins.login_via_facebook": "construction_core.auth.login_via_facebook",
+}
 
 jinja = {
 	"methods": [
@@ -323,4 +339,5 @@ jinja = {
 # The Vue portal: /portal and every route under it render www/portal.html
 website_route_rules = [
 	{"from_route": "/portal/<path:app_path>", "to_route": "portal"},
+	{"from_route": "/p/<project>", "to_route": "public_project"},
 ]

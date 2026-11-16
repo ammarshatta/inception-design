@@ -1,0 +1,9 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div dir="rtl" lang="ar" style="max-width: 560px; margin: 48px auto; text-align: center">
+	{% if branding.office_name %}<p style="color:#5B6661">{{ branding.office_name }}</p>{% endif %}
+	<h1 style="font-size: 24px">{{ _("صفحة المشروع هتكون جاهزة قريباً") }}</h1>
+	<p style="color:#5B6661">{{ _("اللينك ده شغال، والصفحة نفسها بتتعمل في مرحلة لاحقة.") }}</p>
+</div>
+{% endblock %}

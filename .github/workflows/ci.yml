@@ -123,6 +123,10 @@ jobs:
           bench use test_site
           bench --site test_site execute construction_core.tests.e2e_setup.create_e2e_user \
             --kwargs "{'email': 'e2e-client@example.com', 'password': '$E2E_PASSWORD'}"
+          bench --site test_site execute construction_core.tests.e2e_setup.create_temp_password_client > /tmp/temp_client.json
+          E2E_TEMP_USER="$(python3 -c "import json,ast;d=ast.literal_eval(open('/tmp/temp_client.json').read().strip().splitlines()[-1]);print(d['username'])")"
+          E2E_TEMP_PASSWORD="$(python3 -c "import json,ast;d=ast.literal_eval(open('/tmp/temp_client.json').read().strip().splitlines()[-1]);print(d['password'])")"
+          export E2E_TEMP_USER E2E_TEMP_PASSWORD
           (bench serve --port 8000 > /tmp/serve.log 2>&1 &)
           for i in $(seq 1 45); do curl -sf http://localhost:8000/api/method/ping && break; sleep 2; done
           cd apps/construction_core/e2e

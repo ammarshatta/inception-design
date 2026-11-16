@@ -20,7 +20,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 |---|---|---|---|---|---|
 | 0 | Foundation: app, portal skeleton, CI | ✅ (CI) | Cloud + CI | [phase-0.md](phase-0.md) | CI green: install, 33 tests, portal build, 2 Playwright tests. One local install is still to do. |
 | 1 | Data model and permissions | ✅ (CI) | Cloud + CI | [phase-1.md](phase-1.md) | Every required test passes in CI. Review the 4 decisions. |
-| 2 | Admin screens, client onboarding | ⬜ | | | |
+| 2 | Admin screens, client onboarding | 🔵 | Cloud + CI | [phase-2.md](phase-2.md) | Code written, waiting for CI |
 | 3 | Engineer portal, photo uploads | ⬜ | | | Screens: `docs/design/SCREENS.md` |
 | 4 | Client portal, chat, approvals | ⬜ | | | Screens drafted |
 | 5 | Design catalog, public pages, lead form | ⬜ | | | Screens drafted |
@@ -38,6 +38,20 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 17 | Reports and dashboards | ⬜ | | | |
 | 18 | AI assistant | ⬜ | | | |
 | 19 | Launch: hosting and compliance | ⬜ | | | The first time a server is involved |
+
+## Working mode (decided 16 Nov 2026)
+
+The owner asked for all phases to be built in a row and reviewed once at the end.
+- No approval is needed between phases.
+- CI must be green before the next phase starts.
+- Work stops only for paid services, accounts in the owner's name, phase 19 hosting, and legal questions.
+- Anything that needs a real phone, a real account or a manual check goes into "Owner checks at the end" below.
+
+## Owner checks at the end
+
+| Check | Phase |
+|---|---|
+| Timed admin run (under 3 minutes): project from a template + 2 clients + share link | 2 |
 
 ## Next actions (owner)
 
