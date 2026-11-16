@@ -1,6 +1,6 @@
 # Phase 7 — Sales pipeline and estimating
 
-**Status:** 🔵 Code written on 17 Nov 2026; waiting for CI.
+**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
 
 ## What was done
 
@@ -29,11 +29,11 @@
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| Engine: known totals with waste, overhead, profit and VAT, to the piastre (2235.26; 5840.51) | `test_estimating.TestEngine`, `test_estimate_total_with_vat` | pending CI |
-| A new Item Price after approval does not change the estimate | `test_approved_estimate_keeps_captured_price` | pending CI |
-| `compare_revisions` with an added, a removed and a changed line | `test_revise_and_compare` | pending CI |
+| Engine: known totals with waste, overhead, profit and VAT, to the piastre (2235.26; 5840.51) | `test_estimating.TestEngine`, `test_estimate_total_with_vat` | ✅ CI |
+| A new Item Price after approval does not change the estimate | `test_approved_estimate_keeps_captured_price` | ✅ CI |
+| `compare_revisions` with an added, a removed and a changed line | `test_revise_and_compare` | ✅ CI |
 | Lead → Opportunity → Estimate → Quotation end to end in Playwright | `e2e/sales.spec.ts`. It drives the server API and then opens the Kanban and the Quotation in the desk. | pending CI |
 | No `float(` in `costing/` | grep above | ✅ |
-| P07-02: the January price is used for a February estimate; prices cannot be deleted | `test_price_in_force_on_date`, `test_prices_cannot_be_deleted` | pending CI |
-| P07-03: assembly for 50 m² | `test_assembly_for_50_m2` | pending CI |
-| P07-07: import with per-row errors | `test_import_prices_with_row_errors` | pending CI |
+| P07-02: the January price is used for a February estimate; prices cannot be deleted | `test_price_in_force_on_date`, `test_prices_cannot_be_deleted` | ✅ CI |
+| P07-03: assembly for 50 m² | `test_assembly_for_50_m2` | ✅ CI |
+| P07-07: import with per-row errors | `test_import_prices_with_row_errors` | ✅ CI |

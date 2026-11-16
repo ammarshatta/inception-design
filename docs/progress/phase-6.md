@@ -1,6 +1,6 @@
 # Phase 6 — Money
 
-**Status:** 🔵 Code written on 16 Nov 2026; waiting for CI.
+**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
 
 ## What was done
 
@@ -27,9 +27,9 @@
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| Full cycle: Due → draft → submit → Payment Entry → Paid → the portal shows Paid | `test_money.test_full_cycle_and_cancel` | pending CI |
+| Full cycle: Due → draft → submit → Payment Entry → Paid → the portal shows Paid | `test_money.test_full_cycle_and_cancel` | ✅ CI |
 | Cancelling the Payment Entry returns the milestone to Invoiced | same test | pending CI |
-| Report totals equal the GL and Accounts Receivable to the piastre (amounts with piastres: 85000.55, 40000.25, 10000.10, 1500.5, 3200.25) | `test_report_matches_general_ledger` | pending CI |
+| Report totals equal the GL and Accounts Receivable to the piastre (amounts with piastres: 85000.55, 40000.25, 10000.10, 1500.5, 3200.25) | `test_report_matches_general_ledger` | ✅ CI |
 | No raw `float(` in money code | grep above | ✅ |
-| A submitted invoice cannot be edited | `test_submitted_invoice_cannot_be_edited` | pending CI |
-| P06-04: VAT at the rate the accountant entered | `test_vat_template_rate_from_accountant` | pending CI |
+| A submitted invoice cannot be edited | `test_submitted_invoice_cannot_be_edited` | ✅ CI |
+| P06-04: VAT at the rate the accountant entered | `test_vat_template_rate_from_accountant` | ✅ CI |

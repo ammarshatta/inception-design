@@ -1,6 +1,6 @@
 # Phase 3 — Engineer portal
 
-**Status:** 🔵 Code written on 16 Nov 2026; waiting for CI.
+**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
 
 ## What was done
 
@@ -26,10 +26,10 @@
 | Playwright on Slow 4G: 10 photos of 4 MB or more upload, and the update shows 10 | `e2e/engineer.spec.ts` (CI) | pending CI |
 | Each stored photo is under 500 KB with no GPS. Checked by downloading every file and checking for an EXIF block; a server unit test checks the GPS IFD. | `engineer.spec.ts`, `test_engineer_portal.test_photo_is_resized_and_stripped` | pending CI |
 | A private file URL is not served to a logged-out browser | `engineer.spec.ts` | pending CI |
-| `project_detail` on another engineer's project → permission error | `test_project_detail_other_project_denied` | pending CI |
+| `project_detail` on another engineer's project → permission error | `test_project_detail_other_project_denied` | ✅ CI |
 | Screens usable at 360 px (screenshots) | CI artifact `screenshots`, copied to `docs/progress/screens/phase-3/` | pending CI |
-| P03-03: ticking an item updates stage and project progress | `test_toggle_checklist_updates_progress` | pending CI |
-| P03-04: the client never sees internal updates | `test_client_stage_detail_hides_internal` | pending CI |
-| P03-05: a public copy is made and removed | `test_publishable_makes_public_copy` | pending CI |
+| P03-03: ticking an item updates stage and project progress | `test_toggle_checklist_updates_progress` | ✅ CI |
+| P03-04: the client never sees internal updates | `test_client_stage_detail_hides_internal` | ✅ CI |
+| P03-05: a public copy is made and removed | `test_publishable_makes_public_copy` | ✅ CI |
 | P03-06: the video limit message | `engineer.spec.ts`, 2nd test | pending CI |
 | P03-07: installable on Android Chrome | manifest and service worker tested; the install itself needs a real phone | ☐ (owner, at the end) |

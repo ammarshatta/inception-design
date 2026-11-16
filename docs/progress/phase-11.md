@@ -1,6 +1,6 @@
 # Phase 11 — Scheduling and crews
 
-**Status:** 🔵 Code written on 17 Nov 2026; waiting for CI.
+**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
 
 ## What was done
 
@@ -19,8 +19,8 @@
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| Working-day slide across a Friday, across a holiday, and along a chain of 3 dependencies | `test_scheduling.TestWorkingDays` | pending CI |
-| An overlap warning names the other project | `test_overlap_warns_and_names_project` | pending CI |
-| Stage dates update when tasks move | `test_stage_dates_follow_tasks` | pending CI |
+| Working-day slide across a Friday, across a holiday, and along a chain of 3 dependencies | `test_scheduling.TestWorkingDays` | ✅ CI |
+| An overlap warning names the other project | `test_overlap_warns_and_names_project` | ✅ CI |
+| Stage dates update when tasks move | `test_stage_dates_follow_tasks` | ✅ CI |
 | Playwright: drag a task in the Gantt | ⚠️ Not automated. The drag is ERPNext's own Gantt (it calls `frappe.desk.gantt.update_task`); our roll-up on save is tested. Check it by hand. | ☐ (owner) |
-| The foreman's view shows only their crew's assignments | `test_foreman_sees_only_own_crew` | pending CI |
+| The foreman's view shows only their crew's assignments | `test_foreman_sees_only_own_crew` | ✅ CI |

@@ -1,6 +1,6 @@
 # Phase 4 — Client portal
 
-**Status:** 🔵 Code written on 16 Nov 2026; waiting for CI.
+**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
 
 ## What was done
 
@@ -23,9 +23,9 @@
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| Changing an answered approval through the API fails, even for the admin | `test_client_portal.test_chat_and_approval_flow`, `test_approvals.py` | pending CI |
+| Changing an answered approval through the API fails, even for the admin | `test_client_portal.test_chat_and_approval_flow`, `test_approvals.py` | ✅ CI |
 | Two browsers: a message appears for the other user within 5 seconds | `e2e/chat.spec.ts` | pending CI |
-| Every portal method rejects another client's project (one subtest per method) | `test_every_method_rejects_other_project`, `test_answer_approval_other_project_rejected` | pending CI |
-| An internal update never appears on home, in the gallery or in notifications | `test_home_shows_last_three_non_internal`, `test_internal_never_in_gallery`, `test_update_notifies_client_internal_does_not` | pending CI |
+| Every portal method rejects another client's project (one subtest per method) | `test_every_method_rejects_other_project`, `test_answer_approval_other_project_rejected` | ✅ CI |
+| An internal update never appears on home, in the gallery or in notifications | `test_home_shows_last_three_non_internal`, `test_internal_never_in_gallery`, `test_update_notifies_client_internal_does_not` | ✅ CI |
 | The invoice PDF renders in Arabic RTL (screenshot) | CI renders the PDF with PlutoPrint (Frappe v16's built-in engine; the CI image has no wkhtmltopdf) and turns it into a PNG: `docs/progress/screens/` | pending CI |
-| P04-02: a 4-day delay is shown | `test_timeline_delay` | pending CI |
+| P04-02: a 4-day delay is shown | `test_timeline_delay` | ✅ CI |

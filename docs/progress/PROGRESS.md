@@ -30,7 +30,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 | 9 | Finish selections | 🟢 | Cloud + CI | [phase-9.md](phase-9.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
 | 10 | Change orders | 🟢 | Cloud + CI | [phase-10.md](phase-10.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
 | 11 | Scheduling and crews | 🟢 | Cloud + CI | [phase-11.md](phase-11.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
-| 12 | Daily logs, timesheets, GPS clock-in | 🟢 | Cloud + CI | [phase-12.md](phase-12.md) | Unit tests green; e2e pending. Weekly PDF (Could) not done |
+| 12 | Daily logs, timesheets, GPS clock-in | 🟢 | Cloud + CI | [phase-12.md](phase-12.md) | Unit tests green; e2e pending |
 | 13 | Subcontractors and procurement | 🟢 | Cloud + CI | [phase-13.md](phase-13.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
 | 14 | Documents, markup, takeoff | 🟢 | Cloud + CI | [phase-14.md](phase-14.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
 | 15 | Online payments and reminders | 🟢 | Cloud + CI | [phase-15.md](phase-15.md) | Unit tests green in CI (run 43975747126); e2e being fixed; sandbox run needs the owner |

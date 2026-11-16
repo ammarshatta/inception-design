@@ -1,6 +1,6 @@
 # Phase 14 — Documents, photo markup and takeoff
 
-**Status:** 🔵 Code written on 17 Nov 2026; waiting for CI.
+**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
 
 **Approval:** built without waiting between phases, as the owner asked on 16 Nov 2026. CI is the gate.
 
@@ -35,9 +35,9 @@ No library was added for markup: it is plain SVG + canvas, so there is nothing t
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| Area and length: 4×5 m rectangle at a known scale = 20 m²; L-shape polygon | `test_documents.TestGeometry` | pending CI |
-| New version keeps the old one downloadable; client sees the current one only | `test_versions_and_client_visibility` | pending CI |
-| Markup saves and re-opens with editable shapes; original unchanged (hash) | `test_markup_keeps_original` | pending CI |
+| Area and length: 4×5 m rectangle at a known scale = 20 m²; L-shape polygon | `test_documents.TestGeometry` | ✅ CI |
+| New version keeps the old one downloadable; client sees the current one only | `test_versions_and_client_visibility` | ✅ CI |
+| Markup saves and re-opens with editable shapes; original unchanged (hash) | `test_markup_keeps_original` | ✅ CI |
 | Playwright: calibrate, measure an area, push it to an estimate line | `e2e/takeoff.spec.ts` | pending CI |
-| A client cannot download a non-visible document even with its URL | `test_versions_and_client_visibility` (File permission) | pending CI |
-| P14-04 AC2: measured area becomes an estimate line's quantity | `TestTakeoffToEstimate` + e2e | pending CI |
+| A client cannot download a non-visible document even with its URL | `test_versions_and_client_visibility` (File permission) | ✅ CI |
+| P14-04 AC2: measured area becomes an estimate line's quantity | `TestTakeoffToEstimate` + e2e | ✅ CI |

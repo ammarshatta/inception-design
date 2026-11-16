@@ -1,6 +1,6 @@
 # Phase 5 — Public pages
 
-**Status:** 🔵 Code written on 16 Nov 2026; waiting for CI.
+**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
 
 ## What was done
 
@@ -25,8 +25,8 @@
 | Criterion | Evidence | Result |
 |---|---|---|
 | Playwright: `/` → `/designs` → filter → design (floor plan and stages) → request → the Lead exists | `e2e/public.spec.ts` | pending CI |
-| Leak test: every public method, with every public setting on, contains none of: phone, mobile, email, amount, customer, internal_only, /private/ | `test_public_site.test_leak_test_every_public_method` | pending CI |
-| A private project, an unpublished design and an expired or revoked token give an identical 404 | `test_identical_404s`, `test_unpublished_design_404_and_public_copies_removed`, e2e 404 test | pending CI |
+| Leak test: every public method, with every public setting on, contains none of: phone, mobile, email, amount, customer, internal_only, /private/ | `test_public_site.test_leak_test_every_public_method` | ✅ CI |
+| A private project, an unpublished design and an expired or revoked token give an identical 404 | `test_identical_404s`, `test_unpublished_design_404_and_public_copies_removed`, e2e 404 test | ✅ CI |
 | The 6th request from one IP within an hour is rejected | `e2e/public.spec.ts` (rate limit) | pending CI |
 | P05-05: privacy and data-deletion pages in Arabic | e2e | pending CI |
-| P05-06: the demo removal command deletes the design and its files | `test_demo_remove` | pending CI |
+| P05-06: the demo removal command deletes the design and its files | `test_demo_remove` | ✅ CI |

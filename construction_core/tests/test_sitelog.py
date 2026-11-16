@@ -169,3 +169,16 @@ class TestClockAndTimesheets(IntegrationTestCase):
 		self.assertNotIn("سر", text)
 		self.assertNotIn("manpower", text)
 		self.assertNotIn("headcount", text)
+
+
+class TestClientWeek(IntegrationTestCase):
+	def test_week_summary_and_access(self):
+		w = make_world()
+		with self.set_user(w.users.eng1):
+			sitelog.save_daily_log(w.p1, {"log_date": nowdate(), "work_done": "دهان الريسبشن"})
+		with self.set_user(w.users.client1):
+			week = sitelog.client_week(w.p1)
+			self.assertGreaterEqual(week["days_worked"], 1)
+			self.assertTrue(all(p.startswith("data:image/") for p in week["photos"]))
+		with self.set_user(w.users.client2):
+			self.assertRaises(frappe.PermissionError, sitelog.client_week, w.p1)

@@ -1,6 +1,6 @@
 # Phase 9 — Finish selections
 
-**Status:** 🔵 Code written on 17 Nov 2026; waiting for CI.
+**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
 
 ## What was done
 
@@ -19,7 +19,7 @@
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| Price difference with the allowance above, equal to and below the price | `test_selections_changes.TestPriceDifference` | pending CI |
+| Price difference with the allowance above, equal to and below the price | `test_selections_changes.TestPriceDifference` | ✅ CI |
 | The client chooses over the allowance, signs, and a draft Change Order with the right amount exists | `test_over_allowance_sign_creates_draft_change_order` (Playwright for this flow is added with phase 10's cycle) | pending CI |
-| A locked selection cannot be changed by the client or the engineer | `test_locked_cannot_change` | pending CI |
-| The purchase list shows only approved selections, with the right quantities | `test_purchase_list_only_approved` | pending CI |
+| A locked selection cannot be changed by the client or the engineer | `test_locked_cannot_change` | ✅ CI |
+| The purchase list shows only approved selections, with the right quantities | `test_purchase_list_only_approved` | ✅ CI |

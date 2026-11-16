@@ -22,7 +22,7 @@
 
 ## Not done
 
-- **P12-05 weekly summary PDF (Could):** the numbers exist (`week_summary`), the PDF and its weekly email are not built. Left for after the Must stories of later phases.
+- (Done later, 17 Nov) **P12-05 weekly summary PDF:** print format "Inceptiondesign Weekly Client" (days worked, progress, work done, up to 6 photos embedded), emailed to the project's clients every Saturday 9 AM when an email account exists (`sitelog.send_client_weekly`), and downloadable with `sitelog.client_week_pdf`.
 - Client portal page for daily logs: the API exists (`client_daily_logs`); the page is not added yet.
 - Offline clock-in (phase 16 adds the offline queue).
 
@@ -43,5 +43,5 @@
 | P12-03 AC1: matched events → Timesheet; submit raises labor cost by hours × rate | `test_timesheet_from_events_raises_labor_cost` (6 h × 50 = 300) | ✅ CI |
 | P12-03 AC2: In without Out → flagged, not counted | same test + `test_pairing_with_missing_out` | ✅ CI |
 | P12-04: client sees work done, no manpower | `test_daily_log_one_per_day_and_client_view` | ✅ CI |
-| P12-05: weekly PDF | — | ✗ not built (Could) |
+| P12-05: weekly PDF | `test_sitelog.TestClientWeek` (data + access); the email needs an email account on a real site | ✅ CI · ☐ (owner) |
 | Real phone at the site | Owner check | ☐ (owner) |

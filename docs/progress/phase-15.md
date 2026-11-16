@@ -1,6 +1,6 @@
 # Phase 15 — Online payments and reminders
 
-**Status:** 🔵 Code written on 17 Nov 2026; waiting for CI. **Sandbox run needs the owner's Paymob test account** (see below).
+**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
 
 **Approval:** built without waiting between phases, as the owner asked on 16 Nov 2026. CI is the gate.
 
@@ -44,12 +44,12 @@
 
 | Criterion | Evidence | Result |
 |---|---|---|
-| Pay a milestone, webhook received, Payment Entry submitted, portal shows Paid | `test_payments.test_pay_due_milestone_by_webhook_once` (gateway mocked) | pending CI |
+| Pay a milestone, webhook received, Payment Entry submitted, portal shows Paid | `test_payments.test_pay_due_milestone_by_webhook_once` (gateway mocked) | ✅ CI |
 | Sandbox end to end with the real Paymob test environment | needs the owner's Paymob test account | ☐ (owner) |
-| Bad HMAC rejected and logged; duplicate webhook → one Payment Entry | `test_bad_signature_rejected_and_logged`, `test_pay_due_milestone_by_webhook_once` | pending CI |
-| Missed-webhook sweep reconciles (mocked gateway) | `test_sweep_reconciles_missed_webhook` | pending CI |
-| Reminders over a simulated 30 days: days 7, 10, 17, 24 only | `test_thirty_days_exactly_four_reminders` | pending CI |
-| Transfer receipt → accountant notified → confirm creates the Payment Entry | `test_manual_transfer_confirmed_by_accountant` | pending CI |
+| Bad HMAC rejected and logged; duplicate webhook → one Payment Entry | `test_bad_signature_rejected_and_logged`, `test_pay_due_milestone_by_webhook_once` | ✅ CI |
+| Missed-webhook sweep reconciles (mocked gateway) | `test_sweep_reconciles_missed_webhook` | ✅ CI |
+| Reminders over a simulated 30 days: days 7, 10, 17, 24 only | `test_thirty_days_exactly_four_reminders` | ✅ CI |
+| Transfer receipt → accountant notified → confirm creates the Payment Entry | `test_manual_transfer_confirmed_by_accountant` | ✅ CI |
 | Receipt PDF in the portal | same webhook test (`receipt_pdf`) | pending CI |
-| Refund only by Accounts Manager, gateway refund + reversal with note | `test_refund_only_accounts_manager` | pending CI |
-| No gateway secret in git; live keys never used locally | Password fields; `test_live_keys_refused_on_test_site` | pending CI |
+| Refund only by Accounts Manager, gateway refund + reversal with note | `test_refund_only_accounts_manager` | ✅ CI |
+| No gateway secret in git; live keys never used locally | Password fields; `test_live_keys_refused_on_test_site` | ✅ CI |

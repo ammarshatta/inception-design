@@ -1,6 +1,6 @@
 # Phase 2 — Admin screens and client onboarding
 
-**Status:** 🔵 In progress. Code written on 16 Nov 2026; waiting for CI.
+**Status:** 🟢 Unit tests green in CI (run 43975747126, 17 Nov 2026). Playwright results are recorded in PROGRESS.md as they come in.
 
 **Approval:** on 16 Nov 2026 the owner asked for every phase to be built without waiting for approval between phases, with one review at the end. CI is the gate between phases.
 
@@ -42,9 +42,9 @@
 |---|---|---|
 | Timed manual run: create a project from a template, add one client with email and one with username, publish by link, all in under 3 minutes | Needs the owner on a real site | ☐ (owner) |
 | Playwright: a temporary password shows only the change-password page, then reaches `/portal` | `e2e/portal.spec.ts`, 3rd test (CI) | pending CI |
-| Unit test: the OAuth path cannot create a new user | `test_auth_sharing.TestNoOAuthSignup` | pending CI |
-| After "لينك جديد" the old token is invalid; expired and private links fail | `test_auth_sharing.TestShareLinks` | pending CI |
-| P02-01: reorder stages, and the total updates | `test_onboarding.TestStagesOrdering` | pending CI |
-| P02-02: client with email; invalid mobile rejected | `test_client_with_email`, `test_mobile_validation` | pending CI |
-| P02-03: client without email gets a 12-character password and a wa.me link | `test_client_without_email` | pending CI |
-| P02-05: an added engineer sees the project | `test_add_engineer` | pending CI |
+| Unit test: the OAuth path cannot create a new user | `test_auth_sharing.TestNoOAuthSignup` | ✅ CI |
+| After "لينك جديد" the old token is invalid; expired and private links fail | `test_auth_sharing.TestShareLinks` | ✅ CI |
+| P02-01: reorder stages, and the total updates | `test_onboarding.TestStagesOrdering` | ✅ CI |
+| P02-02: client with email; invalid mobile rejected | `test_client_with_email`, `test_mobile_validation` | ✅ CI |
+| P02-03: client without email gets a 12-character password and a wa.me link | `test_client_without_email` | ✅ CI |
+| P02-05: an added engineer sees the project | `test_add_engineer` | ✅ CI |

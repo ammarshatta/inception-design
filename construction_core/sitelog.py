@@ -349,3 +349,83 @@ def week_summary(project: str, week_end: str | None = None) -> dict:
 		"progress": flt(frappe.db.get_value("Project", project, "weighted_progress")),
 		"days": logs,
 	}
+
+
+# --- Weekly client summary PDF (P12-05) ------------------------------------------------
+
+CLIENT_WEEK_FORMAT = "Inceptiondesign Weekly Client"
+
+
+def client_week(project: str) -> dict:
+	"""Jinja method for the print format: the week's logs and up to 6 public-safe photos."""
+	data = week_summary(project)
+	photos = frappe.db.sql(
+		"""select m.file from `tabStage Update Media` m join `tabStage Update` u on u.name = m.parent
+		where u.project = %s and u.internal_only = 0 and m.kind = 'Photo' and u.creation >= %s
+		order by u.creation desc limit 6""",
+		(project, data["from"]),
+		pluck=True,
+	)
+	import base64
+
+	embedded = []
+	for url in photos:
+		try:
+			content = frappe.get_doc("File", {"file_url": url}).get_content()
+		except Exception:
+			continue
+		# private photos are embedded, so the PDF never needs a public link to them
+		embedded.append("data:image/jpeg;base64," + base64.b64encode(content).decode())
+	return {**data, "photos": embedded}
+
+
+def send_client_weekly():
+	"""Saturday (hooks cron): each open project's clients get the week's PDF by email."""
+	if not frappe.db.exists("Email Account", {"enable_outgoing": 1, "default_outgoing": 1}):
+		return []
+	from construction_core.notifications import _clients
+	from construction_core.utils import as_system
+
+	sent = []
+	for project in frappe.get_all("Project", filters={"status": "Open"}, pluck="name"):
+		if not frappe.db.exists(
+			"Daily Log", {"project": project, "internal_only": 0, "log_date": [">=", add_days(nowdate(), -6)]}
+		):
+			continue
+		emails = [
+			e
+			for e in (frappe.db.get_value("User", u, "email") for u in _clients(project))
+			if e and not e.endswith(".invalid")
+		]
+		if not emails:
+			continue
+		with as_system():
+			pdf = frappe.get_print(
+				"Project", project, print_format=CLIENT_WEEK_FORMAT, as_pdf=True, no_letterhead=1
+			)
+		frappe.sendmail(
+			recipients=emails,
+			subject=_("ملخص الأسبوع: {0}").format(frappe.db.get_value("Project", project, "project_name")),
+			message=_("ملخص شغل الأسبوع في مشروعك مرفق."),
+			attachments=[{"fname": "week.pdf", "fcontent": pdf}],
+			now=False,
+		)
+		sent.append(project)
+	return sent
+
+
+@frappe.whitelist()
+def client_week_pdf(project: str):
+	"""The same PDF from the portal."""
+	from werkzeug.wrappers import Response
+
+	from construction_core.utils import as_system
+
+	assert_project_access(project)
+	with as_system():
+		pdf = frappe.get_print(
+			"Project", project, print_format=CLIENT_WEEK_FORMAT, as_pdf=True, no_letterhead=1
+		)
+	resp = Response(pdf, content_type="application/pdf")
+	resp.headers["Content-Disposition"] = 'attachment; filename="week.pdf"'
+	return resp
