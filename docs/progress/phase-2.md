@@ -1,6 +1,6 @@
 # Phase 2 — Admin screens and client onboarding
 
-**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026) except the temporary-password browser test, fixed in the next commit.
+**Status:** ✅ Unit tests (166) and Playwright tests green in CI run 43977742055 (17 Nov 2026) — and the temporary-password browser test in run 43980628912.
 
 **Approval:** on 16 Nov 2026 the owner asked for every phase to be built without waiting for approval between phases, with one review at the end. CI is the gate between phases.
 
@@ -45,7 +45,7 @@ Frappe's change-password page sends its call as a POST to `/` with `cmd=frappe.c
 | Criterion | Evidence | Result |
 |---|---|---|
 | Timed manual run: create a project from a template, add one client with email and one with username, publish by link, all in under 3 minutes | Needs the owner on a real site | ☐ (owner) |
-| Playwright: a temporary password shows only the change-password page, then reaches `/portal` | `e2e/portal.spec.ts`, 3rd test (CI) | pending CI |
+| Playwright: a temporary password shows only the change-password page, then reaches `/portal` | `e2e/portal.spec.ts`, 3rd test (CI) | ✅ CI (run 43980628912) |
 | Unit test: the OAuth path cannot create a new user | `test_auth_sharing.TestNoOAuthSignup` | ✅ CI |
 | After "لينك جديد" the old token is invalid; expired and private links fail | `test_auth_sharing.TestShareLinks` | ✅ CI |
 | P02-01: reorder stages, and the total updates | `test_onboarding.TestStagesOrdering` | ✅ CI |

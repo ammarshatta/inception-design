@@ -20,7 +20,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 |---|---|---|---|---|---|
 | 0 | Foundation: app, portal skeleton, CI | ✅ (CI) | Cloud + CI | [phase-0.md](phase-0.md) | CI green: install, 33 tests, portal build, 2 Playwright tests. One local install is still to do. |
 | 1 | Data model and permissions | ✅ (CI) | Cloud + CI | [phase-1.md](phase-1.md) | Every required test passes in CI. Review the 4 decisions. |
-| 2 | Admin screens, client onboarding | 🟢 | Cloud + CI | [phase-2.md](phase-2.md) | Unit green; the temporary-password browser test is the last one being fixed |
+| 2 | Admin screens, client onboarding | ✅ (CI) | Cloud + CI | [phase-2.md](phase-2.md) | Unit + Playwright green (run 43980628912); fixed the forced password change |
 | 3 | Engineer portal, photo uploads | ✅ (CI) | Cloud + CI | [phase-3.md](phase-3.md) | Unit + Playwright green (run 43977742055) |
 | 4 | Client portal, chat, approvals | ✅ (CI) | Cloud + CI | [phase-4.md](phase-4.md) | Unit + Playwright green (run 43977742055) |
 | 5 | Design catalog, public pages, lead form | ✅ (CI) | Cloud + CI | [phase-5.md](phase-5.md) | Unit + Playwright green (run 43977742055) |
@@ -96,4 +96,4 @@ The owner asked for all phases to be built in a row and reviewed once at the end
 |---|---|---|
 | 16 Nov 2026 | Cloud | Phases 0 and 1 code written. Plan, backlog and design docs added. |
 | 16 Nov 2026 | CI | 8 CI runs. Fixed welcome emails, the permission test method, the portal build path and the office-name fallback. All green. |
-| 17 Nov 2026 | Cloud + CI | Phases 2–18 built. CI run 43977742055: 166 unit tests pass, 16 of 17 Playwright tests pass. Phase 19 prepared (deploy files, docs, security review); hosting waits for the owner. |
+| 17 Nov 2026 | Cloud + CI | Phases 2–18 built. CI run 43980628912: 166 unit tests and all 17 Playwright tests pass. Phase 19 prepared (deploy files, docs, security review); hosting waits for the owner. |

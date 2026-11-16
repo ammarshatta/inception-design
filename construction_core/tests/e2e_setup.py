@@ -222,6 +222,11 @@ def peek_otp(request: str) -> str:
 
 
 def signed_pdf_path(request: str) -> str:
-	return frappe.get_doc(
-		"File", {"file_url": frappe.db.get_value("Signature Request", request, "signed_pdf")}
-	).get_full_path()
+	"""Absolute path (bench execute runs inside sites/, the CI step runs from the bench root)."""
+	import os
+
+	return os.path.abspath(
+		frappe.get_doc(
+			"File", {"file_url": frappe.db.get_value("Signature Request", request, "signed_pdf")}
+		).get_full_path()
+	)
