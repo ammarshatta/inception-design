@@ -349,6 +349,8 @@ scheduler_events = {
 	],
 	"cron": {
 		"*/15 * * * *": ["construction_core.payments.online.sweep_pending"],
+		# Saturday 9 AM (server time; the site time zone is Africa/Cairo)
+		"0 9 * * 6": ["construction_core.analytics.send_weekly_summary"],
 	},
 }
 
@@ -402,6 +404,7 @@ jinja = {
 	"methods": [
 		"construction_core.branding.get_branding",
 		"construction_core.esign.render_contract_body",
+		"construction_core.analytics.owner_summary",
 	],
 }
 

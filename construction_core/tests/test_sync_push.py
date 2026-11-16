@@ -1,6 +1,7 @@
 """Phase 16: idempotent offline sync, checklist conflict rule, push categories and VAPID."""
 
 import json
+from datetime import UTC
 from unittest.mock import patch
 
 import frappe
@@ -9,6 +10,12 @@ from frappe.utils import add_days, add_to_date, now_datetime
 
 from construction_core import push, sync
 from construction_core.tests.factories import make_world, stages_of
+
+
+def utc_now_iso() -> str:
+	from datetime import datetime, timezone
+
+	return datetime.now(UTC).isoformat().replace("+00:00", "Z")
 
 
 class TestSync(IntegrationTestCase):
@@ -21,7 +28,7 @@ class TestSync(IntegrationTestCase):
 		stage = stages_of(self.w.p1)[0]
 		payload = {"project": self.w.p1, "stage": stage, "text": "تحديث من غير نت"}
 		with self.set_user(self.w.users.eng1):
-			first = sync.apply("uuid-update-1", "create_update", payload, str(now_datetime()))
+			first = sync.apply("uuid-update-1", "create_update", payload, utc_now_iso())
 			# the browser was closed before it saw the answer, and sends again
 			second = sync.apply("uuid-update-1", "create_update", json.dumps(payload), str(now_datetime()))
 		self.assertEqual(first["status"], "done")
@@ -67,6 +74,17 @@ class TestSync(IntegrationTestCase):
 				str(now_datetime()),
 			)
 			self.assertEqual(res["status"], "done")
+
+	def test_utc_phone_time_becomes_site_time(self):
+		from datetime import datetime, timezone
+		from zoneinfo import ZoneInfo
+
+		from frappe.utils import get_system_timezone
+
+		utc = datetime.now(UTC).replace(microsecond=0)
+		local = sync._client_time(utc.isoformat().replace("+00:00", "Z"))
+		self.assertIsNone(local.tzinfo)
+		self.assertEqual(local, utc.astimezone(ZoneInfo(get_system_timezone())).replace(tzinfo=None))
 
 	def test_clock_keeps_phone_time_and_rejects_very_old(self):
 		frappe.db.set_single_value("Inceptiondesign Settings", "enable_gps_clock_in", 1)

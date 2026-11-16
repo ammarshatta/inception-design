@@ -51,7 +51,7 @@
       <button class="min-h-[44px] rounded-[10px] bg-[#1D6B57] text-sm font-bold text-white">{{ __('ابعت طلب الموافقة') }}</button>
     </form>
 
-    <form class="flex items-center gap-2 bg-[#F4F5F2] px-3 py-2" @submit.prevent="send">
+    <form class="flex items-center gap-2 bg-[#F4F5F2] px-3 py-2" @submit.prevent="send()">
       <label class="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#E2E5E0] bg-white" :aria-label="__('إرفاق صورة')">
         📎
         <input type="file" accept="image/*" class="hidden" @change="attach" />

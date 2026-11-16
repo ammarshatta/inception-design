@@ -12,6 +12,7 @@ const routes = [
   { path: '/takeoff/:name?', name: 'Takeoff', component: () => import('@/pages/TakeoffPage.vue'), props: true },
   { path: '/sync', name: 'Sync', component: () => import('@/pages/SyncPage.vue') },
   { path: '/settings', name: 'Settings', component: () => import('@/pages/SettingsPage.vue') },
+  { path: '/assistant', name: 'Assistant', component: () => import('@/pages/AssistantPage.vue') },
   { path: '/stages/:name', name: 'Stage', component: () => import('@/pages/StagePage.vue'), props: true },
   { path: '/foreman', name: 'Foreman', component: () => import('@/pages/ForemanPage.vue') },
   { path: '/sign/:name', name: 'Sign', component: () => import('@/pages/SignPage.vue'), props: true },

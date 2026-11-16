@@ -55,7 +55,11 @@ test('temporary password: only the change-password page until changed', async ({
   await page.waitForTimeout(1500)
   console.log('update-password page errors:', JSON.stringify(consoleErrors))
   await expect(page.locator('#update'), consoleErrors.join(' | ')).toBeEnabled({ timeout: 10000 })
-  await page.locator('#update').click()
-  await page.waitForURL(/\/portal/, { timeout: 15000 })
+  const [upd] = await Promise.all([
+    page.waitForResponse((r) => r.url().includes('update_password')),
+    page.locator('#update').click(),
+  ])
+  console.log('update_password response:', upd.status(), (await upd.text()).slice(0, 300))
+  await page.waitForURL((u) => u.pathname.startsWith('/portal'), { timeout: 15000 })
   await expect(page.getByTestId('greeting')).toContainText('أهلاً', { timeout: 15000 })
 })

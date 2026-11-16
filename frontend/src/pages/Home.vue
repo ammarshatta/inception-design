@@ -8,6 +8,7 @@
         <div class="mt-1 flex items-center gap-2">
           <SyncBadge />
           <RouterLink to="/settings" class="text-xs font-semibold text-[#1D6B57]" data-testid="open-settings">{{ __('الإعدادات والإشعارات') }}</RouterLink>
+          <RouterLink v-if="me.data.features?.enable_ai_assistant && (me.data.roles.engineer || me.data.roles.admin)" to="/assistant" class="text-xs font-semibold text-[#1D6B57]" data-testid="open-assistant">{{ __('المساعد') }}</RouterLink>
         </div>
       </header>
 
@@ -26,6 +27,21 @@
           <span class="text-sm font-semibold">{{ s.title }}</span>
           <span class="text-xs">{{ ['Sent', 'Viewed'].includes(s.status) ? __('وقّع') : s.status === 'Signed' ? __('اتوقّع') : s.status }}</span>
         </RouterLink>
+      </section>
+
+      <section v-if="dash" class="mx-4 mt-2 flex flex-col gap-2 rounded-[14px] bg-white p-3.5" data-testid="engineer-dashboard">
+        <h2 class="text-sm font-bold">{{ __('أولوياتي النهارده') }}</h2>
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="flex flex-col rounded-lg bg-[#F4F5F2] p-2"><span class="num text-lg font-bold">{{ dash.tasks_today.length }}</span><span class="text-[11px] text-[#5B6661]">{{ __('مهام النهارده') }}</span></div>
+          <div class="flex flex-col rounded-lg bg-[#F4F5F2] p-2"><span class="num text-lg font-bold" :class="dash.overdue_selections.length ? 'text-[#B42318]' : ''">{{ dash.overdue_selections.length }}</span><span class="text-[11px] text-[#5B6661]">{{ __('اختيارات متأخرة') }}</span></div>
+          <div class="flex flex-col rounded-lg bg-[#F4F5F2] p-2"><span class="num text-lg font-bold">{{ dash.pending_approvals.length + dash.client_requests.length }}</span><span class="text-[11px] text-[#5B6661]">{{ __('مستني رد') }}</span></div>
+        </div>
+        <ul class="text-sm">
+          <li v-for="t in dash.tasks_today" :key="t.name" class="border-t border-[#EEF0EC] py-1.5">{{ t.subject }} <span class="text-xs text-[#5B6661]">· {{ t.project_name }}</span></li>
+          <li v-for="s in dash.overdue_selections" :key="s.name" class="border-t border-[#EEF0EC] py-1.5 text-[#B42318]">{{ __('اختيار متأخر') }}: {{ s.title }} <span class="text-xs">· {{ s.project_name }}</span></li>
+          <li v-for="a in dash.pending_approvals" :key="a.name" class="border-t border-[#EEF0EC] py-1.5">{{ __('موافقة') }}: {{ a.approval_title }} <span class="text-xs text-[#5B6661]">· {{ a.project_name }}</span></li>
+          <li v-for="c in dash.client_requests" :key="c.name" class="border-t border-[#EEF0EC] py-1.5">{{ __('طلب تعديل') }}: {{ c.title }} <span class="text-xs text-[#5B6661]">· {{ c.project_name }}</span></li>
+        </ul>
       </section>
 
       <section v-if="projects.length || !loadingProjects" class="flex flex-col gap-2.5 px-4 pb-24 pt-2">
@@ -67,6 +83,7 @@ import ProgressBar from '@/components/ProgressBar.vue'
 const router = useRouter()
 const projects = ref<any[]>([])
 const signatures = ref<any[]>([])
+const dash = ref<any>(null)
 
 function isClientOnly() {
   const r = me.data?.roles
@@ -88,6 +105,9 @@ onMounted(async () => {
     projects.value = await cachedCall('construction_core.api.portal.my_projects')
     await me.promise?.catch(() => {})
     if (!me.data) await me.fetch()
+    if (me.data?.roles?.engineer) {
+      dash.value = await cachedCall('construction_core.analytics.engineer_dashboard').catch(() => null)
+    }
     if (isSigner()) {
       signatures.value = await call('construction_core.esign.my_signature_requests')
       const pending = signatures.value.some((s) => ['Sent', 'Viewed'].includes(s.status))

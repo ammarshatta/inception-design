@@ -1,0 +1,110 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "hash",
+ "creation": "2026-11-17 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "conversation",
+  "user",
+  "tool",
+  "ok",
+  "input_json",
+  "output_json",
+  "tokens_in",
+  "tokens_out",
+  "cost_usd",
+  "at"
+ ],
+ "fields": [
+  {
+   "fieldname": "conversation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المحادثة",
+   "options": "AI Conversation"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المستخدم",
+   "options": "User"
+  },
+  {
+   "fieldname": "tool",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الأداة"
+  },
+  {
+   "fieldname": "ok",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "نجحت"
+  },
+  {
+   "fieldname": "input_json",
+   "fieldtype": "Code",
+   "label": "المدخلات",
+   "options": "JSON"
+  },
+  {
+   "fieldname": "output_json",
+   "fieldtype": "Code",
+   "label": "المخرجات",
+   "options": "JSON"
+  },
+  {
+   "fieldname": "tokens_in",
+   "fieldtype": "Int",
+   "label": "توكن داخل"
+  },
+  {
+   "fieldname": "tokens_out",
+   "fieldtype": "Int",
+   "label": "توكن خارج"
+  },
+  {
+   "fieldname": "cost_usd",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "التكلفة (دولار)",
+   "precision": "6"
+  },
+  {
+   "fieldname": "at",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "الوقت"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "AI Tool Log",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "read": 1,
+   "report": 1,
+   "role": "System Manager"
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Construction Admin"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

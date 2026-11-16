@@ -1,0 +1,27 @@
+# Used with frappe_docker's compose.yaml and its overrides (mariadb, redis, https):
+#   docker compose -f compose.yaml -f overrides/compose.mariadb.yaml -f overrides/compose.redis.yaml \
+#     -f overrides/compose.https.yaml -f ../inception-design/deploy/compose.override.yaml --env-file .env up -d
+# Pins our image and the Cairo time zone on every container.
+x-tz: &tz
+  TZ: Africa/Cairo
+services:
+  backend:
+    image: ${CUSTOM_IMAGE}:${CUSTOM_TAG}
+    environment: *tz
+  frontend:
+    image: ${CUSTOM_IMAGE}:${CUSTOM_TAG}
+    environment: *tz
+  websocket:
+    image: ${CUSTOM_IMAGE}:${CUSTOM_TAG}
+    environment: *tz
+  queue-short:
+    image: ${CUSTOM_IMAGE}:${CUSTOM_TAG}
+    environment: *tz
+  queue-long:
+    image: ${CUSTOM_IMAGE}:${CUSTOM_TAG}
+    environment: *tz
+  scheduler:
+    image: ${CUSTOM_IMAGE}:${CUSTOM_TAG}
+    environment: *tz
+  configurator:
+    image: ${CUSTOM_IMAGE}:${CUSTOM_TAG}

@@ -1,0 +1,40 @@
+name: Image
+# Builds the production image (frappe + erpnext + construction_core) when a tag vX.Y.Z is pushed,
+# and pushes it to GitHub Container Registry (private). Nothing is deployed from here:
+# the owner runs deploy/deploy.sh <tag> on the server after CI is green.
+on:
+  push:
+    tags: ["v*.*.*"]
+permissions:
+  contents: read
+  packages: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: frappe/frappe_docker
+          path: frappe_docker
+      - uses: actions/checkout@v4
+        with:
+          path: app
+      - name: Pin our app to this tag in apps.json
+        run: |
+          sed "s#\"branch\": \"main\"#\"branch\": \"${GITHUB_REF_NAME}\"#" app/deploy/apps.json > apps.json
+          echo "APPS_JSON_BASE64=$(base64 -w 0 apps.json)" >> "$GITHUB_ENV"
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: frappe_docker
+          file: frappe_docker/images/layered/Containerfile
+          push: true
+          build-args: |
+            FRAPPE_PATH=https://github.com/frappe/frappe
+            FRAPPE_BRANCH=version-16
+            APPS_JSON_BASE64=${{ env.APPS_JSON_BASE64 }}
+          tags: ghcr.io/${{ github.repository_owner }}/inceptiondesign:${{ github.ref_name }}

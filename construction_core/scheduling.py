@@ -51,6 +51,8 @@ from datetime import date, timedelta
 from frappe import _
 from frappe.utils import getdate
 
+from construction_core.permissions import assert_project_access
+
 HOLIDAY_LIST = "إجازات المقاولات"
 # Fixed-date Egyptian public holidays (Islamic holidays move each year: the office adds them).
 FIXED_HOLIDAYS = [(1, 7), (1, 25), (4, 25), (5, 1), (6, 30), (7, 23), (10, 6)]
@@ -143,6 +145,9 @@ def slide_task(task: str, days: int, apply: int = 0) -> list[dict]:
 		"Projects Manager",
 	}:
 		frappe.throw(_("Not allowed"), frappe.PermissionError)
+	project = frappe.db.get_value("Task", task, "project")
+	if project:
+		assert_project_access(project, "write")  # an engineer moves only their own projects' tasks
 	off = holidays()
 	plan = []
 	for name in [task, *dependents(task)]:

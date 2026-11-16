@@ -20,24 +20,24 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 |---|---|---|---|---|---|
 | 0 | Foundation: app, portal skeleton, CI | ✅ (CI) | Cloud + CI | [phase-0.md](phase-0.md) | CI green: install, 33 tests, portal build, 2 Playwright tests. One local install is still to do. |
 | 1 | Data model and permissions | ✅ (CI) | Cloud + CI | [phase-1.md](phase-1.md) | Every required test passes in CI. Review the 4 decisions. |
-| 2 | Admin screens, client onboarding | 🔵 | Cloud + CI | [phase-2.md](phase-2.md) | Code written, waiting for CI |
-| 3 | Engineer portal, photo uploads | 🔵 | Cloud + CI | [phase-3.md](phase-3.md) | Code written, waiting for CI |
-| 4 | Client portal, chat, approvals | 🔵 | Cloud + CI | [phase-4.md](phase-4.md) | Code written, waiting for CI |
-| 5 | Design catalog, public pages, lead form | 🔵 | Cloud + CI | [phase-5.md](phase-5.md) | Code written, waiting for CI |
-| 6 | Money: milestones, invoices, expenses | 🔵 | Cloud + CI | [phase-6.md](phase-6.md) | Code written, waiting for CI |
-| 7 | Sales and estimating | 🔵 | Cloud + CI | [phase-7.md](phase-7.md) | Code written, waiting for CI |
-| 8 | Proposals and e-signature | 🔵 | Cloud + CI | [phase-8.md](phase-8.md) | Code written, waiting for CI |
-| 9 | Finish selections | 🔵 | Cloud + CI | [phase-9.md](phase-9.md) | Code written, waiting for CI |
-| 10 | Change orders | 🔵 | Cloud + CI | [phase-10.md](phase-10.md) | Code written, waiting for CI |
-| 11 | Scheduling and crews | 🔵 | Cloud + CI | [phase-11.md](phase-11.md) | Code written, waiting for CI |
+| 2 | Admin screens, client onboarding | 🟢 | Cloud + CI | [phase-2.md](phase-2.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 3 | Engineer portal, photo uploads | 🟢 | Cloud + CI | [phase-3.md](phase-3.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 4 | Client portal, chat, approvals | 🟢 | Cloud + CI | [phase-4.md](phase-4.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 5 | Design catalog, public pages, lead form | 🟢 | Cloud + CI | [phase-5.md](phase-5.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 6 | Money: milestones, invoices, expenses | 🟢 | Cloud + CI | [phase-6.md](phase-6.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 7 | Sales and estimating | 🟢 | Cloud + CI | [phase-7.md](phase-7.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 8 | Proposals and e-signature | 🟢 | Cloud + CI | [phase-8.md](phase-8.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 9 | Finish selections | 🟢 | Cloud + CI | [phase-9.md](phase-9.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 10 | Change orders | 🟢 | Cloud + CI | [phase-10.md](phase-10.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 11 | Scheduling and crews | 🟢 | Cloud + CI | [phase-11.md](phase-11.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
 | 12 | Daily logs, timesheets, GPS clock-in | 🟢 | Cloud + CI | [phase-12.md](phase-12.md) | Unit tests green; e2e pending. Weekly PDF (Could) not done |
-| 13 | Subcontractors and procurement | 🔵 | Cloud + CI | [phase-13.md](phase-13.md) | Code written, waiting for CI |
-| 14 | Documents, markup, takeoff | 🔵 | Cloud + CI | [phase-14.md](phase-14.md) | Code written, waiting for CI |
-| 15 | Online payments and reminders | 🔵 | Cloud + CI | [phase-15.md](phase-15.md) | Code written (gateway mocked); sandbox run needs the owner's Paymob test account |
-| 16 | Offline PWA and push | 🔵 | Cloud + CI | [phase-16.md](phase-16.md) | Code written, waiting for CI |
-| 17 | Reports and dashboards | ⬜ | | | |
-| 18 | AI assistant | ⬜ | | | |
-| 19 | Launch: hosting and compliance | ⬜ | | | The first time a server is involved |
+| 13 | Subcontractors and procurement | 🟢 | Cloud + CI | [phase-13.md](phase-13.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 14 | Documents, markup, takeoff | 🟢 | Cloud + CI | [phase-14.md](phase-14.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 15 | Online payments and reminders | 🟢 | Cloud + CI | [phase-15.md](phase-15.md) | Unit tests green in CI (run 43975747126); e2e being fixed; sandbox run needs the owner |
+| 16 | Offline PWA and push | 🟢 | Cloud + CI | [phase-16.md](phase-16.md) | Unit tests green in CI (run 43975747126); e2e being fixed |
+| 17 | Reports and dashboards | 🔵 | Cloud + CI | [phase-17.md](phase-17.md) | Code written, waiting for CI |
+| 18 | AI assistant | 🔵 | Cloud + CI | [phase-18.md](phase-18.md) | Code written, off by default (needs the owner's key and cap) |
+| 19 | Launch: hosting and compliance | ⏸ | Waiting for the owner | [phase-19.md](phase-19.md) | Deploy files, docs and security review ready; needs hosting, domain, accounts and the lawyer |
 
 ## Working mode (decided 16 Nov 2026)
 
@@ -66,6 +66,8 @@ The owner asked for all phases to be built in a row and reviewed once at the end
 | Open a free Paymob **test** account, put the test keys in Settings → الدفع أونلاين, and pay one milestone end to end | 15 |
 | Decide on Paymob live (fee per transaction) and set the clearing and manual-payment accounts in Settings | 15 / 19 |
 | Put VAPID keys in site_config.json, turn on notifications on an Android phone and receive a chat push | 16 |
+| AI: decide on a provider and monthly cap, put the key in AI Settings, turn on "المساعد الذكي" | 18 |
+| MCP: create an API key for one engineer, connect Claude Desktop, check one of their projects works and another's is denied | 18 |
 | Accountant enters the VAT rate in the "ضريبة القيمة المضافة" template (14% today) | 6 |
 
 ## Next actions (owner)

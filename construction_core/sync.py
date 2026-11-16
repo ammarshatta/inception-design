@@ -44,9 +44,16 @@ def _resolve(uuid_or_name: str, doctype: str) -> str:
 
 
 def _client_time(value):
+	"""The phone sends ISO time in UTC ("…Z"); store it as site time without a zone."""
 	if not value:
 		return None
 	t = get_datetime(value)
+	if t.tzinfo is not None:
+		from zoneinfo import ZoneInfo
+
+		from frappe.utils import get_system_timezone
+
+		t = t.astimezone(ZoneInfo(get_system_timezone())).replace(tzinfo=None)
 	now = now_datetime()
 	if t > now:
 		return now

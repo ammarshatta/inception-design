@@ -209,8 +209,11 @@ def _line_key(line) -> tuple:
 @frappe.whitelist()
 def compare_revisions(a: str, b: str) -> dict:
 	"""Lines added, removed and changed from revision `a` to revision `b`, with money differences."""
-	old = {_line_key(r): r for r in frappe.get_doc("Estimate", a).lines}
-	new = {_line_key(r): r for r in frappe.get_doc("Estimate", b).lines}
+	docs = [frappe.get_doc("Estimate", a), frappe.get_doc("Estimate", b)]
+	for d in docs:
+		d.check_permission("read")  # estimates are office documents
+	old = {_line_key(r): r for r in docs[0].lines}
+	new = {_line_key(r): r for r in docs[1].lines}
 
 	def row(line):
 		return {

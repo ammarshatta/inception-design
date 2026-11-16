@@ -1,0 +1,153 @@
+{
+ "app": "construction_core",
+ "charts": [],
+ "content": "[{\"id\": \"hdrmgr0001\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>لوحة المدير</b></span>\", \"col\": 12}}, {\"id\": \"nc00000000\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"CC Active Projects\", \"col\": 4}}, {\"id\": \"nc00000001\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"CC WIP Over Under\", \"col\": 4}}, {\"id\": \"nc00000002\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"CC Receivables\", \"col\": 4}}, {\"id\": \"nc00000003\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"CC Overdue\", \"col\": 4}}, {\"id\": \"nc00000004\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"CC Late Projects\", \"col\": 4}}, {\"id\": \"nc00000005\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"CC Pipeline Value\", \"col\": 4}}, {\"id\": \"hdrmgr0002\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>التقارير</b></span>\", \"col\": 12}}, {\"id\": \"scm0000000\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"أعمال تحت التنفيذ\", \"col\": 3}}, {\"id\": \"scm0000001\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"تكاليف المشروع\", \"col\": 3}}, {\"id\": \"scm0000002\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"تجاوز الميزانية\", \"col\": 3}}, {\"id\": \"scm0000003\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"العمالة\", \"col\": 3}}, {\"id\": \"scm0000004\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"مسار المبيعات\", \"col\": 3}}, {\"id\": \"scm0000005\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"التحصيل\", \"col\": 3}}, {\"id\": \"scm0000006\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"حالة الاختيارات\", \"col\": 3}}, {\"id\": \"scm0000007\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"المشاريع المتأخرة\", \"col\": 3}}, {\"id\": \"scm0000008\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"التكلفة الملتزم بيها\", \"col\": 3}}, {\"id\": \"scm0000009\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"حالة عقود الباطن\", \"col\": 3}}, {\"id\": \"scm0000010\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"الملخص المالي للمشروع\", \"col\": 3}}]",
+ "creation": "2026-11-17 14:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "dashboard",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "لوحة المدير",
+ "links": [],
+ "modified": "2026-11-17 14:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction Core",
+ "name": "لوحة المدير",
+ "number_cards": [
+  {
+   "label": "المشاريع الشغالة",
+   "number_card_name": "CC Active Projects"
+  },
+  {
+   "label": "فوترة زيادة/ناقص",
+   "number_card_name": "CC WIP Over Under"
+  },
+  {
+   "label": "مستحق على العملاء",
+   "number_card_name": "CC Receivables"
+  },
+  {
+   "label": "متأخر التحصيل",
+   "number_card_name": "CC Overdue"
+  },
+  {
+   "label": "مشاريع متأخرة",
+   "number_card_name": "CC Late Projects"
+  },
+  {
+   "label": "قيمة الفرص المفتوحة",
+   "number_card_name": "CC Pipeline Value"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "restrict_to_domain": "",
+ "roles": [
+  {
+   "role": "Construction Admin"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "sequence_id": 0.5,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "أعمال تحت التنفيذ",
+   "link_to": "CC WIP",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "تكاليف المشروع",
+   "link_to": "CC Job Costing",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "تجاوز الميزانية",
+   "link_to": "CC Budget Variance",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "العمالة",
+   "link_to": "CC Labor",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "مسار المبيعات",
+   "link_to": "CC Sales Pipeline",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "التحصيل",
+   "link_to": "CC Collections",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "حالة الاختيارات",
+   "link_to": "CC Selections Status",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "المشاريع المتأخرة",
+   "link_to": "CC Schedule Status",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "التكلفة الملتزم بيها",
+   "link_to": "Committed Cost",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "حالة عقود الباطن",
+   "link_to": "Subcontract Status",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "is_query_report": 1,
+   "label": "الملخص المالي للمشروع",
+   "link_to": "Project Financial Summary",
+   "type": "Report"
+  }
+ ],
+ "standard": 1,
+ "title": "لوحة المدير",
+ "type": "Workspace"
+}
