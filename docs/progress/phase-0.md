@@ -1,6 +1,6 @@
 # Phase 0 — Local foundation
 
-**Status:** 🟡 Code written in the cloud session on 16 Nov 2026. **Not run yet.**
+**Status:** ✅ Verified in CI on 16 Nov 2026, run [43934298054](https://github.com/ammarshatta/inception-design/actions/runs/43934298054). It still needs one install on the owner's computer.
 
 **Approval:** the owner asked to "complete what you can" (16 Nov 2026). That counts as approval of this plan for the cloud part only.
 
@@ -48,23 +48,37 @@
 **What could not be checked in the cloud:**
 - No Docker, MariaDB, pip or npm installs were available there. So nothing was installed, migrated, built or tested against a real site.
 
+## CI evidence (run 43934298054, 16 Nov 2026)
+
+| Step | Result |
+|---|---|
+| `bench init` (frappe version-16), get erpnext version-16 | ✓ |
+| `new-site`, `install-app erpnext`, `install-app construction_core`, `migrate` | ✓ no errors |
+| `run-tests --app construction_core` | ✓ `Ran 33 tests … OK` |
+| `bench version` | frappe 16.56.0 (49789a1), erpnext 16.55.0 (8e10a34) |
+| `bench build --app construction_core` (vite build of the portal) | ✓ `www/portal.html` created |
+| Playwright against `bench serve` | ✓ `2 passed`. Logged out → `/login?redirect-to=/portal`. Logged in → `<html lang="ar" dir="rtl">` and "أهلاً، عميل التجربة" |
+
+### Fixes found by running in CI
+1. **Welcome emails:** ERPNext's `Project.validate` emails every new project user, and that fails when there is no outgoing email account. The test factory now marks users as welcomed.
+   - **Phase 2 must handle this**, by setting up an email account or by controlling `welcome_email_sent`. Otherwise adding a client to a project fails on a site with no email.
+2. **`frappe.get_doc()` never checks permissions in Python.** The tests now check what the browser actually uses: `frappe.client.get`, `check_permission`, and `get_list`.
+3. **Wrong output folder:** the starter's `vite.config.js` resolved the app name one folder too high (`apps/www/portal.html`). The path is now fixed.
+4. **Office-name fallback:** with an empty Settings, the office name showed "Frappe". It now falls back to the default ERPNext company.
+
 ## Not done yet
 
-- [ ] Install on `inceptiondesign.localhost`, then migrate and build.
-- [ ] Run the tests locally.
-- [ ] Check that CI is green on GitHub.
-- [ ] Fill the "Installed" column in `docs/versions.md` from `bench version`.
-- [ ] Run `yarn install` in `frontend/`. The starter's `yarn.lock` is kept as it is.
-- [ ] Run the Playwright tests: `cd e2e && yarn && npx playwright install chromium && E2E_USER=… E2E_PASSWORD=… yarn test`.
+- [ ] Install on `inceptiondesign.localhost` (`docs/LOCAL-SETUP.md`, step 6) and open `/portal` once.
+- [ ] Optional: upgrade frappe-ui from 0.1.x to 1.x, as a separate task.
 
 ## Acceptance criteria
 
-| Criterion | Cloud | Verified on the owner's computer |
+| Criterion | CI / cloud | Verified on the owner's computer |
 |---|---|---|
-| `docs/versions.md` lists the exact versions and licenses | Done from upstream sources. The installed column is still empty. | ☐ |
-| `/portal` shows the Arabic RTL greeting after login, and redirects to `/login` when logged out | Code written: `www/portal.py`, `frontend/`, `e2e/portal.spec.ts` | ☐ |
-| `bench run-tests --app construction_core` passes locally | Not run | ☐ |
-| CI is green on `main` | Not run (the first push triggers it) | ☐ |
+| `docs/versions.md` lists the exact versions and licenses | ✅ installed versions from CI `bench version` | ☐ |
+| `/portal` shows the Arabic RTL greeting after login, and redirects to `/login` when logged out | ✅ Playwright in CI, 2 passed | ☐ |
+| `bench run-tests --app construction_core` passes locally | ✅ in CI (33 OK). Local not run yet. | ☐ |
+| CI is green on `main` | ✅ [run 43934298054](https://github.com/ammarshatta/inception-design/actions/runs/43934298054) | ✅ |
 | No secret in git (`git grep -iE "password\|secret\|token"` shows only `.env.example` keys) | See the note below | ☐ |
 
 **Stories:**

@@ -1,6 +1,6 @@
 # Phase 1 — Data model and permissions
 
-**Status:** 🟡 Code and tests written in the cloud session on 16 Nov 2026. **Not run yet.**
+**Status:** ✅ All required tests pass in CI on a fresh ERPNext v16 site, run [43934298054](https://github.com/ammarshatta/inception-design/actions/runs/43934298054), 16 Nov 2026.
 
 ## Plan
 
@@ -96,21 +96,23 @@ The data comes from `factories.py`:
 
 ## Not done yet
 
-- [ ] Run everything on a real site (see `docs/LOCAL-SETUP.md`, step 6).
-- [ ] `bench --site <fresh site> install-app construction_core`, then `bench migrate`, with no errors.
+- [ ] Install once on your own site (`docs/LOCAL-SETUP.md`, step 6).
+- [ ] Review the 4 decisions above.
+
+**Note for phase 2:** adding a user to a project triggers ERPNext's welcome email (see `phase-0.md`, CI fixes).
 
 ## Required tests and acceptance criteria
 
-| Requirement | Test | Cloud | Verified locally |
+| Requirement | Test | CI result | Verified locally |
 |---|---|---|---|
-| An engineer not in Project User gets PermissionError on get_doc, and the project is not in get_list | `test_engineer_cannot_read_other_project` | Written | ☐ |
-| The same for a client and for Stage Update, Payment Milestone and Project Message | `test_client_cannot_read_other_clients_*`, `test_engineer_cannot_read_other_project_records` | Written | ☐ |
-| A client cannot read an internal_only update, by get or by list | `test_client_cannot_read_internal_update` | Written | ☐ |
-| Weights example = 20.0% | `test_weighted_progress_example`, `test_project_progress_example` | Pure function passed with a stub | ☐ |
-| Auto stage, 3 of 4 done = 75% | `test_auto_progress`, `test_auto_stage_three_of_four` | Pure function passed with a stub | ☐ |
-| Editing the template does not change the project | `test_template_edit_does_not_change_project` | Written | ☐ |
-| A Done stage moves its milestone to Due | `test_done_stage_moves_milestone_to_due` | Written | ☐ |
-| An answered approval cannot be changed, even by Administrator | `test_client_answers_then_locked_even_for_administrator` | Written | ☐ |
-| Weights ≠ 100 shows a warning (P01-03, AC3) | `test_weight_warning` + `project.js` | Written | ☐ |
-| Branding comes from Settings, and no office name or phone is hardcoded (P01-05) | `test_branding.py` | Written | ☐ |
-| `install-app` + `migrate` run on a fresh site without errors | CI | Not run | ☐ |
+| An engineer not in Project User gets PermissionError on get_doc, and the project is not in get_list | `test_engineer_cannot_read_other_project` | ✅ pass | ☐ |
+| The same for a client and for Stage Update, Payment Milestone and Project Message | `test_client_cannot_read_other_clients_*`, `test_engineer_cannot_read_other_project_records` | ✅ pass | ☐ |
+| A client cannot read an internal_only update, by get or by list | `test_client_cannot_read_internal_update` | ✅ pass | ☐ |
+| Weights example = 20.0% | `test_weighted_progress_example`, `test_project_progress_example` | ✅ pass | ☐ |
+| Auto stage, 3 of 4 done = 75% | `test_auto_progress`, `test_auto_stage_three_of_four` | ✅ pass | ☐ |
+| Editing the template does not change the project | `test_template_edit_does_not_change_project` | ✅ pass | ☐ |
+| A Done stage moves its milestone to Due | `test_done_stage_moves_milestone_to_due` | ✅ pass | ☐ |
+| An answered approval cannot be changed, even by Administrator | `test_client_answers_then_locked_even_for_administrator` | ✅ pass | ☐ |
+| Weights ≠ 100 shows a warning (P01-03, AC3) | `test_weight_warning` + `project.js` | ✅ pass | ☐ |
+| Branding comes from Settings, and no office name or phone is hardcoded (P01-05) | `test_branding.py` | ✅ pass | ☐ |
+| `install-app` + `migrate` run on a fresh site without errors | CI Install step | ✅ pass | ☐ |

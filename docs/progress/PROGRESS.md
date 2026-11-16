@@ -6,7 +6,8 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 - ⬜ Not started
 - 🟡 Code written, **not run yet**
 - 🔵 In progress
-- ✅ Done: tests pass on the owner's computer, and every acceptance criterion has evidence
+- ✅ Done: tests pass, and every acceptance criterion has evidence
+- ✅ (CI) means verified in GitHub Actions on a fresh site; one local install is still recommended
 - ⛔ Blocked
 
 **Where work happens**
@@ -17,8 +18,8 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 
 | # | Phase | Status | Where | Report | Notes |
 |---|---|---|---|---|---|
-| 0 | Foundation: app, portal skeleton, CI | 🟡 | Cloud | [phase-0.md](phase-0.md) | Needs a local install and test run, plus a green CI run |
-| 1 | Data model and permissions | 🟡 | Cloud | [phase-1.md](phase-1.md) | 11 DocTypes and 33 tests written; none run yet |
+| 0 | Foundation: app, portal skeleton, CI | ✅ (CI) | Cloud + CI | [phase-0.md](phase-0.md) | CI green: install, 33 tests, portal build, 2 Playwright tests. One local install is still to do. |
+| 1 | Data model and permissions | ✅ (CI) | Cloud + CI | [phase-1.md](phase-1.md) | Every required test passes in CI. Review the 4 decisions. |
 | 2 | Admin screens, client onboarding | ⬜ | | | |
 | 3 | Engineer portal, photo uploads | ⬜ | | | Screens: `docs/design/SCREENS.md` |
 | 4 | Client portal, chat, approvals | ⬜ | | | Screens drafted |
@@ -41,8 +42,8 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 ## Next actions (owner)
 
 1. [ ] Follow `docs/LOCAL-SETUP.md`, steps 1–6, to install the app on your bench.
-2. [ ] Run the tests (`bench --site inceptiondesign.localhost run-tests --app construction_core`). Then ask Claude Code to fix what fails and fill in the "Verified on the owner's computer" sections.
-3. [ ] Check that the first CI run on GitHub (Actions tab) is green.
+2. [ ] Open `/portal` on your site and run the tests once locally.
+3. [x] CI on GitHub is green: [run 43934298054](https://github.com/ammarshatta/inception-design/actions/runs/43934298054).
 4. [ ] Share the design board and the flows board with the engineers and collect feedback (open questions are in `docs/design/SCREENS.md`).
 5. [ ] Approve phase 2 only after phases 0 and 1 are ✅.
 
@@ -59,4 +60,7 @@ Updated: **16 Nov 2026**. Update this file at the end of every session.
 
 | Date | Where | What |
 |---|---|---|
-| 16 Nov 2026 | Cloud | Phases 0 and 1 code written. Plan, backlog and design docs added. Not run. |
+| 16 Nov 2026 | Cloud | Phases 0 and 1 code written. Plan, backlog and design docs added. |
+| 16 Nov 2026 | CI | 8 CI runs. Fixed welcome emails, the permission test method, the portal build path and the office-name fallback. All green. |
+
+| Adding a client to a project sends ERPNext's welcome email, so a site needs an email account | Phase 2 design | Phase 2 |
